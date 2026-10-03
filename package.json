@@ -1,0 +1,7 @@
+{
+  "name": "triply-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Triply travel discovery and booking interactive prototype",
+  "scripts": { "start": "node server.js", "check": "node --check app.js && node --check comments.js && node --check travel-utils.js && node --check server.js", "test": "node --test travel-utils.test.js" }
+}
