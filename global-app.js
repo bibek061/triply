@@ -783,11 +783,11 @@ document.addEventListener("click", async (event) => {
       else render();
     }
     if (action === "category") {
+      if (!$("#global-search").reportValidity()) return;
       capture();
       state.category = el.dataset.category;
       state.kind = "explore";
-      if (state.searchDone) await runSearch();
-      else render();
+      await runSearch();
     }
     if (action === "browse-city") {
       const city = state.area?.destinations.find((city) => city.id === id);
