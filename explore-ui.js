@@ -47,7 +47,11 @@ window.TriplyExplore = (() => {
     );
   }
   function photoMarkup(p, unavailable = false) {
-    const photo = unavailable ? null : state.placePhotos[p.id];
+    const photo = unavailable
+      ? null
+      : Object.hasOwn(state.placePhotos, p.id)
+        ? state.placePhotos[p.id]
+        : p.photo;
     if (!photo)
       return `<div class="place-photo photo-empty" data-photo-id="${escapeHTML(p.id)}"><span>${icon("pin")}</span><strong>${unavailable || Object.hasOwn(state.placePhotos, p.id) || state.page !== "home" ? "Photo unavailable" : "Finding local photos…"}</strong><small>${escapeHTML(p.name)}</small><a href="${escapeHTML(photoSearchURL(p))}" target="_blank" rel="noopener noreferrer">See photos on Google ↗</a></div>`;
     const label =

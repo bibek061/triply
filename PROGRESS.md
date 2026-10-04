@@ -70,3 +70,11 @@
 - Live source checks returned photos for all 12 displayed India cities, all 12 Nepal cities, and 11 of 12 France cities. This is tested sample coverage, not a guarantee that every destination has an image.
 - Nineteen automated tests pass, including wrong-country article rejection, regional-title matching, Wikidata coordinate fallback, and endpoint input/batch limits.
 - Browser verification: India and Nepal each render 12 city-photo cards with the first visible images loaded; Nepal has 12 distinct image URLs. Mobile at 390 × 844 has no horizontal overflow. Photo credits and city actions remain visible, with no browser errors during these checks.
+
+## Functional regression testing — October 4, 2026 (New York)
+
+- Tested discovery, maps, filters, accounts, uploads, comments/replies, traveler search, chat acceptance/delivery/blocking, saves, currency conversion, and booking links. Write tests used an isolated local database and synthetic accounts.
+- Fixed a reproduced bug where saved places lost their verified photo attribution and fee details after reload. These details now persist on new saves; arbitrary submitted image metadata is ignored.
+- All 20 automated tests and 20 JavaScript syntax checks pass. Added a saved-place restart/persistence regression test.
+- Live Paris search returned 35 places/pins and 20 matching photos. India and California each showed 12 city choices. Booking.com retained destination, dates, guests and USD on its actual search page. Mobile pages had no horizontal overflow in the checked views, and no browser JavaScript errors were observed.
+- Live currency conversion passed. Amadeus credentials are still absent; hotel/car live-price feeds are not integrated. Full scope and limitations are recorded in QA-REPORT.md.
