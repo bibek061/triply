@@ -1,36 +1,79 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fb6c45">
-  <title>Triply — Book smart. Travel easy.</title>
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="comments.css">
-</head>
-<body>
-  <aside class="sidebar">
-    <a href="#home" class="brand" aria-label="Triply home"><span class="brand-icon" data-icon="plane"></span>triply<span class="brand-dot">.</span></a>
-    <div class="workspace-label">YOUR NEXT ADVENTURE</div>
-    <nav id="main-nav" aria-label="Main navigation"></nav>
-    <div class="sidebar-bottom">
-      <div class="sidebar-note"><span data-icon="sparkles"></span><strong>A little further.<br>A little less.</strong><p>Big adventures don’t need<br>big budgets.</p><a href="#deals">Find your next deal <span>↗</span></a></div>
-      <button id="theme-toggle" class="theme-toggle"><span data-icon="moon"></span><span>Dark mode</span><span class="toggle-track"></span></button>
-      <div class="sidebar-footer">Made for the journey <span>✳</span></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fb6c45" />
+    <title>Triply — Find your next somewhere.</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="global.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a href="#home" class="brand" aria-label="Triply home"
+        ><span class="brand-icon" data-icon="plane"></span>triply<span
+          class="brand-dot"
+          >.</span
+        ></a
+      >
+      <div class="workspace-label">YOUR NEXT ADVENTURE</div>
+      <nav id="main-nav" aria-label="Main navigation"></nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note">
+          <span data-icon="sparkles"></span
+          ><strong>A little further.<br />A little less.</strong>
+          <p>Big adventures don’t need<br />big budgets.</p>
+          <a href="#deals">Find your next deal <span>↗</span></a>
+        </div>
+        <button id="theme-toggle" class="theme-toggle">
+          <span data-icon="moon"></span><span>Dark mode</span
+          ><span class="toggle-track"></span>
+        </button>
+        <div class="sidebar-footer">Made for the journey <span>✳</span></div>
+      </div>
+    </aside>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="breadcrumb">
+          Good places. Better company. <span>↗</span>
+        </div>
+        <a class="mobile-brand" href="#home">triply.</a>
+        <div class="topbar-actions">
+          <button class="world-label" data-action="convert">
+            Currency converter</button
+          ><label class="currency-label"
+            ><span data-icon="globe"></span
+            ><select id="currency" aria-label="Display currency">
+              <option value="USD">USD</option>
+            </select></label
+          ><button
+            id="profile-button"
+            class="primary-button"
+            data-action="account"
+          >
+            Sign in
+          </button>
+        </div>
+      </header>
+      <main id="main" tabindex="-1"></main>
+      <footer class="page-footer">
+        <span>© 2026 Triply. A good trip starts here.</span
+        ><span
+          >250 countries & territories.
+          <button class="text-link" data-action="credits">
+            Data & photo credits
+          </button></span
+        >
+      </footer>
     </div>
-  </aside>
-  <div class="app-shell">
-    <header class="topbar"><div class="breadcrumb">Your world, a little closer <span>↗</span></div><a class="mobile-brand" href="#home">triply.</a><div class="topbar-actions"><span class="demo-badge">INTERACTIVE DEMO</span><label class="currency-label"><span data-icon="globe"></span><select id="currency" aria-label="Display currency"><option value="USD">USD</option><option value="NPR">NPR</option><option value="INR">INR</option></select></label><button id="profile-button" class="avatar" aria-label="Open your trips">JD</button></div></header>
-    <main id="main" tabindex="-1"></main>
-    <footer class="page-footer"><span>© 2026 Triply. A good trip starts here.</span><span>Nepal & India, thoughtfully explored.</span></footer>
-  </div>
-  <div id="toast" role="status" aria-live="polite"></div>
-  <dialog id="modal" aria-labelledby="modal-title"></dialog>
-  <script src="travel-utils.js"></script>
-  <script src="comments.js"></script>
-  <script src="app.js"></script>
-</body>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <dialog id="modal" aria-labelledby="modal-title"></dialog>
+    <script src="global-app.js"></script>
+  </body>
 </html>
