@@ -1,5 +1,7 @@
 # Triply regression check — October 4, 2026
 
+> Later pricing update: the Duffel and Booking.com adapters are now implemented. The current suite has 24 passing tests and 21 syntax checks. An actual Duffel account check returned 30 sandbox flight offers for JFK–LHR. Booking.com credentials remain absent; hotel/car provider tests use isolated fixtures. Production pricing access has not been verified. See PRICING-SETUP.md and the latest PROGRESS.md entry. The original regression findings below describe the earlier version.
+
 ## Result
 
 20 automated tests passed; syntax checks passed for 20 JavaScript files. Browser checks below passed in the Codex browser. One reproducible saved-place bug was fixed. This is a functional regression pass, not a production certification or a guarantee of every external provider's availability.

@@ -110,6 +110,10 @@ const state = {
   start: future(14),
   end: future(17),
   adults: 2,
+  residence: "",
+  driverAge: 30,
+  pickupTime: "10:00",
+  dropoffTime: "10:00",
   currency: read("triply-currency", "USD"),
   user: null,
   countries: [],
@@ -121,7 +125,7 @@ const state = {
   chatData: null,
   searchDone: false,
   placesError: "",
-  flightData: null,
+  priceData: null,
   loading: false,
 };
 let searchVersion = 0,
@@ -237,6 +241,10 @@ function capture() {
     "end",
     "budget",
     "admission",
+    "residence",
+    "driverAge",
+    "pickupTime",
+    "dropoffTime",
   ])
     if (b.has(key)) state[key] = String(b.get(key)).trim();
   if (b.has("adults")) state.adults = Number(b.get("adults"));
@@ -353,21 +361,32 @@ function providerLinks() {
     },
   ];
 }
-function dealResults() {
-  const matchingOffers = TriplyFilters.offers(
-    state.flightData?.offers || [],
-    state.budget,
-    state.currency,
+function pricingResults() {
+  const data = state.priceData;
+  const provider = state.kind === "flights" ? "Duffel" : "Booking.com";
+  const connected =
+    state.kind === "flights"
+      ? state.pricing.configured
+      : state.pricing.bookingConfigured;
+  if (!data)
+    return `<section id="live-pricing" class="live-pricing" aria-live="polite"><h3>${state.kind === "flights" ? "Flight" : state.kind === "cars" ? "Rental car" : "Stay"} prices · ${provider}</h3><p>${state.loading ? "Checking prices for your trip…" : connected ? "Search to compare returned prices." : "Pricing is not connected yet. Use the booking websites below while account access is set up."}</p></section>`;
+  const available = (data.offers || []).filter(
+    (o) => !o.expiresAt || Date.parse(o.expiresAt) > Date.now(),
   );
-  return `${intro("A good trip starts with a good deal.", "Compare the journey, the stay, and the little details.")} ${searchForm()}<section class="content-section"><div class="section-heading"><div><h2>${state.kind === "flights" ? `${escapeHTML(state.origin)} → ${escapeHTML(state.destination)}` : `${state.kind === "cars" ? "Car rentals" : "Places to stay"} in ${escapeHTML(state.location)}`}</h2><p>${state.start}${state.kind === "flights" ? "" : ` → ${state.end}`} · ${state.adults} traveler${state.adults === 1 ? "" : "s"} · ${state.currency}</p></div><button class="text-link" data-action="convert">Compare currencies ↗</button></div><div class="comparison-note">${icon("check")}<div><strong>Compare the total. Choose what works for you.</strong><p>These are provider search links, not ranked live offers. We don’t label a site “cheapest” without matching current prices.</p></div></div><div class="provider-grid">${providerLinks()
+  const offers = TriplyFilters.offers(available, state.budget, state.currency);
+  return `<section id="live-pricing" class="live-pricing" aria-live="polite"><div class="section-heading"><h3>${escapeHTML(data.provider || provider)} prices</h3><span class="price-mode ${data.status === "live" ? "is-live" : ""}">${data.status === "sandbox" ? "TEST DATA" : data.status === "live" ? "LIVE SEARCH" : "CONNECTION STATUS"}</span></div><p>${escapeHTML(data.message || "Prices could not be loaded.")}</p>${data.checkedAt ? `<p class="source-note">Checked ${escapeHTML(new Date(data.checkedAt).toLocaleString())} · sorted by total in ${escapeHTML(state.currency)}${state.budget ? ` · maximum ${money(Number(state.budget), state.currency)}` : ""}</p>` : ""}${offers.length ? `<div class="price-offers">${offers.map((o, i) => `<article class="price-offer">${o.image ? `<img class="offer-image" src="${escapeHTML(o.image)}" alt="${escapeHTML(o.name)} · Booking.com property photo" loading="lazy">` : ""}<div class="offer-description"><h4>${escapeHTML(o.name)}</h4>${(o.details || []).map((d) => `<p>${escapeHTML(d)}</p>`).join("")}<small>${escapeHTML(o.terms || "")}</small>${o.expiresAt ? `<p class="source-note">Offer expires ${escapeHTML(new Date(o.expiresAt).toLocaleTimeString())}. Search again before making plans.</p>` : ""}</div><div class="offer-price"><strong>${money(o.total, o.currency)}</strong><small>${data.status === "sandbox" ? "Test total" : i === 0 ? "Lowest returned total" : "Total for this search"}</small>${o.url && data.status === "live" ? `<a class="primary-button" href="${escapeHTML(o.url)}" target="_blank" rel="noopener noreferrer">View offer ↗</a>` : `<span class="source-note">${data.status === "sandbox" ? "Test offer · no live booking" : "Compare booking sites below"}</span>`}</div></article>`).join("")}</div>` : ["live", "sandbox"].includes(data.status) ? `<div class="notice">${available.length && state.budget ? "No returned offers fit this budget. Increase the maximum total and search again." : "No current offers returned in this currency. Try other dates or a currency supported by the provider."}</div>` : ""}</section>`;
+}
+function dealResults() {
+  return `${intro("A good trip starts with a good deal.", "Compare the journey, the stay, and the little details.")} ${searchForm()}<section class="content-section"><div class="section-heading"><div><h2>${state.kind === "flights" ? `${escapeHTML(state.origin)} → ${escapeHTML(state.destination)}` : `${state.kind === "cars" ? "Car rentals" : "Places to stay"} in ${escapeHTML(state.location)}`}</h2><p>${state.start}${state.kind === "flights" ? "" : ` → ${state.end}`} · ${state.adults} travelers · ${state.currency}</p></div><button class="text-link" data-action="convert">Compare currencies ↗</button></div>${pricingResults()}<div class="comparison-note">${icon("check")}<div><strong>Check other booking websites.</strong><p>These links open separate searches. Their prices may differ from the offers above; compare the same dates, inclusions, and cancellation terms.</p></div></div><div class="provider-grid">${providerLinks()
     .map(
       (p, i) =>
         `<article class="provider-card">${TriplyExplore.providerPhoto(state.kind)}<span class="provider-number">0${i + 1}</span><div class="provider-wordmark">${p.name}</div><h3>${p.subtitle}</h3><p>${escapeHTML(p.detail)}</p><span class="price-check-label">Price available on provider</span><a class="primary-button" target="_blank" rel="noopener noreferrer" href="${escapeHTML(p.url)}">Compare on ${p.name} ↗</a></article>`,
     )
     .join(
       "",
-    )}</div>${state.kind === "flights" ? `<section class="flight-api"><h3>Flight fares from Amadeus</h3>${state.budget && state.flightData?.offers?.length ? `<p>${matchingOffers.length} offers within ${money(Number(state.budget), state.currency)} for ${state.adults} traveler${state.adults === 1 ? "" : "s"}.</p>` : ""}<p>${escapeHTML(state.flightData?.message || (state.loading ? "Checking offers…" : state.pricing.configured ? "Search to check connected flight pricing." : "Live fares are not connected yet. Compare prices on the provider websites."))}</p>${matchingOffers.length ? `<div class="flight-offers">${matchingOffers.map((o, i) => `<article><div><strong>${escapeHTML(o.airlines.join(" / "))}</strong><p>${o.segments.map((s) => `${escapeHTML(s.from)} → ${escapeHTML(s.to)}`).join(" · ")}</p><small>${escapeHTML(o.segments[0]?.departure)} · ${state.adults} travelers</small></div><div><strong>${money(o.total, o.currency)}</strong><small>${state.flightData.status === "sandbox" ? "TEST FARE" : i === 0 ? "Lowest returned total" : "Total for this search"}</small></div></article>`).join("")}</div>` : ""}</section>` : ""}<p class="source-note">You book and pay on the selected provider’s website. Availability, currencies, fees, and support vary by destination. Triply does not create a reservation or sync external bookings.</p></section>`;
+    )}</div><p class="source-note">You book and pay on the provider’s website. Triply does not create reservations. Lowest returned total means lowest among this search’s returned offers, not every website or every available option.</p></section>`;
 }
+
 function postCard(p) {
   return `<article class="pick-card"><div class="pick-image"><img src="${p.image}" alt="${escapeHTML(p.location)} shared by ${escapeHTML(p.name)}" loading="lazy"><span class="verified-badge">${categoryName(p.category)} · Community photo</span></div><div class="pick-body"><div class="pick-author"><span class="small-avatar">${escapeHTML(p.name.slice(0, 2).toUpperCase())}</span><strong>${escapeHTML(p.name)}</strong><span>@${escapeHTML(p.handle)}</span></div><h3>${escapeHTML(p.location)}, ${escapeHTML(countryName(p.country))}</h3><p class="post-caption">${escapeHTML(p.caption)}</p><div class="pick-bottom"><button class="text-link" data-action="comments" data-id="${p.id}">${icon("chat")}${p.commentCount} comments</button><button class="text-link" data-action="nearby" data-country="${p.country}" data-location="${escapeHTML(p.location)}">Find deals →</button></div><div class="quick-questions"><button data-action="question" data-id="${p.id}" data-question="Where did you stay?">Where did you stay?</button><button data-action="question" data-id="${p.id}" data-question="How much was it?">How much was it?</button></div><button class="report-link" data-action="report" data-id="${p.id}">Report post</button></div></article>`;
 }
@@ -543,7 +562,7 @@ async function runSearch() {
   const version = ++searchVersion,
     query = { ...state };
   state.loading = true;
-  state.flightData = null;
+  state.priceData = null;
   if (query.kind === "explore") {
     state.searchDone = true;
     state.placesError = "";
@@ -584,24 +603,33 @@ async function runSearch() {
   } else {
     navigate("deals");
     render();
-    if (query.kind === "flights")
-      try {
-        const data = await api(
-          "/api/flights?" +
-            new URLSearchParams({
-              origin: query.origin,
-              destination: query.destination,
-              start: query.start,
-              adults: query.adults,
-              currency: query.currency,
-            }),
-        );
-        if (version !== searchVersion) return;
-        state.flightData = data;
-      } catch (e) {
-        if (version === searchVersion)
-          state.flightData = { message: e.message, offers: [] };
-      }
+    try {
+      const data = await api(
+        `/api/${query.kind}?` +
+          new URLSearchParams({
+            origin: query.origin,
+            destination: query.destination,
+            start: query.start,
+            end: query.end,
+            adults: query.adults,
+            currency: query.currency,
+            location: query.location,
+            ...(query.selectedDestination
+              ? { destinationId: query.selectedDestination.id }
+              : {}),
+            residence: query.residence,
+            driverAge: query.driverAge,
+            pickupTime: query.pickupTime,
+            dropoffTime: query.dropoffTime,
+            platform: window.innerWidth <= 640 ? "mobile" : "desktop",
+          }),
+      );
+      if (version !== searchVersion) return;
+      state.priceData = data;
+    } catch (e) {
+      if (version === searchVersion)
+        state.priceData = { message: e.message, offers: [] };
+    }
     if (version === searchVersion) {
       state.loading = false;
       if (state.page === "deals") render();
@@ -651,7 +679,7 @@ document.addEventListener("click", async (event) => {
       searchVersion++;
       state.kind = kind;
       state.loading = false;
-      state.flightData = null;
+      state.priceData = null;
       if (kind === "explore") navigate("home");
       else if (state.page === "deals") render();
       else render();
@@ -901,6 +929,19 @@ async function preparePhoto(file) {
   bitmap.close();
   return canvas.toDataURL("image/jpeg", 0.85);
 }
+document.addEventListener("input", (event) => {
+  if (!event.target.closest("#global-search")) return;
+  searchVersion++;
+  state.loading = false;
+  state.priceData = null;
+  const panel = $("#live-pricing");
+  if (panel)
+    panel.innerHTML = "<p>Search again to update prices for these details.</p>";
+  const button = $("#global-search .search-submit");
+  button.disabled = false;
+  button.textContent =
+    state.kind === "explore" ? "Find places" : "Compare prices";
+});
 document.addEventListener("change", (event) => {
   if (event.target.id === "currency") {
     capture();
@@ -908,7 +949,7 @@ document.addEventListener("change", (event) => {
     state.loading = false;
     state.currency = event.target.value;
     store("triply-currency", state.currency);
-    state.flightData = null;
+    state.priceData = null;
     render();
   }
   if (
@@ -917,12 +958,12 @@ document.addEventListener("change", (event) => {
   ) {
     searchVersion++;
     state.loading = false;
-    state.flightData = null;
+    state.priceData = null;
     const button = $("#global-search .search-submit");
     button.disabled = false;
     button.innerHTML =
       icon("search") +
-      (state.kind === "explore" ? "Find places" : "Compare providers");
+      (state.kind === "explore" ? "Find places" : "Compare prices");
     if (event.target.name === "location") {
       capture();
       $(".country-context").innerHTML = destinationHint();
