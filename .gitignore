@@ -1,4 +1,7 @@
 node_modules/
+private-data/
+test-results/
+*.sqlite*
 .env
 .env.*
 !.env.example

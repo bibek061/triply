@@ -1,0 +1,4036 @@
+{
+  "source": "https://raw.githubusercontent.com/mledoze/countries/master/countries.json",
+  "currencySource": "https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-core/supplemental/currencyData.json",
+  "retrievedAt": "2026-10-03T23:52:47.468Z",
+  "countries": [
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "officialName": "Islamic Republic of Afghanistan",
+      "region": "Asia",
+      "capital": "Kabul",
+      "currencies": [
+        {
+          "code": "AFN",
+          "name": "Afghan Afghani",
+          "symbol": "؋"
+        }
+      ],
+      "lat": 33,
+      "lon": 65
+    },
+    {
+      "code": "AX",
+      "name": "Åland Islands",
+      "officialName": "Åland Islands",
+      "region": "Europe",
+      "capital": "Mariehamn",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 60.116667,
+      "lon": 19.9
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "officialName": "Republic of Albania",
+      "region": "Europe",
+      "capital": "Tirana",
+      "currencies": [
+        {
+          "code": "ALL",
+          "name": "Albanian Lek",
+          "symbol": "L"
+        }
+      ],
+      "lat": 41,
+      "lon": 20
+    },
+    {
+      "code": "DZ",
+      "name": "Algeria",
+      "officialName": "People's Democratic Republic of Algeria",
+      "region": "Africa",
+      "capital": "Algiers",
+      "currencies": [
+        {
+          "code": "DZD",
+          "name": "Algerian Dinar",
+          "symbol": "د.ج"
+        }
+      ],
+      "lat": 28,
+      "lon": 3
+    },
+    {
+      "code": "AS",
+      "name": "American Samoa",
+      "officialName": "American Samoa",
+      "region": "Oceania",
+      "capital": "Pago Pago",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -14.33333333,
+      "lon": -170
+    },
+    {
+      "code": "AD",
+      "name": "Andorra",
+      "officialName": "Principality of Andorra",
+      "region": "Europe",
+      "capital": "Andorra la Vella",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 42.5,
+      "lon": 1.5
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "officialName": "Republic of Angola",
+      "region": "Africa",
+      "capital": "Luanda",
+      "currencies": [
+        {
+          "code": "AOA",
+          "name": "Angolan Kwanza",
+          "symbol": "Kz"
+        }
+      ],
+      "lat": -12.5,
+      "lon": 18.5
+    },
+    {
+      "code": "AI",
+      "name": "Anguilla",
+      "officialName": "Anguilla",
+      "region": "Americas",
+      "capital": "The Valley",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 18.25,
+      "lon": -63.16666666
+    },
+    {
+      "code": "AQ",
+      "name": "Antarctica",
+      "officialName": "Antarctica",
+      "region": "Antarctic",
+      "capital": "",
+      "currencies": [],
+      "lat": -90,
+      "lon": 0
+    },
+    {
+      "code": "AG",
+      "name": "Antigua and Barbuda",
+      "officialName": "Antigua and Barbuda",
+      "region": "Americas",
+      "capital": "Saint John's",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 17.05,
+      "lon": -61.8
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "officialName": "Argentine Republic",
+      "region": "Americas",
+      "capital": "Buenos Aires",
+      "currencies": [
+        {
+          "code": "ARS",
+          "name": "Argentine Peso",
+          "symbol": "$"
+        }
+      ],
+      "lat": -34,
+      "lon": -64
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "officialName": "Republic of Armenia",
+      "region": "Asia",
+      "capital": "Yerevan",
+      "currencies": [
+        {
+          "code": "AMD",
+          "name": "Armenian Dram",
+          "symbol": "֏"
+        }
+      ],
+      "lat": 40,
+      "lon": 45
+    },
+    {
+      "code": "AW",
+      "name": "Aruba",
+      "officialName": "Aruba",
+      "region": "Americas",
+      "capital": "Oranjestad",
+      "currencies": [
+        {
+          "code": "AWG",
+          "name": "Aruban Florin",
+          "symbol": "ƒ"
+        }
+      ],
+      "lat": 12.5,
+      "lon": -69.96666666
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "officialName": "Commonwealth of Australia",
+      "region": "Oceania",
+      "capital": "Canberra",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -27,
+      "lon": 133
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "officialName": "Republic of Austria",
+      "region": "Europe",
+      "capital": "Vienna",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 47.33333333,
+      "lon": 13.33333333
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "officialName": "Republic of Azerbaijan",
+      "region": "Asia",
+      "capital": "Baku",
+      "currencies": [
+        {
+          "code": "AZN",
+          "name": "Azerbaijani Manat",
+          "symbol": "₼"
+        }
+      ],
+      "lat": 40.5,
+      "lon": 47.5
+    },
+    {
+      "code": "BS",
+      "name": "Bahamas",
+      "officialName": "Commonwealth of the Bahamas",
+      "region": "Americas",
+      "capital": "Nassau",
+      "currencies": [
+        {
+          "code": "BSD",
+          "name": "Bahamian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 24.25,
+      "lon": -76
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "officialName": "Kingdom of Bahrain",
+      "region": "Asia",
+      "capital": "Manama",
+      "currencies": [
+        {
+          "code": "BHD",
+          "name": "Bahraini Dinar",
+          "symbol": ".د.ب"
+        }
+      ],
+      "lat": 26,
+      "lon": 50.55
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "officialName": "People's Republic of Bangladesh",
+      "region": "Asia",
+      "capital": "Dhaka",
+      "currencies": [
+        {
+          "code": "BDT",
+          "name": "Bangladeshi Taka",
+          "symbol": "৳"
+        }
+      ],
+      "lat": 24,
+      "lon": 90
+    },
+    {
+      "code": "BB",
+      "name": "Barbados",
+      "officialName": "Barbados",
+      "region": "Americas",
+      "capital": "Bridgetown",
+      "currencies": [
+        {
+          "code": "BBD",
+          "name": "Barbadian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 13.16666666,
+      "lon": -59.53333333
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "officialName": "Republic of Belarus",
+      "region": "Europe",
+      "capital": "Minsk",
+      "currencies": [
+        {
+          "code": "BYN",
+          "name": "Belarusian Ruble",
+          "symbol": "Br"
+        }
+      ],
+      "lat": 53,
+      "lon": 28
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "officialName": "Kingdom of Belgium",
+      "region": "Europe",
+      "capital": "Brussels",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 50.83333333,
+      "lon": 4
+    },
+    {
+      "code": "BZ",
+      "name": "Belize",
+      "officialName": "Belize",
+      "region": "Americas",
+      "capital": "Belmopan",
+      "currencies": [
+        {
+          "code": "BZD",
+          "name": "Belize Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 17.25,
+      "lon": -88.75
+    },
+    {
+      "code": "BJ",
+      "name": "Benin",
+      "officialName": "Republic of Benin",
+      "region": "Africa",
+      "capital": "Porto-Novo",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 9.5,
+      "lon": 2.25
+    },
+    {
+      "code": "BM",
+      "name": "Bermuda",
+      "officialName": "Bermuda",
+      "region": "Americas",
+      "capital": "Hamilton",
+      "currencies": [
+        {
+          "code": "BMD",
+          "name": "Bermudan Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 32.33333333,
+      "lon": -64.75
+    },
+    {
+      "code": "BT",
+      "name": "Bhutan",
+      "officialName": "Kingdom of Bhutan",
+      "region": "Asia",
+      "capital": "Thimphu",
+      "currencies": [
+        {
+          "code": "BTN",
+          "name": "Bhutanese Ngultrum",
+          "symbol": "Nu."
+        },
+        {
+          "code": "INR",
+          "name": "Indian Rupee",
+          "symbol": "₹"
+        }
+      ],
+      "lat": 27.5,
+      "lon": 90.5
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia",
+      "officialName": "Plurinational State of Bolivia",
+      "region": "Americas",
+      "capital": "Sucre",
+      "currencies": [
+        {
+          "code": "BOB",
+          "name": "Bolivian Boliviano",
+          "symbol": "Bs."
+        }
+      ],
+      "lat": -17,
+      "lon": -65
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "officialName": "Bosnia and Herzegovina",
+      "region": "Europe",
+      "capital": "Sarajevo",
+      "currencies": [
+        {
+          "code": "BAM",
+          "name": "Bosnia-Herzegovina Convertible Mark",
+          "symbol": "KM"
+        }
+      ],
+      "lat": 44,
+      "lon": 18
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "officialName": "Republic of Botswana",
+      "region": "Africa",
+      "capital": "Gaborone",
+      "currencies": [
+        {
+          "code": "BWP",
+          "name": "Botswanan Pula",
+          "symbol": "P"
+        }
+      ],
+      "lat": -22,
+      "lon": 24
+    },
+    {
+      "code": "BV",
+      "name": "Bouvet Island",
+      "officialName": "Bouvet Island",
+      "region": "Antarctic",
+      "capital": "",
+      "currencies": [
+        {
+          "code": "NOK",
+          "name": "Norwegian Krone",
+          "symbol": "NOK"
+        }
+      ],
+      "lat": -54.43333333,
+      "lon": 3.4
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "officialName": "Federative Republic of Brazil",
+      "region": "Americas",
+      "capital": "Brasília",
+      "currencies": [
+        {
+          "code": "BRL",
+          "name": "Brazilian Real",
+          "symbol": "R$"
+        }
+      ],
+      "lat": -10,
+      "lon": -55
+    },
+    {
+      "code": "IO",
+      "name": "British Indian Ocean Territory",
+      "officialName": "British Indian Ocean Territory",
+      "region": "Africa",
+      "capital": "Diego Garcia",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -6,
+      "lon": 71.5
+    },
+    {
+      "code": "VG",
+      "name": "British Virgin Islands",
+      "officialName": "Virgin Islands",
+      "region": "Americas",
+      "capital": "Road Town",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 18.431383,
+      "lon": -64.62305
+    },
+    {
+      "code": "BN",
+      "name": "Brunei",
+      "officialName": "Nation of Brunei, Abode of Peace",
+      "region": "Asia",
+      "capital": "Bandar Seri Begawan",
+      "currencies": [
+        {
+          "code": "BND",
+          "name": "Brunei Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 4.5,
+      "lon": 114.66666666
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "officialName": "Republic of Bulgaria",
+      "region": "Europe",
+      "capital": "Sofia",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 43,
+      "lon": 25
+    },
+    {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "officialName": "Burkina Faso",
+      "region": "Africa",
+      "capital": "Ouagadougou",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 13,
+      "lon": -2
+    },
+    {
+      "code": "BI",
+      "name": "Burundi",
+      "officialName": "Republic of Burundi",
+      "region": "Africa",
+      "capital": "Gitega",
+      "currencies": [
+        {
+          "code": "BIF",
+          "name": "Burundian Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": -3.5,
+      "lon": 30
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "officialName": "Kingdom of Cambodia",
+      "region": "Asia",
+      "capital": "Phnom Penh",
+      "currencies": [
+        {
+          "code": "KHR",
+          "name": "Cambodian Riel",
+          "symbol": "៛"
+        }
+      ],
+      "lat": 13,
+      "lon": 105
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "officialName": "Republic of Cameroon",
+      "region": "Africa",
+      "capital": "Yaoundé",
+      "currencies": [
+        {
+          "code": "XAF",
+          "name": "Central African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 6,
+      "lon": 12
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "officialName": "Canada",
+      "region": "Americas",
+      "capital": "Ottawa",
+      "currencies": [
+        {
+          "code": "CAD",
+          "name": "Canadian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 60,
+      "lon": -95
+    },
+    {
+      "code": "CV",
+      "name": "Cape Verde",
+      "officialName": "Republic of Cabo Verde",
+      "region": "Africa",
+      "capital": "Praia",
+      "currencies": [
+        {
+          "code": "CVE",
+          "name": "Cape Verdean Escudo",
+          "symbol": "Esc"
+        }
+      ],
+      "lat": 16,
+      "lon": -24
+    },
+    {
+      "code": "BQ",
+      "name": "Caribbean Netherlands",
+      "officialName": "Bonaire, Sint Eustatius and Saba",
+      "region": "Americas",
+      "capital": "Kralendijk",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 12.18,
+      "lon": -68.25
+    },
+    {
+      "code": "KY",
+      "name": "Cayman Islands",
+      "officialName": "Cayman Islands",
+      "region": "Americas",
+      "capital": "George Town",
+      "currencies": [
+        {
+          "code": "KYD",
+          "name": "Cayman Islands Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 19.5,
+      "lon": -80.5
+    },
+    {
+      "code": "CF",
+      "name": "Central African Republic",
+      "officialName": "Central African Republic",
+      "region": "Africa",
+      "capital": "Bangui",
+      "currencies": [
+        {
+          "code": "XAF",
+          "name": "Central African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 7,
+      "lon": 21
+    },
+    {
+      "code": "TD",
+      "name": "Chad",
+      "officialName": "Republic of Chad",
+      "region": "Africa",
+      "capital": "N'Djamena",
+      "currencies": [
+        {
+          "code": "XAF",
+          "name": "Central African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 15,
+      "lon": 19
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "officialName": "Republic of Chile",
+      "region": "Americas",
+      "capital": "Santiago",
+      "currencies": [
+        {
+          "code": "CLP",
+          "name": "Chilean Peso",
+          "symbol": "$"
+        }
+      ],
+      "lat": -30,
+      "lon": -71
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "officialName": "People's Republic of China",
+      "region": "Asia",
+      "capital": "Beijing",
+      "currencies": [
+        {
+          "code": "CNY",
+          "name": "Chinese Yuan",
+          "symbol": "¥"
+        }
+      ],
+      "lat": 35,
+      "lon": 105
+    },
+    {
+      "code": "CX",
+      "name": "Christmas Island",
+      "officialName": "Territory of Christmas Island",
+      "region": "Oceania",
+      "capital": "Flying Fish Cove",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -10.5,
+      "lon": 105.66666666
+    },
+    {
+      "code": "CC",
+      "name": "Cocos (Keeling) Islands",
+      "officialName": "Territory of the Cocos (Keeling) Islands",
+      "region": "Oceania",
+      "capital": "West Island",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -12.5,
+      "lon": 96.83333333
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "officialName": "Republic of Colombia",
+      "region": "Americas",
+      "capital": "Bogotá",
+      "currencies": [
+        {
+          "code": "COP",
+          "name": "Colombian Peso",
+          "symbol": "$"
+        }
+      ],
+      "lat": 4,
+      "lon": -72
+    },
+    {
+      "code": "KM",
+      "name": "Comoros",
+      "officialName": "Union of the Comoros",
+      "region": "Africa",
+      "capital": "Moroni",
+      "currencies": [
+        {
+          "code": "KMF",
+          "name": "Comorian Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": -12.16666666,
+      "lon": 44.25
+    },
+    {
+      "code": "CG",
+      "name": "Congo",
+      "officialName": "Republic of the Congo",
+      "region": "Africa",
+      "capital": "Brazzaville",
+      "currencies": [
+        {
+          "code": "XAF",
+          "name": "Central African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": -1,
+      "lon": 15
+    },
+    {
+      "code": "CK",
+      "name": "Cook Islands",
+      "officialName": "Cook Islands",
+      "region": "Oceania",
+      "capital": "Avarua",
+      "currencies": [
+        {
+          "code": "NZD",
+          "name": "New Zealand Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -21.23333333,
+      "lon": -159.76666666
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "officialName": "Republic of Costa Rica",
+      "region": "Americas",
+      "capital": "San José",
+      "currencies": [
+        {
+          "code": "CRC",
+          "name": "Costa Rican Colón",
+          "symbol": "₡"
+        }
+      ],
+      "lat": 10,
+      "lon": -84
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "officialName": "Republic of Croatia",
+      "region": "Europe",
+      "capital": "Zagreb",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 45.16666666,
+      "lon": 15.5
+    },
+    {
+      "code": "CU",
+      "name": "Cuba",
+      "officialName": "Republic of Cuba",
+      "region": "Americas",
+      "capital": "Havana",
+      "currencies": [
+        {
+          "code": "CUP",
+          "name": "Cuban Peso",
+          "symbol": "$"
+        }
+      ],
+      "lat": 21.5,
+      "lon": -80
+    },
+    {
+      "code": "CW",
+      "name": "Curaçao",
+      "officialName": "Country of Curaçao",
+      "region": "Americas",
+      "capital": "Willemstad",
+      "currencies": [
+        {
+          "code": "XCG",
+          "name": "Caribbean guilder",
+          "symbol": "XCG"
+        }
+      ],
+      "lat": 12.116667,
+      "lon": -68.933333
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "officialName": "Republic of Cyprus",
+      "region": "Europe",
+      "capital": "Nicosia",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 35,
+      "lon": 33
+    },
+    {
+      "code": "CZ",
+      "name": "Czechia",
+      "officialName": "Czech Republic",
+      "region": "Europe",
+      "capital": "Prague",
+      "currencies": [
+        {
+          "code": "CZK",
+          "name": "Czech Koruna",
+          "symbol": "Kč"
+        }
+      ],
+      "lat": 49.75,
+      "lon": 15.5
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "officialName": "Kingdom of Denmark",
+      "region": "Europe",
+      "capital": "Copenhagen",
+      "currencies": [
+        {
+          "code": "DKK",
+          "name": "Danish Krone",
+          "symbol": "kr"
+        }
+      ],
+      "lat": 56,
+      "lon": 10
+    },
+    {
+      "code": "DJ",
+      "name": "Djibouti",
+      "officialName": "Republic of Djibouti",
+      "region": "Africa",
+      "capital": "Djibouti",
+      "currencies": [
+        {
+          "code": "DJF",
+          "name": "Djiboutian Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 11.5,
+      "lon": 43
+    },
+    {
+      "code": "DM",
+      "name": "Dominica",
+      "officialName": "Commonwealth of Dominica",
+      "region": "Americas",
+      "capital": "Roseau",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 15.41666666,
+      "lon": -61.33333333
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "officialName": "Dominican Republic",
+      "region": "Americas",
+      "capital": "Santo Domingo",
+      "currencies": [
+        {
+          "code": "DOP",
+          "name": "Dominican Peso",
+          "symbol": "$"
+        }
+      ],
+      "lat": 19,
+      "lon": -70.66666666
+    },
+    {
+      "code": "CD",
+      "name": "DR Congo",
+      "officialName": "Democratic Republic of the Congo",
+      "region": "Africa",
+      "capital": "Kinshasa",
+      "currencies": [
+        {
+          "code": "CDF",
+          "name": "Congolese Franc",
+          "symbol": "FC"
+        }
+      ],
+      "lat": 0,
+      "lon": 25
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "officialName": "Republic of Ecuador",
+      "region": "Americas",
+      "capital": "Quito",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -2,
+      "lon": -77.5
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "officialName": "Arab Republic of Egypt",
+      "region": "Africa",
+      "capital": "Cairo",
+      "currencies": [
+        {
+          "code": "EGP",
+          "name": "Egyptian Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 27,
+      "lon": 30
+    },
+    {
+      "code": "SV",
+      "name": "El Salvador",
+      "officialName": "Republic of El Salvador",
+      "region": "Americas",
+      "capital": "San Salvador",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 13.83333333,
+      "lon": -88.91666666
+    },
+    {
+      "code": "GQ",
+      "name": "Equatorial Guinea",
+      "officialName": "Republic of Equatorial Guinea",
+      "region": "Africa",
+      "capital": "Malabo",
+      "currencies": [
+        {
+          "code": "XAF",
+          "name": "Central African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 2,
+      "lon": 10
+    },
+    {
+      "code": "ER",
+      "name": "Eritrea",
+      "officialName": "State of Eritrea",
+      "region": "Africa",
+      "capital": "Asmara",
+      "currencies": [
+        {
+          "code": "ERN",
+          "name": "Eritrean Nakfa",
+          "symbol": "Nfk"
+        }
+      ],
+      "lat": 15,
+      "lon": 39
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "officialName": "Republic of Estonia",
+      "region": "Europe",
+      "capital": "Tallinn",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 59,
+      "lon": 26
+    },
+    {
+      "code": "SZ",
+      "name": "Eswatini",
+      "officialName": "Kingdom of Eswatini",
+      "region": "Africa",
+      "capital": "Lobamba",
+      "currencies": [
+        {
+          "code": "SZL",
+          "name": "Swazi Lilangeni",
+          "symbol": "L"
+        }
+      ],
+      "lat": -26.5,
+      "lon": 31.5
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "officialName": "Federal Democratic Republic of Ethiopia",
+      "region": "Africa",
+      "capital": "Addis Ababa",
+      "currencies": [
+        {
+          "code": "ETB",
+          "name": "Ethiopian Birr",
+          "symbol": "Br"
+        }
+      ],
+      "lat": 8,
+      "lon": 38
+    },
+    {
+      "code": "FK",
+      "name": "Falkland Islands",
+      "officialName": "Falkland Islands",
+      "region": "Americas",
+      "capital": "Stanley",
+      "currencies": [
+        {
+          "code": "FKP",
+          "name": "Falkland Islands Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": -51.75,
+      "lon": -59
+    },
+    {
+      "code": "FO",
+      "name": "Faroe Islands",
+      "officialName": "Faroe Islands",
+      "region": "Europe",
+      "capital": "Tórshavn",
+      "currencies": [
+        {
+          "code": "DKK",
+          "name": "Danish Krone",
+          "symbol": "kr"
+        }
+      ],
+      "lat": 62,
+      "lon": -7
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji",
+      "officialName": "Republic of Fiji",
+      "region": "Oceania",
+      "capital": "Suva",
+      "currencies": [
+        {
+          "code": "FJD",
+          "name": "Fijian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -18,
+      "lon": 175
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "officialName": "Republic of Finland",
+      "region": "Europe",
+      "capital": "Helsinki",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 64,
+      "lon": 26
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "officialName": "French Republic",
+      "region": "Europe",
+      "capital": "Paris",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 46,
+      "lon": 2
+    },
+    {
+      "code": "GF",
+      "name": "French Guiana",
+      "officialName": "Guiana",
+      "region": "Americas",
+      "capital": "Cayenne",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 4,
+      "lon": -53
+    },
+    {
+      "code": "PF",
+      "name": "French Polynesia",
+      "officialName": "French Polynesia",
+      "region": "Oceania",
+      "capital": "Papeetē",
+      "currencies": [
+        {
+          "code": "XPF",
+          "name": "CFP Franc",
+          "symbol": "₣"
+        }
+      ],
+      "lat": -15,
+      "lon": -140
+    },
+    {
+      "code": "TF",
+      "name": "French Southern and Antarctic Lands",
+      "officialName": "Territory of the French Southern and Antarctic Lands",
+      "region": "Antarctic",
+      "capital": "Port-aux-Français",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": -49.25,
+      "lon": 69.167
+    },
+    {
+      "code": "GA",
+      "name": "Gabon",
+      "officialName": "Gabonese Republic",
+      "region": "Africa",
+      "capital": "Libreville",
+      "currencies": [
+        {
+          "code": "XAF",
+          "name": "Central African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": -1,
+      "lon": 11.75
+    },
+    {
+      "code": "GM",
+      "name": "Gambia",
+      "officialName": "Republic of the Gambia",
+      "region": "Africa",
+      "capital": "Banjul",
+      "currencies": [
+        {
+          "code": "GMD",
+          "name": "Gambian Dalasi",
+          "symbol": "D"
+        }
+      ],
+      "lat": 13.46666666,
+      "lon": -16.56666666
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "officialName": "Georgia",
+      "region": "Asia",
+      "capital": "Tbilisi",
+      "currencies": [
+        {
+          "code": "GEL",
+          "name": "Georgian Lari",
+          "symbol": "₾"
+        }
+      ],
+      "lat": 42,
+      "lon": 43.5
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "officialName": "Federal Republic of Germany",
+      "region": "Europe",
+      "capital": "Berlin",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 51,
+      "lon": 9
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "officialName": "Republic of Ghana",
+      "region": "Africa",
+      "capital": "Accra",
+      "currencies": [
+        {
+          "code": "GHS",
+          "name": "Ghanaian Cedi",
+          "symbol": "₵"
+        }
+      ],
+      "lat": 8,
+      "lon": -2
+    },
+    {
+      "code": "GI",
+      "name": "Gibraltar",
+      "officialName": "Gibraltar",
+      "region": "Europe",
+      "capital": "Gibraltar",
+      "currencies": [
+        {
+          "code": "GIP",
+          "name": "Gibraltar Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 36.13333333,
+      "lon": -5.35
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "officialName": "Hellenic Republic",
+      "region": "Europe",
+      "capital": "Athens",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 39,
+      "lon": 22
+    },
+    {
+      "code": "GL",
+      "name": "Greenland",
+      "officialName": "Greenland",
+      "region": "Americas",
+      "capital": "Nuuk",
+      "currencies": [
+        {
+          "code": "DKK",
+          "name": "Danish Krone",
+          "symbol": "kr."
+        }
+      ],
+      "lat": 72,
+      "lon": -40
+    },
+    {
+      "code": "GD",
+      "name": "Grenada",
+      "officialName": "Grenada",
+      "region": "Americas",
+      "capital": "St. George's",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 12.11666666,
+      "lon": -61.66666666
+    },
+    {
+      "code": "GP",
+      "name": "Guadeloupe",
+      "officialName": "Guadeloupe",
+      "region": "Americas",
+      "capital": "Basse-Terre",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 16.25,
+      "lon": -61.583333
+    },
+    {
+      "code": "GU",
+      "name": "Guam",
+      "officialName": "Guam",
+      "region": "Oceania",
+      "capital": "Hagåtña",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 13.46666666,
+      "lon": 144.78333333
+    },
+    {
+      "code": "GT",
+      "name": "Guatemala",
+      "officialName": "Republic of Guatemala",
+      "region": "Americas",
+      "capital": "Guatemala City",
+      "currencies": [
+        {
+          "code": "GTQ",
+          "name": "Guatemalan Quetzal",
+          "symbol": "Q"
+        }
+      ],
+      "lat": 15.5,
+      "lon": -90.25
+    },
+    {
+      "code": "GG",
+      "name": "Guernsey",
+      "officialName": "Bailiwick of Guernsey",
+      "region": "Europe",
+      "capital": "St. Peter Port",
+      "currencies": [
+        {
+          "code": "GBP",
+          "name": "British Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 49.46666666,
+      "lon": -2.58333333
+    },
+    {
+      "code": "GN",
+      "name": "Guinea",
+      "officialName": "Republic of Guinea",
+      "region": "Africa",
+      "capital": "Conakry",
+      "currencies": [
+        {
+          "code": "GNF",
+          "name": "Guinean Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 11,
+      "lon": -10
+    },
+    {
+      "code": "GW",
+      "name": "Guinea-Bissau",
+      "officialName": "Republic of Guinea-Bissau",
+      "region": "Africa",
+      "capital": "Bissau",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 12,
+      "lon": -15
+    },
+    {
+      "code": "GY",
+      "name": "Guyana",
+      "officialName": "Co-operative Republic of Guyana",
+      "region": "Americas",
+      "capital": "Georgetown",
+      "currencies": [
+        {
+          "code": "GYD",
+          "name": "Guyanaese Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 5,
+      "lon": -59
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "officialName": "Republic of Haiti",
+      "region": "Americas",
+      "capital": "Port-au-Prince",
+      "currencies": [
+        {
+          "code": "HTG",
+          "name": "Haitian Gourde",
+          "symbol": "G"
+        },
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "USD"
+        }
+      ],
+      "lat": 19,
+      "lon": -72.41666666
+    },
+    {
+      "code": "HM",
+      "name": "Heard Island and McDonald Islands",
+      "officialName": "Heard Island and McDonald Islands",
+      "region": "Antarctic",
+      "capital": "",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "AUD"
+        }
+      ],
+      "lat": -53.1,
+      "lon": 72.51666666
+    },
+    {
+      "code": "HN",
+      "name": "Honduras",
+      "officialName": "Republic of Honduras",
+      "region": "Americas",
+      "capital": "Tegucigalpa",
+      "currencies": [
+        {
+          "code": "HNL",
+          "name": "Honduran Lempira",
+          "symbol": "L"
+        }
+      ],
+      "lat": 15,
+      "lon": -86.5
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong",
+      "officialName": "Hong Kong Special Administrative Region of the People's Republic of China",
+      "region": "Asia",
+      "capital": "City of Victoria",
+      "currencies": [
+        {
+          "code": "HKD",
+          "name": "Hong Kong Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 22.267,
+      "lon": 114.188
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "officialName": "Hungary",
+      "region": "Europe",
+      "capital": "Budapest",
+      "currencies": [
+        {
+          "code": "HUF",
+          "name": "Hungarian Forint",
+          "symbol": "Ft"
+        }
+      ],
+      "lat": 47,
+      "lon": 20
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "officialName": "Iceland",
+      "region": "Europe",
+      "capital": "Reykjavik",
+      "currencies": [
+        {
+          "code": "ISK",
+          "name": "Icelandic Króna",
+          "symbol": "kr"
+        }
+      ],
+      "lat": 65,
+      "lon": -18
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "officialName": "Republic of India",
+      "region": "Asia",
+      "capital": "New Delhi",
+      "currencies": [
+        {
+          "code": "INR",
+          "name": "Indian Rupee",
+          "symbol": "₹"
+        }
+      ],
+      "lat": 20,
+      "lon": 77
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "officialName": "Republic of Indonesia",
+      "region": "Asia",
+      "capital": "Jakarta",
+      "currencies": [
+        {
+          "code": "IDR",
+          "name": "Indonesian Rupiah",
+          "symbol": "Rp"
+        }
+      ],
+      "lat": -5,
+      "lon": 120
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "officialName": "Islamic Republic of Iran",
+      "region": "Asia",
+      "capital": "Tehran",
+      "currencies": [
+        {
+          "code": "IRR",
+          "name": "Iranian Rial",
+          "symbol": "﷼"
+        }
+      ],
+      "lat": 32,
+      "lon": 53
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "officialName": "Republic of Iraq",
+      "region": "Asia",
+      "capital": "Baghdad",
+      "currencies": [
+        {
+          "code": "IQD",
+          "name": "Iraqi Dinar",
+          "symbol": "ع.د"
+        }
+      ],
+      "lat": 33,
+      "lon": 44
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "officialName": "Republic of Ireland",
+      "region": "Europe",
+      "capital": "Dublin",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 53,
+      "lon": -8
+    },
+    {
+      "code": "IM",
+      "name": "Isle of Man",
+      "officialName": "Isle of Man",
+      "region": "Europe",
+      "capital": "Douglas",
+      "currencies": [
+        {
+          "code": "GBP",
+          "name": "British Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 54.25,
+      "lon": -4.5
+    },
+    {
+      "code": "IL",
+      "name": "Israel",
+      "officialName": "State of Israel",
+      "region": "Asia",
+      "capital": "Jerusalem",
+      "currencies": [
+        {
+          "code": "ILS",
+          "name": "Israeli New Shekel",
+          "symbol": "₪"
+        }
+      ],
+      "lat": 31.47,
+      "lon": 35.13
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "officialName": "Italian Republic",
+      "region": "Europe",
+      "capital": "Rome",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 42.83333333,
+      "lon": 12.83333333
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast",
+      "officialName": "Republic of Côte d'Ivoire",
+      "region": "Africa",
+      "capital": "Yamoussoukro",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 8,
+      "lon": -5
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "officialName": "Jamaica",
+      "region": "Americas",
+      "capital": "Kingston",
+      "currencies": [
+        {
+          "code": "JMD",
+          "name": "Jamaican Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 18.25,
+      "lon": -77.5
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "officialName": "Japan",
+      "region": "Asia",
+      "capital": "Tokyo",
+      "currencies": [
+        {
+          "code": "JPY",
+          "name": "Japanese Yen",
+          "symbol": "¥"
+        }
+      ],
+      "lat": 36,
+      "lon": 138
+    },
+    {
+      "code": "JE",
+      "name": "Jersey",
+      "officialName": "Bailiwick of Jersey",
+      "region": "Europe",
+      "capital": "Saint Helier",
+      "currencies": [
+        {
+          "code": "GBP",
+          "name": "British Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 49.25,
+      "lon": -2.16666666
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "officialName": "Hashemite Kingdom of Jordan",
+      "region": "Asia",
+      "capital": "Amman",
+      "currencies": [
+        {
+          "code": "JOD",
+          "name": "Jordanian Dinar",
+          "symbol": "د.ا"
+        }
+      ],
+      "lat": 31,
+      "lon": 36
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "officialName": "Republic of Kazakhstan",
+      "region": "Asia",
+      "capital": "Astana",
+      "currencies": [
+        {
+          "code": "KZT",
+          "name": "Kazakhstani Tenge",
+          "symbol": "₸"
+        }
+      ],
+      "lat": 48,
+      "lon": 68
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "officialName": "Republic of Kenya",
+      "region": "Africa",
+      "capital": "Nairobi",
+      "currencies": [
+        {
+          "code": "KES",
+          "name": "Kenyan Shilling",
+          "symbol": "Sh"
+        }
+      ],
+      "lat": 1,
+      "lon": 38
+    },
+    {
+      "code": "KI",
+      "name": "Kiribati",
+      "officialName": "Independent and Sovereign Republic of Kiribati",
+      "region": "Oceania",
+      "capital": "South Tarawa",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 1.41666666,
+      "lon": 173
+    },
+    {
+      "code": "XK",
+      "name": "Kosovo",
+      "officialName": "Republic of Kosovo",
+      "region": "Europe",
+      "capital": "Pristina",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 42.666667,
+      "lon": 21.166667
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "officialName": "State of Kuwait",
+      "region": "Asia",
+      "capital": "Kuwait City",
+      "currencies": [
+        {
+          "code": "KWD",
+          "name": "Kuwaiti Dinar",
+          "symbol": "د.ك"
+        }
+      ],
+      "lat": 29.5,
+      "lon": 45.75
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "officialName": "Kyrgyz Republic",
+      "region": "Asia",
+      "capital": "Bishkek",
+      "currencies": [
+        {
+          "code": "KGS",
+          "name": "Kyrgyz Som",
+          "symbol": "с"
+        }
+      ],
+      "lat": 41,
+      "lon": 75
+    },
+    {
+      "code": "LA",
+      "name": "Laos",
+      "officialName": "Lao People's Democratic Republic",
+      "region": "Asia",
+      "capital": "Vientiane",
+      "currencies": [
+        {
+          "code": "LAK",
+          "name": "Laotian Kip",
+          "symbol": "₭"
+        }
+      ],
+      "lat": 18,
+      "lon": 105
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "officialName": "Republic of Latvia",
+      "region": "Europe",
+      "capital": "Riga",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 57,
+      "lon": 25
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "officialName": "Lebanese Republic",
+      "region": "Asia",
+      "capital": "Beirut",
+      "currencies": [
+        {
+          "code": "LBP",
+          "name": "Lebanese Pound",
+          "symbol": "ل.ل"
+        }
+      ],
+      "lat": 33.83333333,
+      "lon": 35.83333333
+    },
+    {
+      "code": "LS",
+      "name": "Lesotho",
+      "officialName": "Kingdom of Lesotho",
+      "region": "Africa",
+      "capital": "Maseru",
+      "currencies": [
+        {
+          "code": "ZAR",
+          "name": "South African Rand",
+          "symbol": "R"
+        },
+        {
+          "code": "LSL",
+          "name": "Lesotho Loti",
+          "symbol": "L"
+        }
+      ],
+      "lat": -29.5,
+      "lon": 28.5
+    },
+    {
+      "code": "LR",
+      "name": "Liberia",
+      "officialName": "Republic of Liberia",
+      "region": "Africa",
+      "capital": "Monrovia",
+      "currencies": [
+        {
+          "code": "LRD",
+          "name": "Liberian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 6.5,
+      "lon": -9.5
+    },
+    {
+      "code": "LY",
+      "name": "Libya",
+      "officialName": "State of Libya",
+      "region": "Africa",
+      "capital": "Tripoli",
+      "currencies": [
+        {
+          "code": "LYD",
+          "name": "Libyan Dinar",
+          "symbol": "ل.د"
+        }
+      ],
+      "lat": 25,
+      "lon": 17
+    },
+    {
+      "code": "LI",
+      "name": "Liechtenstein",
+      "officialName": "Principality of Liechtenstein",
+      "region": "Europe",
+      "capital": "Vaduz",
+      "currencies": [
+        {
+          "code": "CHF",
+          "name": "Swiss Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 47.26666666,
+      "lon": 9.53333333
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "officialName": "Republic of Lithuania",
+      "region": "Europe",
+      "capital": "Vilnius",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 56,
+      "lon": 24
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "officialName": "Grand Duchy of Luxembourg",
+      "region": "Europe",
+      "capital": "Luxembourg",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 49.75,
+      "lon": 6.16666666
+    },
+    {
+      "code": "MO",
+      "name": "Macau",
+      "officialName": "Macao Special Administrative Region of the People's Republic of China",
+      "region": "Asia",
+      "capital": "",
+      "currencies": [
+        {
+          "code": "MOP",
+          "name": "Macanese Pataca",
+          "symbol": "P"
+        }
+      ],
+      "lat": 22.16666666,
+      "lon": 113.55
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "officialName": "Republic of Madagascar",
+      "region": "Africa",
+      "capital": "Antananarivo",
+      "currencies": [
+        {
+          "code": "MGA",
+          "name": "Malagasy Ariary",
+          "symbol": "Ar"
+        }
+      ],
+      "lat": -20,
+      "lon": 47
+    },
+    {
+      "code": "MW",
+      "name": "Malawi",
+      "officialName": "Republic of Malawi",
+      "region": "Africa",
+      "capital": "Lilongwe",
+      "currencies": [
+        {
+          "code": "MWK",
+          "name": "Malawian Kwacha",
+          "symbol": "MK"
+        }
+      ],
+      "lat": -13.5,
+      "lon": 34
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "officialName": "Malaysia",
+      "region": "Asia",
+      "capital": "Kuala Lumpur",
+      "currencies": [
+        {
+          "code": "MYR",
+          "name": "Malaysian Ringgit",
+          "symbol": "RM"
+        }
+      ],
+      "lat": 2.5,
+      "lon": 112.5
+    },
+    {
+      "code": "MV",
+      "name": "Maldives",
+      "officialName": "Republic of the Maldives",
+      "region": "Asia",
+      "capital": "Malé",
+      "currencies": [
+        {
+          "code": "MVR",
+          "name": "Maldivian Rufiyaa",
+          "symbol": ".ރ"
+        }
+      ],
+      "lat": 3.25,
+      "lon": 73
+    },
+    {
+      "code": "ML",
+      "name": "Mali",
+      "officialName": "Republic of Mali",
+      "region": "Africa",
+      "capital": "Bamako",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 17,
+      "lon": -4
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "officialName": "Republic of Malta",
+      "region": "Europe",
+      "capital": "Valletta",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 35.83333333,
+      "lon": 14.58333333
+    },
+    {
+      "code": "MH",
+      "name": "Marshall Islands",
+      "officialName": "Republic of the Marshall Islands",
+      "region": "Oceania",
+      "capital": "Majuro",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 9,
+      "lon": 168
+    },
+    {
+      "code": "MQ",
+      "name": "Martinique",
+      "officialName": "Martinique",
+      "region": "Americas",
+      "capital": "Fort-de-France",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 14.666667,
+      "lon": -61
+    },
+    {
+      "code": "MR",
+      "name": "Mauritania",
+      "officialName": "Islamic Republic of Mauritania",
+      "region": "Africa",
+      "capital": "Nouakchott",
+      "currencies": [
+        {
+          "code": "MRU",
+          "name": "Mauritanian Ouguiya",
+          "symbol": "UM"
+        }
+      ],
+      "lat": 20,
+      "lon": -12
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "officialName": "Republic of Mauritius",
+      "region": "Africa",
+      "capital": "Port Louis",
+      "currencies": [
+        {
+          "code": "MUR",
+          "name": "Mauritian Rupee",
+          "symbol": "₨"
+        }
+      ],
+      "lat": -20.28333333,
+      "lon": 57.55
+    },
+    {
+      "code": "YT",
+      "name": "Mayotte",
+      "officialName": "Department of Mayotte",
+      "region": "Africa",
+      "capital": "Mamoudzou",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": -12.83333333,
+      "lon": 45.16666666
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "officialName": "United Mexican States",
+      "region": "Americas",
+      "capital": "Mexico City",
+      "currencies": [
+        {
+          "code": "MXN",
+          "name": "Mexican Peso",
+          "symbol": "$"
+        }
+      ],
+      "lat": 23,
+      "lon": -102
+    },
+    {
+      "code": "FM",
+      "name": "Micronesia",
+      "officialName": "Federated States of Micronesia",
+      "region": "Oceania",
+      "capital": "Palikir",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "USD"
+        }
+      ],
+      "lat": 6.91666666,
+      "lon": 158.25
+    },
+    {
+      "code": "MD",
+      "name": "Moldova",
+      "officialName": "Republic of Moldova",
+      "region": "Europe",
+      "capital": "Chișinău",
+      "currencies": [
+        {
+          "code": "MDL",
+          "name": "Moldovan Leu",
+          "symbol": "L"
+        }
+      ],
+      "lat": 47,
+      "lon": 29
+    },
+    {
+      "code": "MC",
+      "name": "Monaco",
+      "officialName": "Principality of Monaco",
+      "region": "Europe",
+      "capital": "Monaco",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 43.73333333,
+      "lon": 7.4
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "officialName": "Mongolia",
+      "region": "Asia",
+      "capital": "Ulan Bator",
+      "currencies": [
+        {
+          "code": "MNT",
+          "name": "Mongolian Tugrik",
+          "symbol": "₮"
+        }
+      ],
+      "lat": 46,
+      "lon": 105
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "officialName": "Montenegro",
+      "region": "Europe",
+      "capital": "Podgorica",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 42.5,
+      "lon": 19.3
+    },
+    {
+      "code": "MS",
+      "name": "Montserrat",
+      "officialName": "Montserrat",
+      "region": "Americas",
+      "capital": "Plymouth",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 16.75,
+      "lon": -62.2
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "officialName": "Kingdom of Morocco",
+      "region": "Africa",
+      "capital": "Rabat",
+      "currencies": [
+        {
+          "code": "MAD",
+          "name": "Moroccan Dirham",
+          "symbol": "د.م."
+        }
+      ],
+      "lat": 32,
+      "lon": -5
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "officialName": "Republic of Mozambique",
+      "region": "Africa",
+      "capital": "Maputo",
+      "currencies": [
+        {
+          "code": "MZN",
+          "name": "Mozambican Metical",
+          "symbol": "MT"
+        }
+      ],
+      "lat": -18.25,
+      "lon": 35
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "officialName": "Republic of the Union of Myanmar",
+      "region": "Asia",
+      "capital": "Naypyidaw",
+      "currencies": [
+        {
+          "code": "MMK",
+          "name": "Myanmar Kyat",
+          "symbol": "Ks"
+        }
+      ],
+      "lat": 22,
+      "lon": 98
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "officialName": "Republic of Namibia",
+      "region": "Africa",
+      "capital": "Windhoek",
+      "currencies": [
+        {
+          "code": "NAD",
+          "name": "Namibian Dollar",
+          "symbol": "$"
+        },
+        {
+          "code": "ZAR",
+          "name": "South African Rand",
+          "symbol": "R"
+        }
+      ],
+      "lat": -22,
+      "lon": 17
+    },
+    {
+      "code": "NR",
+      "name": "Nauru",
+      "officialName": "Republic of Nauru",
+      "region": "Oceania",
+      "capital": "Yaren",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -0.53333333,
+      "lon": 166.91666666
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "officialName": "Federal Democratic Republic of Nepal",
+      "region": "Asia",
+      "capital": "Kathmandu",
+      "currencies": [
+        {
+          "code": "NPR",
+          "name": "Nepalese Rupee",
+          "symbol": "₨"
+        }
+      ],
+      "lat": 28,
+      "lon": 84
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "officialName": "Kingdom of the Netherlands",
+      "region": "Europe",
+      "capital": "Amsterdam",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 52.5,
+      "lon": 5.75
+    },
+    {
+      "code": "NC",
+      "name": "New Caledonia",
+      "officialName": "New Caledonia",
+      "region": "Oceania",
+      "capital": "Nouméa",
+      "currencies": [
+        {
+          "code": "XPF",
+          "name": "CFP Franc",
+          "symbol": "₣"
+        }
+      ],
+      "lat": -21.5,
+      "lon": 165.5
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "officialName": "New Zealand",
+      "region": "Oceania",
+      "capital": "Wellington",
+      "currencies": [
+        {
+          "code": "NZD",
+          "name": "New Zealand Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -41,
+      "lon": 174
+    },
+    {
+      "code": "NI",
+      "name": "Nicaragua",
+      "officialName": "Republic of Nicaragua",
+      "region": "Americas",
+      "capital": "Managua",
+      "currencies": [
+        {
+          "code": "NIO",
+          "name": "Nicaraguan Córdoba",
+          "symbol": "C$"
+        }
+      ],
+      "lat": 13,
+      "lon": -85
+    },
+    {
+      "code": "NE",
+      "name": "Niger",
+      "officialName": "Republic of Niger",
+      "region": "Africa",
+      "capital": "Niamey",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 16,
+      "lon": 8
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "officialName": "Federal Republic of Nigeria",
+      "region": "Africa",
+      "capital": "Abuja",
+      "currencies": [
+        {
+          "code": "NGN",
+          "name": "Nigerian Naira",
+          "symbol": "₦"
+        }
+      ],
+      "lat": 10,
+      "lon": 8
+    },
+    {
+      "code": "NU",
+      "name": "Niue",
+      "officialName": "Niue",
+      "region": "Oceania",
+      "capital": "Alofi",
+      "currencies": [
+        {
+          "code": "NZD",
+          "name": "New Zealand Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -19.03333333,
+      "lon": -169.86666666
+    },
+    {
+      "code": "NF",
+      "name": "Norfolk Island",
+      "officialName": "Territory of Norfolk Island",
+      "region": "Oceania",
+      "capital": "Kingston",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -29.03333333,
+      "lon": 167.95
+    },
+    {
+      "code": "KP",
+      "name": "North Korea",
+      "officialName": "Democratic People's Republic of Korea",
+      "region": "Asia",
+      "capital": "Pyongyang",
+      "currencies": [
+        {
+          "code": "KPW",
+          "name": "North Korean Won",
+          "symbol": "₩"
+        }
+      ],
+      "lat": 40,
+      "lon": 127
+    },
+    {
+      "code": "MK",
+      "name": "North Macedonia",
+      "officialName": "Republic of North Macedonia",
+      "region": "Europe",
+      "capital": "Skopje",
+      "currencies": [
+        {
+          "code": "MKD",
+          "name": "Macedonian Denar",
+          "symbol": "den"
+        }
+      ],
+      "lat": 41.83333333,
+      "lon": 22
+    },
+    {
+      "code": "MP",
+      "name": "Northern Mariana Islands",
+      "officialName": "Commonwealth of the Northern Mariana Islands",
+      "region": "Oceania",
+      "capital": "Saipan",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 15.2,
+      "lon": 145.75
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "officialName": "Kingdom of Norway",
+      "region": "Europe",
+      "capital": "Oslo",
+      "currencies": [
+        {
+          "code": "NOK",
+          "name": "Norwegian Krone",
+          "symbol": "kr"
+        }
+      ],
+      "lat": 62,
+      "lon": 10
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "officialName": "Sultanate of Oman",
+      "region": "Asia",
+      "capital": "Muscat",
+      "currencies": [
+        {
+          "code": "OMR",
+          "name": "Omani Rial",
+          "symbol": "ر.ع."
+        }
+      ],
+      "lat": 21,
+      "lon": 57
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "officialName": "Islamic Republic of Pakistan",
+      "region": "Asia",
+      "capital": "Islamabad",
+      "currencies": [
+        {
+          "code": "PKR",
+          "name": "Pakistani Rupee",
+          "symbol": "₨"
+        }
+      ],
+      "lat": 30,
+      "lon": 70
+    },
+    {
+      "code": "PW",
+      "name": "Palau",
+      "officialName": "Republic of Palau",
+      "region": "Oceania",
+      "capital": "Ngerulmud",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 7.5,
+      "lon": 134.5
+    },
+    {
+      "code": "PS",
+      "name": "Palestine",
+      "officialName": "State of Palestine",
+      "region": "Asia",
+      "capital": "Ramallah",
+      "currencies": [
+        {
+          "code": "ILS",
+          "name": "Israeli New Shekel",
+          "symbol": "₪"
+        },
+        {
+          "code": "JOD",
+          "name": "Jordanian Dinar",
+          "symbol": "JD"
+        }
+      ],
+      "lat": 31.9,
+      "lon": 35.2
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "officialName": "Republic of Panama",
+      "region": "Americas",
+      "capital": "Panama City",
+      "currencies": [
+        {
+          "code": "PAB",
+          "name": "Panamanian Balboa",
+          "symbol": "B/."
+        },
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 9,
+      "lon": -80
+    },
+    {
+      "code": "PG",
+      "name": "Papua New Guinea",
+      "officialName": "Independent State of Papua New Guinea",
+      "region": "Oceania",
+      "capital": "Port Moresby",
+      "currencies": [
+        {
+          "code": "PGK",
+          "name": "Papua New Guinean Kina",
+          "symbol": "K"
+        }
+      ],
+      "lat": -6,
+      "lon": 147
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "officialName": "Republic of Paraguay",
+      "region": "Americas",
+      "capital": "Asunción",
+      "currencies": [
+        {
+          "code": "PYG",
+          "name": "Paraguayan Guarani",
+          "symbol": "₲"
+        }
+      ],
+      "lat": -23,
+      "lon": -58
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "officialName": "Republic of Peru",
+      "region": "Americas",
+      "capital": "Lima",
+      "currencies": [
+        {
+          "code": "PEN",
+          "name": "Peruvian Sol",
+          "symbol": "S/."
+        }
+      ],
+      "lat": -10,
+      "lon": -76
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "officialName": "Republic of the Philippines",
+      "region": "Asia",
+      "capital": "Manila",
+      "currencies": [
+        {
+          "code": "PHP",
+          "name": "Philippine Peso",
+          "symbol": "₱"
+        }
+      ],
+      "lat": 13,
+      "lon": 122
+    },
+    {
+      "code": "PN",
+      "name": "Pitcairn Islands",
+      "officialName": "Pitcairn Group of Islands",
+      "region": "Oceania",
+      "capital": "Adamstown",
+      "currencies": [
+        {
+          "code": "NZD",
+          "name": "New Zealand Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -25.06666666,
+      "lon": -130.1
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "officialName": "Republic of Poland",
+      "region": "Europe",
+      "capital": "Warsaw",
+      "currencies": [
+        {
+          "code": "PLN",
+          "name": "Polish Zloty",
+          "symbol": "zł"
+        }
+      ],
+      "lat": 52,
+      "lon": 20
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "officialName": "Portuguese Republic",
+      "region": "Europe",
+      "capital": "Lisbon",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 39.5,
+      "lon": -8
+    },
+    {
+      "code": "PR",
+      "name": "Puerto Rico",
+      "officialName": "Commonwealth of Puerto Rico",
+      "region": "Americas",
+      "capital": "San Juan",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 18.25,
+      "lon": -66.5
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "officialName": "State of Qatar",
+      "region": "Asia",
+      "capital": "Doha",
+      "currencies": [
+        {
+          "code": "QAR",
+          "name": "Qatari Riyal",
+          "symbol": "ر.ق"
+        }
+      ],
+      "lat": 25.5,
+      "lon": 51.25
+    },
+    {
+      "code": "RE",
+      "name": "Réunion",
+      "officialName": "Réunion Island",
+      "region": "Africa",
+      "capital": "Saint-Denis",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": -21.15,
+      "lon": 55.5
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "officialName": "Romania",
+      "region": "Europe",
+      "capital": "Bucharest",
+      "currencies": [
+        {
+          "code": "RON",
+          "name": "Romanian Leu",
+          "symbol": "lei"
+        }
+      ],
+      "lat": 46,
+      "lon": 25
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "officialName": "Russian Federation",
+      "region": "Europe",
+      "capital": "Moscow",
+      "currencies": [
+        {
+          "code": "RUB",
+          "name": "Russian Ruble",
+          "symbol": "₽"
+        }
+      ],
+      "lat": 60,
+      "lon": 100
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "officialName": "Republic of Rwanda",
+      "region": "Africa",
+      "capital": "Kigali",
+      "currencies": [
+        {
+          "code": "RWF",
+          "name": "Rwandan Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": -2,
+      "lon": 30
+    },
+    {
+      "code": "BL",
+      "name": "Saint Barthélemy",
+      "officialName": "Collectivity of Saint Barthélemy",
+      "region": "Americas",
+      "capital": "Gustavia",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 18.5,
+      "lon": -63.41666666
+    },
+    {
+      "code": "SH",
+      "name": "Saint Helena, Ascension and Tristan da Cunha",
+      "officialName": "Saint Helena, Ascension and Tristan da Cunha",
+      "region": "Africa",
+      "capital": "Jamestown",
+      "currencies": [
+        {
+          "code": "SHP",
+          "name": "St. Helena Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": -15.95,
+      "lon": -5.72
+    },
+    {
+      "code": "KN",
+      "name": "Saint Kitts and Nevis",
+      "officialName": "Federation of Saint Christopher and Nevis",
+      "region": "Americas",
+      "capital": "Basseterre",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 17.33333333,
+      "lon": -62.75
+    },
+    {
+      "code": "LC",
+      "name": "Saint Lucia",
+      "officialName": "Saint Lucia",
+      "region": "Americas",
+      "capital": "Castries",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 13.88333333,
+      "lon": -60.96666666
+    },
+    {
+      "code": "MF",
+      "name": "Saint Martin",
+      "officialName": "Saint Martin",
+      "region": "Americas",
+      "capital": "Marigot",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 18.08333333,
+      "lon": -63.95
+    },
+    {
+      "code": "PM",
+      "name": "Saint Pierre and Miquelon",
+      "officialName": "Saint Pierre and Miquelon",
+      "region": "Americas",
+      "capital": "Saint-Pierre",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 46.83333333,
+      "lon": -56.33333333
+    },
+    {
+      "code": "VC",
+      "name": "Saint Vincent and the Grenadines",
+      "officialName": "Saint Vincent and the Grenadines",
+      "region": "Americas",
+      "capital": "Kingstown",
+      "currencies": [
+        {
+          "code": "XCD",
+          "name": "East Caribbean Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 13.25,
+      "lon": -61.2
+    },
+    {
+      "code": "WS",
+      "name": "Samoa",
+      "officialName": "Independent State of Samoa",
+      "region": "Oceania",
+      "capital": "Apia",
+      "currencies": [
+        {
+          "code": "WST",
+          "name": "Samoan Tala",
+          "symbol": "T"
+        }
+      ],
+      "lat": -13.58333333,
+      "lon": -172.33333333
+    },
+    {
+      "code": "SM",
+      "name": "San Marino",
+      "officialName": "Most Serene Republic of San Marino",
+      "region": "Europe",
+      "capital": "City of San Marino",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 43.76666666,
+      "lon": 12.41666666
+    },
+    {
+      "code": "ST",
+      "name": "São Tomé and Príncipe",
+      "officialName": "Democratic Republic of São Tomé and Príncipe",
+      "region": "Africa",
+      "capital": "São Tomé",
+      "currencies": [
+        {
+          "code": "STN",
+          "name": "São Tomé & Príncipe Dobra",
+          "symbol": "Db"
+        }
+      ],
+      "lat": 1,
+      "lon": 7
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "officialName": "Kingdom of Saudi Arabia",
+      "region": "Asia",
+      "capital": "Riyadh",
+      "currencies": [
+        {
+          "code": "SAR",
+          "name": "Saudi Riyal",
+          "symbol": "ر.س"
+        }
+      ],
+      "lat": 25,
+      "lon": 45
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "officialName": "Republic of Senegal",
+      "region": "Africa",
+      "capital": "Dakar",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 14,
+      "lon": -14
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "officialName": "Republic of Serbia",
+      "region": "Europe",
+      "capital": "Belgrade",
+      "currencies": [
+        {
+          "code": "RSD",
+          "name": "Serbian Dinar",
+          "symbol": "дин."
+        }
+      ],
+      "lat": 44,
+      "lon": 21
+    },
+    {
+      "code": "SC",
+      "name": "Seychelles",
+      "officialName": "Republic of Seychelles",
+      "region": "Africa",
+      "capital": "Victoria",
+      "currencies": [
+        {
+          "code": "SCR",
+          "name": "Seychellois Rupee",
+          "symbol": "₨"
+        }
+      ],
+      "lat": -4.58333333,
+      "lon": 55.66666666
+    },
+    {
+      "code": "SL",
+      "name": "Sierra Leone",
+      "officialName": "Republic of Sierra Leone",
+      "region": "Africa",
+      "capital": "Freetown",
+      "currencies": [
+        {
+          "code": "SLE",
+          "name": "Sierra Leonean Leone",
+          "symbol": "Le"
+        }
+      ],
+      "lat": 8.5,
+      "lon": -11.5
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "officialName": "Republic of Singapore",
+      "region": "Asia",
+      "capital": "Singapore",
+      "currencies": [
+        {
+          "code": "SGD",
+          "name": "Singapore Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 1.36666666,
+      "lon": 103.8
+    },
+    {
+      "code": "SX",
+      "name": "Sint Maarten",
+      "officialName": "Sint Maarten",
+      "region": "Americas",
+      "capital": "Philipsburg",
+      "currencies": [
+        {
+          "code": "XCG",
+          "name": "Caribbean guilder",
+          "symbol": "XCG"
+        }
+      ],
+      "lat": 18.033333,
+      "lon": -63.05
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "officialName": "Slovak Republic",
+      "region": "Europe",
+      "capital": "Bratislava",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 48.66666666,
+      "lon": 19.5
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "officialName": "Republic of Slovenia",
+      "region": "Europe",
+      "capital": "Ljubljana",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 46.11666666,
+      "lon": 14.81666666
+    },
+    {
+      "code": "SB",
+      "name": "Solomon Islands",
+      "officialName": "Solomon Islands",
+      "region": "Oceania",
+      "capital": "Honiara",
+      "currencies": [
+        {
+          "code": "SBD",
+          "name": "Solomon Islands Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -8,
+      "lon": 159
+    },
+    {
+      "code": "SO",
+      "name": "Somalia",
+      "officialName": "Federal Republic of Somalia",
+      "region": "Africa",
+      "capital": "Mogadishu",
+      "currencies": [
+        {
+          "code": "SOS",
+          "name": "Somali Shilling",
+          "symbol": "Sh"
+        }
+      ],
+      "lat": 10,
+      "lon": 49
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "officialName": "Republic of South Africa",
+      "region": "Africa",
+      "capital": "Pretoria",
+      "currencies": [
+        {
+          "code": "ZAR",
+          "name": "South African Rand",
+          "symbol": "R"
+        }
+      ],
+      "lat": -29,
+      "lon": 24
+    },
+    {
+      "code": "GS",
+      "name": "South Georgia",
+      "officialName": "South Georgia and the South Sandwich Islands",
+      "region": "Antarctic",
+      "capital": "King Edward Point",
+      "currencies": [
+        {
+          "code": "GBP",
+          "name": "British Pound",
+          "symbol": "GBP"
+        }
+      ],
+      "lat": -54.5,
+      "lon": -37
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "officialName": "Republic of Korea",
+      "region": "Asia",
+      "capital": "Seoul",
+      "currencies": [
+        {
+          "code": "KRW",
+          "name": "South Korean Won",
+          "symbol": "₩"
+        }
+      ],
+      "lat": 37,
+      "lon": 127.5
+    },
+    {
+      "code": "SS",
+      "name": "South Sudan",
+      "officialName": "Republic of South Sudan",
+      "region": "Africa",
+      "capital": "Juba",
+      "currencies": [
+        {
+          "code": "SSP",
+          "name": "South Sudanese Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 7,
+      "lon": 30
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "officialName": "Kingdom of Spain",
+      "region": "Europe",
+      "capital": "Madrid",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 40,
+      "lon": -4
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "officialName": "Democratic Socialist Republic of Sri Lanka",
+      "region": "Asia",
+      "capital": "Colombo",
+      "currencies": [
+        {
+          "code": "LKR",
+          "name": "Sri Lankan Rupee",
+          "symbol": "Rs රු"
+        }
+      ],
+      "lat": 7,
+      "lon": 81
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "officialName": "Republic of the Sudan",
+      "region": "Africa",
+      "capital": "Khartoum",
+      "currencies": [
+        {
+          "code": "SDG",
+          "name": "Sudanese Pound",
+          "symbol": "PT"
+        }
+      ],
+      "lat": 15,
+      "lon": 30
+    },
+    {
+      "code": "SR",
+      "name": "Suriname",
+      "officialName": "Republic of Suriname",
+      "region": "Americas",
+      "capital": "Paramaribo",
+      "currencies": [
+        {
+          "code": "SRD",
+          "name": "Surinamese Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 4,
+      "lon": -56
+    },
+    {
+      "code": "SJ",
+      "name": "Svalbard and Jan Mayen",
+      "officialName": "Svalbard og Jan Mayen",
+      "region": "Europe",
+      "capital": "Longyearbyen",
+      "currencies": [
+        {
+          "code": "NOK",
+          "name": "Norwegian Krone",
+          "symbol": "kr"
+        }
+      ],
+      "lat": 78,
+      "lon": 20
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "officialName": "Kingdom of Sweden",
+      "region": "Europe",
+      "capital": "Stockholm",
+      "currencies": [
+        {
+          "code": "SEK",
+          "name": "Swedish Krona",
+          "symbol": "kr"
+        }
+      ],
+      "lat": 62,
+      "lon": 15
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "officialName": "Swiss Confederation",
+      "region": "Europe",
+      "capital": "Bern",
+      "currencies": [
+        {
+          "code": "CHF",
+          "name": "Swiss Franc",
+          "symbol": "Fr."
+        }
+      ],
+      "lat": 47,
+      "lon": 8
+    },
+    {
+      "code": "SY",
+      "name": "Syria",
+      "officialName": "Syrian Arab Republic",
+      "region": "Asia",
+      "capital": "Damascus",
+      "currencies": [
+        {
+          "code": "SYP",
+          "name": "Syrian Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 35,
+      "lon": 38
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "officialName": "Republic of China (Taiwan)",
+      "region": "Asia",
+      "capital": "Taipei",
+      "currencies": [
+        {
+          "code": "TWD",
+          "name": "New Taiwan Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 23.5,
+      "lon": 121
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "officialName": "Republic of Tajikistan",
+      "region": "Asia",
+      "capital": "Dushanbe",
+      "currencies": [
+        {
+          "code": "TJS",
+          "name": "Tajikistani Somoni",
+          "symbol": "ЅМ"
+        }
+      ],
+      "lat": 39,
+      "lon": 71
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania",
+      "officialName": "United Republic of Tanzania",
+      "region": "Africa",
+      "capital": "Dodoma",
+      "currencies": [
+        {
+          "code": "TZS",
+          "name": "Tanzanian Shilling",
+          "symbol": "Sh"
+        }
+      ],
+      "lat": -6,
+      "lon": 35
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "officialName": "Kingdom of Thailand",
+      "region": "Asia",
+      "capital": "Bangkok",
+      "currencies": [
+        {
+          "code": "THB",
+          "name": "Thai Baht",
+          "symbol": "฿"
+        }
+      ],
+      "lat": 15,
+      "lon": 100
+    },
+    {
+      "code": "TL",
+      "name": "Timor-Leste",
+      "officialName": "Democratic Republic of Timor-Leste",
+      "region": "Asia",
+      "capital": "Dili",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -8.83333333,
+      "lon": 125.91666666
+    },
+    {
+      "code": "TG",
+      "name": "Togo",
+      "officialName": "Togolese Republic",
+      "region": "Africa",
+      "capital": "Lomé",
+      "currencies": [
+        {
+          "code": "XOF",
+          "name": "West African CFA Franc",
+          "symbol": "Fr"
+        }
+      ],
+      "lat": 8,
+      "lon": 1.16666666
+    },
+    {
+      "code": "TK",
+      "name": "Tokelau",
+      "officialName": "Tokelau",
+      "region": "Oceania",
+      "capital": "Fakaofo",
+      "currencies": [
+        {
+          "code": "NZD",
+          "name": "New Zealand Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -9,
+      "lon": -172
+    },
+    {
+      "code": "TO",
+      "name": "Tonga",
+      "officialName": "Kingdom of Tonga",
+      "region": "Oceania",
+      "capital": "Nuku'alofa",
+      "currencies": [
+        {
+          "code": "TOP",
+          "name": "Tongan Paʻanga",
+          "symbol": "T$"
+        }
+      ],
+      "lat": -20,
+      "lon": -175
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "officialName": "Republic of Trinidad and Tobago",
+      "region": "Americas",
+      "capital": "Port of Spain",
+      "currencies": [
+        {
+          "code": "TTD",
+          "name": "Trinidad & Tobago Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 11,
+      "lon": -61
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "officialName": "Tunisian Republic",
+      "region": "Africa",
+      "capital": "Tunis",
+      "currencies": [
+        {
+          "code": "TND",
+          "name": "Tunisian Dinar",
+          "symbol": "د.ت"
+        }
+      ],
+      "lat": 34,
+      "lon": 9
+    },
+    {
+      "code": "TR",
+      "name": "Türkiye",
+      "officialName": "Republic of Türkiye",
+      "region": "Asia",
+      "capital": "Ankara",
+      "currencies": [
+        {
+          "code": "TRY",
+          "name": "Turkish Lira",
+          "symbol": "₺"
+        }
+      ],
+      "lat": 39,
+      "lon": 35
+    },
+    {
+      "code": "TM",
+      "name": "Turkmenistan",
+      "officialName": "Turkmenistan",
+      "region": "Asia",
+      "capital": "Ashgabat",
+      "currencies": [
+        {
+          "code": "TMT",
+          "name": "Turkmenistani Manat",
+          "symbol": "m"
+        }
+      ],
+      "lat": 40,
+      "lon": 60
+    },
+    {
+      "code": "TC",
+      "name": "Turks and Caicos Islands",
+      "officialName": "Turks and Caicos Islands",
+      "region": "Americas",
+      "capital": "Cockburn Town",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 21.75,
+      "lon": -71.58333333
+    },
+    {
+      "code": "TV",
+      "name": "Tuvalu",
+      "officialName": "Tuvalu",
+      "region": "Oceania",
+      "capital": "Funafuti",
+      "currencies": [
+        {
+          "code": "AUD",
+          "name": "Australian Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -8,
+      "lon": 178
+    },
+    {
+      "code": "UG",
+      "name": "Uganda",
+      "officialName": "Republic of Uganda",
+      "region": "Africa",
+      "capital": "Kampala",
+      "currencies": [
+        {
+          "code": "UGX",
+          "name": "Ugandan Shilling",
+          "symbol": "Sh"
+        }
+      ],
+      "lat": 1,
+      "lon": 32
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "officialName": "Ukraine",
+      "region": "Europe",
+      "capital": "Kyiv",
+      "currencies": [
+        {
+          "code": "UAH",
+          "name": "Ukrainian Hryvnia",
+          "symbol": "₴"
+        }
+      ],
+      "lat": 49,
+      "lon": 32
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "officialName": "United Arab Emirates",
+      "region": "Asia",
+      "capital": "Abu Dhabi",
+      "currencies": [
+        {
+          "code": "AED",
+          "name": "United Arab Emirates Dirham",
+          "symbol": "د.إ"
+        }
+      ],
+      "lat": 24,
+      "lon": 54
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "officialName": "United Kingdom of Great Britain and Northern Ireland",
+      "region": "Europe",
+      "capital": "London",
+      "currencies": [
+        {
+          "code": "GBP",
+          "name": "British Pound",
+          "symbol": "£"
+        }
+      ],
+      "lat": 54,
+      "lon": -2
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "officialName": "United States of America",
+      "region": "Americas",
+      "capital": "Washington D.C.",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 38,
+      "lon": -97
+    },
+    {
+      "code": "UM",
+      "name": "United States Minor Outlying Islands",
+      "officialName": "United States Minor Outlying Islands",
+      "region": "Americas",
+      "capital": "",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 19.3,
+      "lon": 166.633333
+    },
+    {
+      "code": "VI",
+      "name": "United States Virgin Islands",
+      "officialName": "Virgin Islands of the United States",
+      "region": "Americas",
+      "capital": "Charlotte Amalie",
+      "currencies": [
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": 18.35,
+      "lon": -64.933333
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "officialName": "Oriental Republic of Uruguay",
+      "region": "Americas",
+      "capital": "Montevideo",
+      "currencies": [
+        {
+          "code": "UYU",
+          "name": "Uruguayan Peso",
+          "symbol": "$"
+        }
+      ],
+      "lat": -33,
+      "lon": -56
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "officialName": "Republic of Uzbekistan",
+      "region": "Asia",
+      "capital": "Tashkent",
+      "currencies": [
+        {
+          "code": "UZS",
+          "name": "Uzbekistani Som",
+          "symbol": "so'm"
+        }
+      ],
+      "lat": 41,
+      "lon": 64
+    },
+    {
+      "code": "VU",
+      "name": "Vanuatu",
+      "officialName": "Republic of Vanuatu",
+      "region": "Oceania",
+      "capital": "Port Vila",
+      "currencies": [
+        {
+          "code": "VUV",
+          "name": "Vanuatu Vatu",
+          "symbol": "Vt"
+        }
+      ],
+      "lat": -16,
+      "lon": 167
+    },
+    {
+      "code": "VA",
+      "name": "Vatican City",
+      "officialName": "Vatican City State",
+      "region": "Europe",
+      "capital": "Vatican City",
+      "currencies": [
+        {
+          "code": "EUR",
+          "name": "Euro",
+          "symbol": "€"
+        }
+      ],
+      "lat": 41.9,
+      "lon": 12.45
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "officialName": "Bolivarian Republic of Venezuela",
+      "region": "Americas",
+      "capital": "Caracas",
+      "currencies": [
+        {
+          "code": "VES",
+          "name": "Venezuelan Bolívar",
+          "symbol": "Bs.S."
+        }
+      ],
+      "lat": 8,
+      "lon": -66
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "officialName": "Socialist Republic of Vietnam",
+      "region": "Asia",
+      "capital": "Hanoi",
+      "currencies": [
+        {
+          "code": "VND",
+          "name": "Vietnamese Dong",
+          "symbol": "₫"
+        }
+      ],
+      "lat": 16.16666666,
+      "lon": 107.83333333
+    },
+    {
+      "code": "WF",
+      "name": "Wallis and Futuna",
+      "officialName": "Territory of the Wallis and Futuna Islands",
+      "region": "Oceania",
+      "capital": "Mata-Utu",
+      "currencies": [
+        {
+          "code": "XPF",
+          "name": "CFP Franc",
+          "symbol": "₣"
+        }
+      ],
+      "lat": -13.3,
+      "lon": -176.2
+    },
+    {
+      "code": "EH",
+      "name": "Western Sahara",
+      "officialName": "Sahrawi Arab Democratic Republic",
+      "region": "Africa",
+      "capital": "El Aaiún",
+      "currencies": [
+        {
+          "code": "MAD",
+          "name": "Moroccan Dirham",
+          "symbol": "DH"
+        }
+      ],
+      "lat": 24.5,
+      "lon": -13
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "officialName": "Republic of Yemen",
+      "region": "Asia",
+      "capital": "Sana'a",
+      "currencies": [
+        {
+          "code": "YER",
+          "name": "Yemeni Rial",
+          "symbol": "﷼"
+        }
+      ],
+      "lat": 15,
+      "lon": 48
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia",
+      "officialName": "Republic of Zambia",
+      "region": "Africa",
+      "capital": "Lusaka",
+      "currencies": [
+        {
+          "code": "ZMW",
+          "name": "Zambian Kwacha",
+          "symbol": "ZK"
+        }
+      ],
+      "lat": -15,
+      "lon": 30
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "officialName": "Republic of Zimbabwe",
+      "region": "Africa",
+      "capital": "Harare",
+      "currencies": [
+        {
+          "code": "ZWG",
+          "name": "Zimbabwean Gold",
+          "symbol": "ZWG"
+        },
+        {
+          "code": "USD",
+          "name": "US Dollar",
+          "symbol": "$"
+        }
+      ],
+      "lat": -20,
+      "lon": 30
+    }
+  ]
+}
