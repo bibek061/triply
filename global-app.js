@@ -548,6 +548,7 @@ async function runSearch() {
     state.searchDone = true;
     state.placesError = "";
     state.places = [];
+    state.area = null;
     state.center = null;
     navigate("home");
     render();
@@ -564,6 +565,7 @@ async function runSearch() {
       );
       if (version !== searchVersion) return;
       state.country = data.country || "";
+      state.area = data.scope === "area" ? data : null;
       state.places = data.places.map((p) => ({
         ...p,
         location: query.location,
@@ -660,6 +662,18 @@ document.addEventListener("click", async (event) => {
       state.kind = "explore";
       if (state.searchDone) await runSearch();
       else render();
+    }
+    if (action === "browse-city") {
+      const city = state.area?.destinations.find((city) => city.id === id);
+      if (!city) return;
+      capture();
+      state.location = city.label;
+      state.country = city.country;
+      state.selectedDestination = city;
+      state.kind = "explore";
+      const input = $("#destination-input");
+      if (input) input.value = city.label;
+      await runSearch();
     }
     if (action === "local-currency") {
       capture();

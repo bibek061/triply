@@ -1,7 +1,31 @@
 "use strict";
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { suggestions, destination } = require("../lib/destinations");
+const {
+  suggestions,
+  destination,
+  browseDestination,
+} = require("../lib/destinations");
+
+test("country and state browsing returns contained cities, while explicit cities stay local", () => {
+  const india = browseDestination("India");
+  assert.equal(india.scope, "area");
+  assert.equal(india.country, "IN");
+  assert.equal(india.center, null);
+  assert.equal(india.destinations.length, 12);
+  assert.ok(india.destinations.every((c) => c.country === "IN"));
+  assert.ok(india.destinations.some((c) => c.name === "Mumbai"));
+  const state = browseDestination("California");
+  assert.ok(state.destinations.every((c) => c.label.includes("California")));
+  const city = destination(india.destinations[0].id);
+  assert.equal(browseDestination(city.name, "IN", city), null);
+  assert.equal(browseDestination("Paris, France"), null);
+  assert.equal(browseDestination("Atlantis"), null);
+  assert.equal(
+    browseDestination("India", "", destination("country-IN")).country,
+    "IN",
+  );
+});
 const filters = require("../travel-filters");
 const { createPhotos } = require("../lib/photos");
 

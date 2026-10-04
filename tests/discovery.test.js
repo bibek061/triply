@@ -211,6 +211,17 @@ test("one destination accepts countries, states, and cities without a hidden cou
     });
     const result = await service.places({ location, category: "all" });
     assert.equal(result.country, country.toUpperCase());
-    assert.equal(result.center.name, location);
+    if (location === "Paris, France")
+      assert.equal(result.center.name, location);
+    else {
+      assert.equal(result.scope, "area");
+      assert.equal(result.center, null);
+      assert.ok(result.destinations.length > 0);
+      assert.ok(
+        result.destinations.every(
+          (city) => city.country === country.toUpperCase(),
+        ),
+      );
+    }
   }
 });

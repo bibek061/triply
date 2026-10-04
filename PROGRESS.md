@@ -55,3 +55,10 @@
 - Live network checks returned attributed, name-matched photos for Pont des Arts (France), Fewa Lake (Nepal) and Sydney Opera House (Australia). This verifies examples across countries, not complete photo coverage of all locations.
 - Sixteen automated tests pass, including Wikipedia redirects, reusable-image requests, name/distance matching, nearby-photo deduplication, attribution and retry/coalescing behavior.
 - Browser verification: Paris viewpoints now have 23 exact/nearby photos across 35 cards, up from 5 direct-reference photos. All 35 cards link to the correct place-specific Google search; missing photos use clear placeholders. Loaded photos, map popups, attribution and progressive completion were checked with no browser errors.
+
+## Country and state search correction — October 3, 2026 (New York)
+
+- Fixed country/state searches that previously looked only within 20 km of a geographic center and could misleadingly return no places. Typed catalog names and selected suggestions now open a chooser of up to 12 larger cities within that country/state, using local data without an external map request.
+- City selection uses its exact catalog coordinates and preserves dates, travelers, budget and entry-fee filters. The chooser explicitly describes its cities as starting points, not a complete attraction list, and includes photo-search links.
+- Corrected error/empty-state wording: map-service failures no longer report zero places, and missing mapped results are distinguished from the free-entry filter excluding places.
+- Seventeen automated tests pass, including typed India through the HTTP API, region containment, explicit city behavior and existing map/photo/chat checks. Browser India search shows 12 cities; selecting Mumbai preserved the budget, and its viewpoints search returned 19 places. Mumbai's all-category query encountered an external service failure, which is handled with retry messaging.
