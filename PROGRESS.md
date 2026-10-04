@@ -34,3 +34,14 @@
 - Worldwide geocoding now resolves the country from the destination instead of applying a stale country filter. Provider searches use the entered destination as-is.
 - Kept resolved country context for local currency and saved places; broad region searches explicitly describe results around their mapped center.
 - Eight automated tests pass, including country/state/city lookup without a hidden country restriction. Live browser search for Paris, France returned 35 viewpoints and EUR context. Mobile verification found one destination input, no country dropdown, and no horizontal overflow.
+
+## Destination discovery, photos, and map — October 3, 2026 (New York)
+
+- Added local suggestions for 250 countries/territories, 3,865 regions and 34,152 cities. Suggestions include state/country labels and keyboard selection. Selected city coordinates prevent ambiguous same-name city searches. GeoNames attribution and a refresh script are included.
+- Added trip dates, traveler count, budget planning, flight-total filtering in the selected currency, and a filter for explicitly free entry. Unknown fees are excluded; outdoor dates/budgets do not imply verified availability or total trip costs.
+- Added an interactive Leaflet map with numbered pins matching place cards, pin popups, card-to-map navigation and mobile List/Map switching.
+- Added attributed photo coverage for every place and flight/stay/car provider card. Explicit Wikimedia/Wikidata references supply actual place photos where available. Other cards show category photos labeled Travel inspiration. Missing remote images do not remove place results.
+- Live browser verification: Paris returned 35 viewpoints and 35 pins; the free-entry filter returned 3 cards and 3 pins. Five of the full results matched actual Wikimedia photo metadata. A separate Eiffel Tower lookup returned an attributed photo successfully.
+- Mobile verification at 390 × 844: no horizontal overflow, List/Map toggles work, and booking links preserve applicable trip details. Provider photos loaded successfully. Keyboard destination selection and card-to-pin popups worked. Browser reported no JavaScript errors during these checks.
+- All 13 automated tests and 19 JavaScript syntax checks pass. New tests cover destination disambiguation, selected coordinates, budget/currency/date/fee boundaries, photo attribution, caching, host validation and outages, plus API input validation.
+- Added a safe Amadeus connection-check script and setup documentation. The saved local credentials remain empty, so no sandbox or production fares are connected. The app explicitly reports this and continues to provide booking-provider search links. Production approval and hotel/car live feeds remain external setup work.

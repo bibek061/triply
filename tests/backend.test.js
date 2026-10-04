@@ -44,6 +44,17 @@ test("accounts, private chat consent, posts, comments, saved places, and persist
   assert.equal(config.body.countries.length, 250);
   assert.ok(config.body.currencies.includes("ZWG"));
   assert.equal(config.body.pricing.configured, false);
+  assert.ok(config.body.photos.camping.url.startsWith("https://"));
+  const suggestions = await request("/api/destinations?q=Paris");
+  assert.equal(suggestions.body.destinations[0].country, "FR");
+  assert.equal(
+    (await request("/api/places?location=Paris&destinationId=invalid")).status,
+    400,
+  );
+  assert.equal(
+    (await request("/api/photos?ids=https://evil.example")).status,
+    400,
+  );
   assert.equal(
     (
       await request(

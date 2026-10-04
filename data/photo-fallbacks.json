@@ -1,0 +1,58 @@
+{
+  "camping": {
+    "url": "https://images.pexels.com/photos/10809314/pexels-photo-10809314.jpeg?w=800",
+    "source": "https://www.pexels.com/photo/white-dome-tent-on-green-grass-10809314",
+    "credit": "Robert Pügner / Pexels",
+    "license": "Pexels license",
+    "alt": "Tent beside mountains and a lake",
+    "kind": "inspiration"
+  },
+  "hiking": {
+    "url": "https://images.unsplash.com/photo-1756846036643-12f2bae42a4f?w=800&auto=format&fit=crop",
+    "source": "https://unsplash.com/photos/hikers-on-a-mountain-ridge-overlooking-a-valley-HPEfNmS1aaw",
+    "credit": "Christopher Politano / Unsplash",
+    "license": "Unsplash license",
+    "alt": "Hikers on a mountain trail",
+    "kind": "inspiration"
+  },
+  "beaches": {
+    "url": "https://images.pexels.com/photos/29069101/pexels-photo-29069101.jpeg?w=800",
+    "source": "https://www.pexels.com/photo/serene-beach-in-morocco-with-clear-blue-skies-29069101",
+    "credit": "Hamza Chouiakh / Pexels",
+    "license": "Pexels license",
+    "alt": "Sandy beach beside blue sea",
+    "kind": "inspiration"
+  },
+  "attractions": {
+    "url": "https://images.pexels.com/photos/30341463/pexels-photo-30341463.jpeg?w=800",
+    "source": "https://www.pexels.com/photo/historic-edinburgh-architecture-with-arthur-s-seat-30341463",
+    "credit": "Gül Işık / Pexels",
+    "license": "Pexels license",
+    "alt": "Historic buildings in Edinburgh",
+    "kind": "inspiration"
+  },
+  "flights": {
+    "url": "https://images.unsplash.com/photo-1568713489957-0f7ac1058b4f?w=800",
+    "source": "https://unsplash.com/photos/an-airplane-flying-through-the-clouds-in-the-sky-t6JxWSybpio",
+    "credit": "Krzysztof Kotkowicz / Unsplash",
+    "license": "Unsplash license",
+    "alt": "Airplane above the clouds",
+    "kind": "inspiration"
+  },
+  "cars": {
+    "url": "https://images.pexels.com/photos/29380865/pexels-photo-29380865.jpeg?w=800",
+    "source": "https://www.pexels.com/photo/scenic-mountain-road-with-car-in-autumn-29380865",
+    "credit": "Michał Robak / Pexels",
+    "license": "Pexels license",
+    "alt": "Car on a scenic mountain road",
+    "kind": "inspiration"
+  },
+  "stays": {
+    "url": "https://images.pexels.com/photos/34838628/pexels-photo-34838628.jpeg?w=800",
+    "source": "https://www.pexels.com/photo/cozy-sunlit-bedroom-with-wooden-bed-frame-34838628",
+    "credit": "Zhiqiang LI / Pexels",
+    "license": "Pexels license",
+    "alt": "Sunlit room with a wooden bed",
+    "kind": "inspiration"
+  }
+}

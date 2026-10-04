@@ -4,6 +4,8 @@ const { spawnSync } = require("node:child_process");
 const files = [
   "server.js",
   "global-app.js",
+  "explore-ui.js",
+  "travel-filters.js",
   ...["lib", "scripts", "tests"].flatMap((dir) =>
     fs
       .readdirSync(dir)

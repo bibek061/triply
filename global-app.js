@@ -99,6 +99,12 @@ const state = {
   location: "Pokhara, Nepal",
   kind: "explore",
   category: "all",
+  budget: "",
+  admission: "any",
+  selectedDestination: null,
+  mapView: "list",
+  photoAssets: {},
+  placePhotos: {},
   origin: "KTM",
   destination: "DEL",
   start: future(14),
@@ -217,6 +223,7 @@ function capture() {
     b.has("location") &&
     String(b.get("location")).trim() !== state.location
   ) {
+    state.selectedDestination = null;
     state.country = "";
     state.center = null;
     state.searchDone = false;
@@ -228,6 +235,8 @@ function capture() {
     "destination",
     "start",
     "end",
+    "budget",
+    "admission",
   ])
     if (b.has(key)) state[key] = String(b.get(key)).trim();
   if (b.has("adults")) state.adults = Number(b.get("adults"));
@@ -247,19 +256,7 @@ function destinationHint() {
   );
 }
 function searchForm() {
-  return `<form id="global-search" class="global-search"><div class="search-tabs">${[
-    ["explore", "globe", "Places to go"],
-    ["flights", "plane", "Flights"],
-    ["stays", "stays", "Stays"],
-    ["cars", "cars", "Cars"],
-  ]
-    .map(
-      ([kind, ic, label]) =>
-        `<button type="button" class="search-tab ${state.kind === kind ? "active" : ""}" data-action="kind" data-kind="${kind}" aria-pressed="${state.kind === kind}">${icon(ic)}${label}</button>`,
-    )
-    .join(
-      "",
-    )}</div><div class="global-fields"><label class="destination-field"><span>${state.kind === "flights" ? "FLYING TO · CITY OR IATA" : "WHERE TO? · COUNTRY, STATE, OR CITY"}</span><input name="${state.kind === "flights" ? "destination" : "location"}" value="${escapeHTML(state.kind === "flights" ? state.destination : state.location)}" aria-label="${state.kind === "flights" ? "Flying to" : "Destination"}" placeholder="${state.kind === "flights" ? "City or airport code" : "Try Nepal, California, or Paris"}" minlength="2" maxlength="100" required></label>${state.kind === "flights" ? `<label><span>FLYING FROM · CITY OR IATA</span><input name="origin" value="${escapeHTML(state.origin)}" placeholder="e.g. JFK" minlength="2" maxlength="80" required></label>` : ""}${state.kind !== "explore" ? `<label><span>${state.kind === "flights" ? "DEPARTURE · ONE WAY" : "START DATE"}</span><input type="date" name="start" value="${state.start}" min="${future(0)}" required></label>${state.kind === "flights" ? "" : `<label><span>END DATE</span><input type="date" name="end" value="${state.end}" min="${state.start}" required></label>`}<label><span>TRAVELERS</span><select name="adults">${Array.from({ length: 9 }, (_, i) => `<option value="${i + 1}" ${state.adults === i + 1 ? "selected" : ""}>${i + 1} adult${i ? "s" : ""}</option>`).join("")}</select></label>` : ""}<button class="primary-button" ${state.loading ? "disabled" : ""}>${icon("search")}${state.loading ? "Searching…" : state.kind === "explore" ? "Find places" : "Compare providers"}</button></div><div class="country-context">${destinationHint()}</div><p id="search-error" class="search-error" role="alert"></p></form>`;
+  return TriplyExplore.searchForm();
 }
 function categoryFilters() {
   return `<div class="category-bar">${["all", "camping", "hiking", "views", "beaches", "attractions"].map((c) => `<button class="category-pill ${state.category === c ? "active" : ""}" data-action="category" data-category="${c}" aria-pressed="${state.category === c}">${icon(c === "all" ? "globe" : c)}${categoryName(c)}</button>`).join("")}</div>`;
@@ -270,15 +267,14 @@ function destinationLabel(location, country) {
     ? `${location}, ${name}`
     : location;
 }
-function placeCard(p) {
-  const saved = state.saved.some((x) => x.id === p.id);
-  return `<article class="place-card"><div class="place-symbol ${p.category}">${icon(p.category)}<span>${categoryName(p.category)}</span><button class="save-button ${saved ? "saved" : ""}" data-action="save-place" data-id="${escapeHTML(p.id)}" aria-label="${saved ? "Unsave" : "Save"} ${escapeHTML(p.name)}">${icon("heart")}</button></div><div class="place-body"><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(destinationLabel(p.location || state.location, p.country || state.country))}</p><span class="place-fee">${escapeHTML(p.fee || "Saved for your next trip")}</span><div class="place-actions"><a class="text-link" href="${escapeHTML(p.url || mapsURL(p.name))}" target="_blank" rel="noopener noreferrer">View on map ↗</a><button class="text-link" data-action="nearby" data-location="${escapeHTML(p.location || state.location)}" data-country="${p.country || state.country}">Plan a visit →</button></div></div></article>`;
+function placeCard(p, index) {
+  return TriplyExplore.placeCard(p, index);
 }
 function mapsURL(query) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 function discover() {
-  return `${intro("Find your next somewhere.", "A great view. A better deal. Someone to share it with.", `<span class="world-count">${icon("globe")}The whole world is open</span>`)}<section class="hero global-hero"><img src="${images.hero}" alt="Mountains and an open valley"><div class="hero-content"><div class="hero-tag">LESS SCROLLING. MORE GOING.</div><h2>Good places.<br><em>Better company.</em></h2><p>Find the trail. Compare the flight.<br>Meet the people who make the trip.</p></div><span class="hero-location">Find your kind of out there ↗</span></section>${searchForm()}${categoryFilters()}${state.searchDone ? `<section class="content-section"><div class="section-heading"><div><h2>${categoryName(state.category)} near ${escapeHTML(state.location)}</h2><p>${state.loading ? "Looking for places…" : `${state.places.length} mapped places within approximately 20 km of the destination’s mapped center`}</p></div><a class="text-link" href="${mapsURL(`${categoryName(state.category)} near ${state.location}, ${countryName(state.country)}`)}" target="_blank" rel="noopener noreferrer">Search on Maps ↗</a></div>${state.placesError ? empty("We couldn’t load places right now.", escapeHTML(state.placesError), "search-again", "Try again") : state.loading ? '<div class="loading-state">Looking around the neighborhood…</div>' : state.places.length ? `<div class="places-grid">${state.places.map(placeCard).join("")}</div>` : empty("A little further might be the answer.", "Try another nearby town or a different category.")}<p class="source-note">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>. Check current access, conditions, and permits before setting out.${state.center ? ` Search center: ${escapeHTML(state.center.name)}.` : ""}</p></section>` : `<section class="content-section"><div class="section-heading"><div><h2>What’s your kind of escape?</h2><p>Pick a place. We’ll help you find what’s around it.</p></div></div><div class="destinations-grid">${inspiration.map((p, i) => `<button class="destination-card" data-action="inspiration" data-index="${i}"><img src="${p.image}" alt="${categoryName(p.category)} inspiration"><span class="destination-tag">${p.label}</span><div class="destination-copy"><h3>${p.name}</h3><p>${countryName(p.country)} · ${categoryName(p.category)}</p><span class="destination-arrow">↗</span></div></button>`).join("")}</div></section>`}<section class="journey-banner"><div><span class="eyebrow">THE BEST PART IS WHO YOU MEET</span><h2>Go for the place.<br>Stay for the people.</h2><p>Trade tips, share your photos, and make a new travel friend.</p><a href="#community" class="primary-button">Meet the community →</a></div><div class="journey-art">${icon("users")}<span>Good stories start with “hello.”</span></div></section>`;
+  return TriplyExplore.discover();
 }
 function providerLinks() {
   const place = state.location,
@@ -358,14 +354,19 @@ function providerLinks() {
   ];
 }
 function dealResults() {
+  const matchingOffers = TriplyFilters.offers(
+    state.flightData?.offers || [],
+    state.budget,
+    state.currency,
+  );
   return `${intro("A good trip starts with a good deal.", "Compare the journey, the stay, and the little details.")} ${searchForm()}<section class="content-section"><div class="section-heading"><div><h2>${state.kind === "flights" ? `${escapeHTML(state.origin)} → ${escapeHTML(state.destination)}` : `${state.kind === "cars" ? "Car rentals" : "Places to stay"} in ${escapeHTML(state.location)}`}</h2><p>${state.start}${state.kind === "flights" ? "" : ` → ${state.end}`} · ${state.adults} traveler${state.adults === 1 ? "" : "s"} · ${state.currency}</p></div><button class="text-link" data-action="convert">Compare currencies ↗</button></div><div class="comparison-note">${icon("check")}<div><strong>Compare the total. Choose what works for you.</strong><p>These are provider search links, not ranked live offers. We don’t label a site “cheapest” without matching current prices.</p></div></div><div class="provider-grid">${providerLinks()
     .map(
       (p, i) =>
-        `<article class="provider-card"><span class="provider-number">0${i + 1}</span><div class="provider-wordmark">${p.name}</div><h3>${p.subtitle}</h3><p>${escapeHTML(p.detail)}</p><span class="price-check-label">Price available on provider</span><a class="primary-button" target="_blank" rel="noopener noreferrer" href="${escapeHTML(p.url)}">Compare on ${p.name} ↗</a></article>`,
+        `<article class="provider-card">${TriplyExplore.providerPhoto(state.kind)}<span class="provider-number">0${i + 1}</span><div class="provider-wordmark">${p.name}</div><h3>${p.subtitle}</h3><p>${escapeHTML(p.detail)}</p><span class="price-check-label">Price available on provider</span><a class="primary-button" target="_blank" rel="noopener noreferrer" href="${escapeHTML(p.url)}">Compare on ${p.name} ↗</a></article>`,
     )
     .join(
       "",
-    )}</div>${state.kind === "flights" ? `<section class="flight-api"><h3>Flight fares from Amadeus</h3><p>${escapeHTML(state.flightData?.message || (state.loading ? "Checking offers…" : state.pricing.configured ? "Search to check connected flight pricing." : "Live fares are not connected yet. Compare prices on the provider websites."))}</p>${state.flightData?.offers?.length ? `<div class="flight-offers">${state.flightData.offers.map((o, i) => `<article><div><strong>${escapeHTML(o.airlines.join(" / "))}</strong><p>${o.segments.map((s) => `${escapeHTML(s.from)} → ${escapeHTML(s.to)}`).join(" · ")}</p><small>${escapeHTML(o.segments[0]?.departure)} · ${state.adults} travelers</small></div><div><strong>${money(o.total, o.currency)}</strong><small>${state.flightData.status === "sandbox" ? "TEST FARE" : i === 0 ? "Lowest returned total" : "Total for this search"}</small></div></article>`).join("")}</div>` : ""}</section>` : ""}<p class="source-note">You book and pay on the selected provider’s website. Availability, currencies, fees, and support vary by destination. Triply does not create a reservation or sync external bookings.</p></section>`;
+    )}</div>${state.kind === "flights" ? `<section class="flight-api"><h3>Flight fares from Amadeus</h3>${state.budget && state.flightData?.offers?.length ? `<p>${matchingOffers.length} offers within ${money(Number(state.budget), state.currency)} for ${state.adults} traveler${state.adults === 1 ? "" : "s"}.</p>` : ""}<p>${escapeHTML(state.flightData?.message || (state.loading ? "Checking offers…" : state.pricing.configured ? "Search to check connected flight pricing." : "Live fares are not connected yet. Compare prices on the provider websites."))}</p>${matchingOffers.length ? `<div class="flight-offers">${matchingOffers.map((o, i) => `<article><div><strong>${escapeHTML(o.airlines.join(" / "))}</strong><p>${o.segments.map((s) => `${escapeHTML(s.from)} → ${escapeHTML(s.to)}`).join(" · ")}</p><small>${escapeHTML(o.segments[0]?.departure)} · ${state.adults} travelers</small></div><div><strong>${money(o.total, o.currency)}</strong><small>${state.flightData.status === "sandbox" ? "TEST FARE" : i === 0 ? "Lowest returned total" : "Total for this search"}</small></div></article>`).join("")}</div>` : ""}</section>` : ""}<p class="source-note">You book and pay on the selected provider’s website. Availability, currencies, fees, and support vary by destination. Triply does not create a reservation or sync external bookings.</p></section>`;
 }
 function postCard(p) {
   return `<article class="pick-card"><div class="pick-image"><img src="${p.image}" alt="${escapeHTML(p.location)} shared by ${escapeHTML(p.name)}" loading="lazy"><span class="verified-badge">${categoryName(p.category)} · Community photo</span></div><div class="pick-body"><div class="pick-author"><span class="small-avatar">${escapeHTML(p.name.slice(0, 2).toUpperCase())}</span><strong>${escapeHTML(p.name)}</strong><span>@${escapeHTML(p.handle)}</span></div><h3>${escapeHTML(p.location)}, ${escapeHTML(countryName(p.country))}</h3><p class="post-caption">${escapeHTML(p.caption)}</p><div class="pick-bottom"><button class="text-link" data-action="comments" data-id="${p.id}">${icon("chat")}${p.commentCount} comments</button><button class="text-link" data-action="nearby" data-country="${p.country}" data-location="${escapeHTML(p.location)}">Find deals →</button></div><div class="quick-questions"><button data-action="question" data-id="${p.id}" data-question="Where did you stay?">Where did you stay?</button><button data-action="question" data-id="${p.id}" data-question="How much was it?">How much was it?</button></div><button class="report-link" data-action="report" data-id="${p.id}">Report post</button></div></article>`;
@@ -525,9 +526,8 @@ function converter() {
 async function runSearch() {
   capture();
   if (
-    state.kind !== "explore" &&
     state.kind !== "flights" &&
-    state.end <= state.start
+    !TriplyFilters.dates(state.start, state.end)
   ) {
     $("#search-error").textContent = "Choose an end date after the start date.";
     return;
@@ -556,6 +556,9 @@ async function runSearch() {
         "/api/places?" +
           new URLSearchParams({
             location: query.location,
+            ...(query.selectedDestination
+              ? { destinationId: query.selectedDestination.id }
+              : {}),
             category: query.category,
           }),
       );
@@ -604,6 +607,7 @@ async function runSearch() {
   }
 }
 function render() {
+  TriplyExplore.dispose();
   const version = ++renderVersion;
   clearInterval(chatTimer);
   header();
@@ -617,6 +621,10 @@ function render() {
           : state.page === "messages"
             ? messagesPage()
             : savedPage();
+  if (state.page === "home" && state.searchDone && !state.loading) {
+    TriplyExplore.mountMap();
+    TriplyExplore.loadPhotos(version);
+  }
   if (state.page === "community") loadPosts(version);
   if (state.page === "messages" && state.user) {
     refreshChatList().catch((e) => toast(e.message));
@@ -666,6 +674,7 @@ document.addEventListener("click", async (event) => {
     }
     if (action === "inspiration") {
       const p = inspiration[Number(el.dataset.index)];
+      state.selectedDestination = null;
       state.country = p.country;
       state.location = `${p.name}, ${countryName(p.country)}`;
       state.category = p.category;
@@ -676,6 +685,8 @@ document.addEventListener("click", async (event) => {
     if (action === "search-again") await runSearch();
     if (action === "nearby") {
       $("#modal").close();
+      capture();
+      state.selectedDestination = null;
       state.country = el.dataset.country;
       state.location = el.dataset.location
         .toLowerCase()
@@ -690,7 +701,7 @@ document.addEventListener("click", async (event) => {
       modal(
         "Built for a curious world.",
         "DATA & PHOTO CREDITS",
-        `<p class="source-note">Places © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>, ODbL. Country data from <a href="https://github.com/mledoze/countries" target="_blank" rel="noopener noreferrer">mledoze/countries</a>; current currency mappings from <a href="https://github.com/unicode-org/cldr-json" target="_blank" rel="noopener noreferrer">Unicode CLDR</a>. <a href="/data/countries.json" target="_blank">Download the adapted country catalog</a> under the <a href="/licenses/countries-ODbL.txt" target="_blank">Open Database License</a>, with <a href="/licenses/unicode.txt" target="_blank">Unicode attribution</a>. Rates By <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">Exchange Rate API</a>. Inspiration photography from Unsplash is illustrative; community photos are uploaded by their authors.</p>`,
+        `<p class="source-note">Places © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>, ODbL. Country data from <a href="https://github.com/mledoze/countries" target="_blank" rel="noopener noreferrer">mledoze/countries</a>; current currency mappings from <a href="https://github.com/unicode-org/cldr-json" target="_blank" rel="noopener noreferrer">Unicode CLDR</a>. <a href="/data/countries.json" target="_blank">Download the adapted country catalog</a> under the <a href="/licenses/countries-ODbL.txt" target="_blank">Open Database License</a>, with <a href="/licenses/unicode.txt" target="_blank">Unicode attribution</a>. Rates By <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">Exchange Rate API</a>. Destination suggestions © <a href="https://www.geonames.org" target="_blank" rel="noopener noreferrer">GeoNames</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Maps use Leaflet (BSD-2-Clause). Place photos use linked Wikimedia Commons images with individual credits. Inspiration photos from Unsplash and Pexels are illustrative, with credits on cards; community photos are uploaded by their authors.</p>`,
       );
     if (action === "create-post") createPost();
     if (action === "comments" || action === "question")
@@ -893,7 +904,7 @@ document.addEventListener("change", (event) => {
     searchVersion++;
     state.loading = false;
     state.flightData = null;
-    const button = $("#global-search .global-fields>.primary-button");
+    const button = $("#global-search .search-submit");
     button.disabled = false;
     button.innerHTML =
       icon("search") +
@@ -933,6 +944,7 @@ window.addEventListener("hashchange", route);
       countries: config.countries,
       currencies: config.currencies,
       pricing: config.pricing,
+      photoAssets: config.photos,
     });
     if (!state.currencies.includes(state.currency)) state.currency = "USD";
     await refreshUser();

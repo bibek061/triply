@@ -11,6 +11,8 @@
     "check": "node scripts/check.js",
     "test": "node --test tests/*.test.js",
     "sync:countries": "node scripts/sync-countries.js",
-    "check:services": "node scripts/check-services.js"
+    "check:services": "node scripts/check-services.js",
+    "check:pricing": "node scripts/check-pricing.js",
+    "sync:destinations": "node scripts/sync-destinations.js"
   }
 }

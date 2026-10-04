@@ -17,6 +17,43 @@ function dataDir(t) {
 }
 const reply = (value) => ({ ok: true, json: async () => value });
 
+test("selected city coordinates bypass ambiguous geocoding and reach map/photo results", async (t) => {
+  const service = createDiscovery({
+    dataDir: dataDir(t),
+    env: {},
+    fetchImpl: async (url) => {
+      assert.ok(!url.includes("nominatim"));
+      assert.match(new URL(url).searchParams.get("data"), /33\./);
+      return reply({
+        elements: [
+          {
+            type: "node",
+            id: 7,
+            lat: 33.66,
+            lon: -95.55,
+            tags: { name: "Texas viewpoint", tourism: "viewpoint", fee: "no" },
+          },
+        ],
+      });
+    },
+  });
+  const result = await service.places({
+    location: "Paris",
+    category: "views",
+    destination: {
+      id: "test-texas",
+      label: "Paris, Texas, United States",
+      country: "US",
+      lat: 33.66,
+      lon: -95.55,
+    },
+  });
+  assert.equal(result.country, "US");
+  assert.equal(result.places[0].lat, 33.66);
+  assert.equal(result.places[0].feeStatus, "free");
+  assert.deepEqual(await service.photos(["osm-node-unknown"]), {});
+});
+
 test("place search coalesces requests, reuses geocodes, and preserves source links", async (t) => {
   const calls = [];
   const discovery = createDiscovery({
