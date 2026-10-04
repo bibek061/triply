@@ -1,10 +1,29 @@
 # Triply regression check — October 4, 2026
 
-> Latest place-page update: 26 automated tests and 24 syntax checks pass. Place pages, category filters, canonical photo linkage, story/comment persistence, and mobile detail layout have been verified; see the latest PROGRESS.md entry. Uploads and comments were tested with synthetic data in an isolated database.
+## Final regression pass — October 4, 2026
 
-> Later pricing update: the Duffel and Booking.com adapters are now implemented. The current suite has 24 passing tests and 21 syntax checks. An actual Duffel account check returned 30 sandbox flight offers for JFK–LHR. Booking.com credentials remain absent; hotel/car provider tests use isolated fixtures. Production pricing access has not been verified. See PRICING-SETUP.md and the latest PROGRESS.md entry. The original regression findings below describe the earlier version.
+- All **26 automated tests** and **24 JavaScript syntax checks** passed. Whitespace checks passed. No new functional regression was found during this pass.
+- Public Nominatim and Overpass checks returned HTTP 200 and 35 places. The main app rendered all 12 displayed India city photographs, with Camping retained as the selected category and city guidance.
+- An actual Duffel account check returned 30 sandbox flight offers. The browser displayed JFK–LHR test fares with total prices, expiry times and TEST DATA labels. Editing the destination removed old fare cards and updated the Google Flights URL.
+- Hotel and car searches with a selected Paris destination correctly reported that Booking.com pricing is not connected. Each retained five comparison websites. Copied rental details included dates, local times, driver age, travelers, currency and residence. An end date before the start date was rejected.
+- In an isolated local database, saved-place removal and re-saving worked. A traveler photo's story link scrolled to its gallery. The quick-question dialog prefilled the question and successfully posted a synthetic comment to that place's story.
+- Camping's Showers filter reduced three fixtures to one card and one pin. Switching to Hiking displayed two trails. A 2 km maximum produced an honest empty state with no pins; Clear filters restored both results. Trail details displayed 4 km length and 900 m elevation above sea level.
+- Discovery, place details and car comparison had no horizontal document overflow at 390 × 844. No browser JavaScript errors were observed in the two QA tabs.
 
-## Result
+Automated coverage includes authentication/session isolation, consent and blocking for chat, posts/comments, saved-place persistence, destination scope, map/photo matching, facility/trail filters, canonical place linkage, currency caching, provider adapters and HTTP validation. Write checks used synthetic accounts and an isolated database on port 4174; real-provider/read-only checks used the main app on port 4173. No booking, payment, or message to a real traveler was created.
+
+### Outstanding external limits
+
+- Duffel is connected in **test mode**, not verified production flight pricing. Checkout/ticketing is not implemented.
+- Booking.com hotel/car credentials and product access remain unconfigured. Its adapters pass fixture tests, but account responses and production offers are not verified. The pricing-check command intentionally exits nonzero while these providers are unconfigured.
+- The extra booking websites are comparison links, not additional live quote feeds or a verified cheapest-price ranking. This final pass checked link generation and fallback behavior; it did not retest every external landing page or checkout.
+- Photo/map/rate coverage and availability depend on external services. Some places have no suitable photo. This pass does not establish cross-browser coverage, load capacity, or deployment security readiness.
+
+See PRICING-SETUP.md for provider setup. The sections below are historical records of the earlier regression pass; their test counts and Amadeus status do not describe the current build.
+
+## Earlier regression record
+
+### Earlier result
 
 20 automated tests passed; syntax checks passed for 20 JavaScript files. Browser checks below passed in the Codex browser. One reproducible saved-place bug was fixed. This is a functional regression pass, not a production certification or a guarantee of every external provider's availability.
 

@@ -108,3 +108,11 @@
 - All 26 automated tests and 24 JavaScript syntax checks pass. New coverage checks unknown values, unit conversion, unsafe website rejection, canonical place linkage, authentication, cross-place story isolation, comments, unlinked legacy posts, and persistence across restart.
 - Isolated browser QA verified campsite facilities filtering (three results to one plus one pin), hiking length/difficulty filtering, linked photo upload, comments, saving, reload, and a 390 × 844 detail layout without horizontal overflow. Tests used synthetic accounts/photos on port 4174, separate from the main app database.
 - Main-app verification returned 35 real Paris viewpoints and opened the Pont des Arts detail page with its attributed nearby Commons photograph and coordinate-based directions. No browser JavaScript errors were observed.
+
+## Final regression pass — October 4, 2026 (New York)
+
+- Re-ran all 26 automated tests, 24 JavaScript syntax checks and whitespace validation; all passed. No new functional regression was found.
+- Rechecked live Nominatim/Overpass (HTTP 200; 35 places), all 12 displayed India city photos, and actual Duffel sandbox pricing (30 offers plus browser TEST DATA/expiry labels). Editing the flight route cleared stale fare cards.
+- Verified invalid-date rejection, hotel/car not-connected messaging, five comparison links per category, and complete copied car-trip details. Booking.com remains unconfigured; Duffel production access remains unverified.
+- Isolated browser checks covered saved-place removal/re-saving, traveler-photo story navigation, quick-question commenting, category changes, facility filters, empty-filter recovery and matching map pins. Mobile discovery/detail/car views had no horizontal overflow at 390 × 844; no browser JavaScript errors were observed.
+- Updated QA-REPORT.md with current evidence and explicit provider/deployment limits, keeping earlier findings labeled as historical. Test accounts/posts stayed in the separate local QA database; no reservations or payments were created.
