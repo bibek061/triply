@@ -53,6 +53,23 @@ test("accounts, private chat consent, posts, comments, saved places, and persist
   assert.equal(india.body.destinations.length, 12);
   assert.equal(india.body.center, null);
   assert.equal(
+    (await request("/api/destination-photos?ids=country-IN")).status,
+    400,
+  );
+  assert.equal(
+    (await request("/api/destination-photos?ids=https://example.com")).status,
+    400,
+  );
+  assert.equal(
+    (
+      await request(
+        "/api/destination-photos?ids=" +
+          Array(13).fill(india.body.destinations[0].id).join(","),
+      )
+    ).status,
+    400,
+  );
+  assert.equal(
     (await request("/api/places?location=Paris&destinationId=invalid")).status,
     400,
   );

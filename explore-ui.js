@@ -53,7 +53,9 @@ window.TriplyExplore = (() => {
     const label =
       photo.kind === "nearby"
         ? "Nearby photo · " + photo.distanceMeters + " m"
-        : "Place photo";
+        : photo.kind === "city"
+          ? "City photo"
+          : "Place photo";
     return `<div class="place-photo" data-photo-id="${escapeHTML(p.id)}"><img src="${escapeHTML(photo.url)}" alt="${escapeHTML(photo.kind === "nearby" ? photo.title + " — taken near " + p.name : p.name)}" loading="lazy" decoding="async"><span class="photo-kind">${label}</span><a class="photo-credit" href="${escapeHTML(photo.source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(photo.credit)} · ${escapeHTML(photo.license)} · cropped</a></div>`;
   }
   function placeCard(p, index) {
@@ -76,7 +78,7 @@ window.TriplyExplore = (() => {
         introHTML +
         searchForm() +
         categoryFilters() +
-        `<section class="content-section results-area"><div class="section-heading"><div><h2>Explore ${escapeHTML(area.destination.name)}</h2><p>Choose a city to find ${escapeHTML(categoryName(state.category).toLowerCase())} nearby.</p></div></div><p class="area-guidance">${escapeHTML(area.destination.name)} covers a wide area. Start with one of these cities, or search for a specific town. Your trip dates, budget, and entry-fee filter carry into the local search.</p><div class="area-cities">${area.destinations.map((city) => `<article class="area-city"><span class="area-city-icon">${icon("pin")}</span><div><h3>${escapeHTML(city.name)}</h3><p>${escapeHTML(city.label)}</p></div><button class="primary-button" data-action="browse-city" data-id="${escapeHTML(city.id)}">Explore ${escapeHTML(city.name)} →</button><a class="text-link" href="${escapeHTML(photoSearchURL({ ...city, location: city.label }))}" target="_blank" rel="noopener noreferrer">Photos on Google ↗</a></article>`).join("")}</div>${area.destinations.length ? `<p class="source-note">Showing ${area.destinations.length} larger cities from ${area.cityCount} cities in the destination catalog. Choose a city to load mapped places and photos; these are starting points, not a complete list of attractions. Destination data © GeoNames, CC BY 4.0.</p>` : empty("Search a town or landmark.", "This area has no city entries in the current catalog. Enter a more specific destination above.")}</section>`
+        `<section class="content-section results-area"><div class="section-heading"><div><h2>Explore ${escapeHTML(area.destination.name)}</h2><p>Choose a city to find ${escapeHTML(categoryName(state.category).toLowerCase())} nearby.</p></div></div><p class="area-guidance">${escapeHTML(area.destination.name)} covers a wide area. Start with one of these cities, or search for a specific town. Your trip dates, budget, and entry-fee filter carry into the local search.</p><div class="area-cities">${area.destinations.map((city) => `<article class="area-city">${photoMarkup({ ...city, location: city.label })}<div><h3>${escapeHTML(city.name)}</h3><p>${escapeHTML(city.label)}</p></div><button class="primary-button" data-action="browse-city" data-id="${escapeHTML(city.id)}">Explore ${escapeHTML(city.name)} →</button><a class="text-link" href="${escapeHTML(photoSearchURL({ ...city, location: city.label }))}" target="_blank" rel="noopener noreferrer">Photos on Google ↗</a></article>`).join("")}</div>${area.destinations.length ? `<p class="source-note">Showing ${area.destinations.length} larger cities from ${area.cityCount} cities in the destination catalog. Choose a city to load mapped places and photos; these are starting points, not a complete list of attractions. Destination data © GeoNames, CC BY 4.0.</p>` : empty("Search a town or landmark.", "This area has no city entries in the current catalog. Enter a more specific destination above.")}</section>`
       );
     }
     const hero = state.searchDone
@@ -149,13 +151,14 @@ window.TriplyExplore = (() => {
   }
   async function loadPhotos(version) {
     // Small batches reveal pictures progressively and keep source traffic bounded.
-    const items = [...state.places];
+    const items = [...(state.area?.destinations || state.places)];
+    const endpoint = state.area ? "/api/destination-photos?" : "/api/photos?";
     for (let offset = 0; offset < items.length; offset += 7) {
       if (version !== renderVersion) return;
       const batch = items.slice(offset, offset + 7);
       try {
         const data = await api(
-          "/api/photos?" +
+          endpoint +
             new URLSearchParams({ ids: batch.map((p) => p.id).join(",") }),
         );
         for (const p of batch)
@@ -322,9 +325,11 @@ window.TriplyExplore = (() => {
       const img = event.target;
       if (img.tagName !== "IMG" || !img.closest(".place-photo")) return;
       const node = img.closest(".place-photo"),
-        p = [...state.places, ...state.saved].find(
-          (p) => p.id === node.dataset.photoId,
-        );
+        p = [
+          ...state.places,
+          ...state.saved,
+          ...(state.area?.destinations || []),
+        ].find((p) => p.id === node.dataset.photoId);
       if (p) {
         state.placePhotos[p.id] = null;
         node.outerHTML = photoMarkup(p, true);

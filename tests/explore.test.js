@@ -295,3 +295,153 @@ test("photo misses retry after expiry and concurrent callers share source reques
   await service.enrich(items);
   assert.equal(calls, 2);
 });
+
+test("city photos reject wrong-country articles and resolve the matching regional title", async () => {
+  const service = createPhotos({
+    fetchImpl: async (url) => {
+      const u = new URL(url);
+      if (u.hostname === "en.wikipedia.org")
+        return {
+          ok: true,
+          json: async () => ({
+            query: {
+              pages: {
+                1: {
+                  title: "Springfield",
+                  pageimage: "Wrong.jpg",
+                  coordinates: [{ lat: 48, lon: 2, country: "FR" }],
+                },
+                2: {
+                  title: "Springfield, Nebraska",
+                  pageimage: "Right.jpg",
+                  coordinates: [{ lat: 41.08, lon: -96.13, country: "US" }],
+                },
+              },
+            },
+          }),
+        };
+      assert.equal(u.searchParams.get("titles"), "File:Right.jpg");
+      return {
+        ok: true,
+        json: async () => ({
+          query: {
+            pages: {
+              1: {
+                title: "File:Right.jpg",
+                imageinfo: [
+                  {
+                    thumburl: "https://thumb.wikimedia.org/right.jpg",
+                    descriptionurl:
+                      "https://commons.wikimedia.org/wiki/File:Right.jpg",
+                    mime: "image/jpeg",
+                    extmetadata: {
+                      Artist: { value: "Author" },
+                      LicenseShortName: { value: "CC BY 4.0" },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        }),
+      };
+    },
+  });
+  const result = await service.enrich([
+    {
+      id: "city-1",
+      kind: "City",
+      name: "Springfield",
+      label: "Springfield, Nebraska, United States",
+      country: "US",
+      lat: 41.08,
+      lon: -96.13,
+    },
+  ]);
+  assert.equal(result["city-1"].kind, "city");
+  assert.match(result["city-1"].url, /right/);
+});
+
+test("city articles can verify missing coordinates through their linked Wikidata item", async () => {
+  const service = createPhotos({
+    fetchImpl: async (url) => {
+      const u = new URL(url);
+      if (u.hostname === "en.wikipedia.org")
+        return {
+          ok: true,
+          json: async () => ({
+            query: {
+              pages: {
+                1: {
+                  title: "Navi Mumbai",
+                  pageimage: "Skyline.jpg",
+                  pageprops: { wikibase_item: "Q1" },
+                },
+              },
+            },
+          }),
+        };
+      if (u.hostname === "www.wikidata.org")
+        return {
+          ok: true,
+          json: async () => ({
+            entities: {
+              Q1: {
+                claims: {
+                  P625: [
+                    {
+                      mainsnak: {
+                        datavalue: {
+                          value: {
+                            latitude: 19.03,
+                            longitude: 73.02,
+                            globe: "http://www.wikidata.org/entity/Q2",
+                          },
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          }),
+        };
+      return {
+        ok: true,
+        json: async () => ({
+          query: {
+            pages: {
+              1: {
+                title: "File:Skyline.jpg",
+                imageinfo: [
+                  {
+                    thumburl: "https://thumb.wikimedia.org/skyline.jpg",
+                    descriptionurl:
+                      "https://commons.wikimedia.org/wiki/File:Skyline.jpg",
+                    mime: "image/jpeg",
+                    extmetadata: {
+                      Artist: { value: "Author" },
+                      LicenseShortName: { value: "CC BY-SA 4.0" },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        }),
+      };
+    },
+  });
+  const result = await service.enrich([
+    {
+      id: "city-2",
+      kind: "City",
+      name: "Navi Mumbai",
+      label: "Navi Mumbai, Maharashtra, India",
+      country: "IN",
+      lat: 19.03,
+      lon: 73.02,
+    },
+  ]);
+  assert.equal(result["city-2"].kind, "city");
+});

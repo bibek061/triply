@@ -573,3 +573,24 @@
     padding: 20px;
   }
 }
+
+.area-city {
+  overflow: hidden;
+}
+.area-city > .place-photo {
+  width: calc(100% + 44px);
+  align-self: center;
+  margin: -22px -22px 4px;
+  flex-shrink: 0;
+  height: 190px;
+}
+.area-city .photo-kind {
+  max-width: calc(100% - 20px);
+}
+@media (max-width: 520px) {
+  .area-city > .place-photo {
+    width: calc(100% + 40px);
+    margin: -20px -20px 4px;
+    height: 210px;
+  }
+}

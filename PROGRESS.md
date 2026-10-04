@@ -62,3 +62,11 @@
 - City selection uses its exact catalog coordinates and preserves dates, travelers, budget and entry-fee filters. The chooser explicitly describes its cities as starting points, not a complete attraction list, and includes photo-search links.
 - Corrected error/empty-state wording: map-service failures no longer report zero places, and missing mapped results are distinguished from the free-entry filter excluding places.
 - Seventeen automated tests pass, including typed India through the HTTP API, region containment, explicit city behavior and existing map/photo/chat checks. Browser India search shows 12 cities; selecting Mumbai preserved the budget, and its viewpoints search returned 19 places. Mumbai's all-category query encountered an external service failure, which is handled with retry messaging.
+
+## Photos on country and state city cards — October 4, 2026 (New York)
+
+- Added real city photos to the country/state chooser cards, replacing the pin-only presentation. Photos load progressively with author/license credits and clear unavailable states; the existing Explore and Google Images actions remain.
+- Added a rate-limited endpoint accepting only catalog city IDs. City-name variants, regional qualifiers, and Wikipedia/Wikidata coordinates check destination matches before displaying Commons images. Distant namesakes and mismatched supplied country codes are rejected.
+- Live source checks returned photos for all 12 displayed India cities, all 12 Nepal cities, and 11 of 12 France cities. This is tested sample coverage, not a guarantee that every destination has an image.
+- Nineteen automated tests pass, including wrong-country article rejection, regional-title matching, Wikidata coordinate fallback, and endpoint input/batch limits.
+- Browser verification: India and Nepal each render 12 city-photo cards with the first visible images loaded; Nepal has 12 distinct image URLs. Mobile at 390 × 844 has no horizontal overflow. Photo credits and city actions remain visible, with no browser errors during these checks.
