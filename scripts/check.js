@@ -5,6 +5,7 @@ const files = [
   "server.js",
   "global-app.js",
   "explore-ui.js",
+  "place-ui.js",
   "travel-filters.js",
   ...["lib", "scripts", "tests"].flatMap((dir) =>
     fs

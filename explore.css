@@ -577,6 +577,125 @@
 .area-city {
   overflow: hidden;
 }
+.place-body h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.place-body h3 a:hover {
+  text-decoration: underline;
+}
+.place-actions .primary-button {
+  width: 100%;
+  justify-content: center;
+}
+.place-filters {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 8px 0 24px;
+  background: var(--surface);
+}
+.place-filters legend {
+  font-weight: 700;
+  font-size: 12px;
+  padding: 0 8px;
+}
+.place-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  align-items: center;
+}
+.place-filter-controls label {
+  font-size: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.place-filter-controls select {
+  max-width: 240px;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+.place-filter-controls input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+}
+.place-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 26px;
+  margin-top: 22px;
+}
+.detail-photo-panel .place-photo {
+  height: 380px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.detail-info {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  min-width: 0;
+}
+.detail-info > p {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.place-facts {
+  margin: 20px 0;
+}
+.place-facts > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.place-facts dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.place-facts dd {
+  font-size: 13px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 900px) {
+  .place-detail-layout {
+    grid-template-columns: 1fr;
+  }
+  .detail-photo-panel .place-photo {
+    height: 300px;
+  }
+}
+@media (max-width: 520px) {
+  .place-filter-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .place-filter-controls label {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .place-filter-controls select {
+    max-width: 100%;
+  }
+  .detail-info {
+    padding: 18px;
+  }
+}
 .area-city > .place-photo {
   width: calc(100% + 44px);
   align-self: center;

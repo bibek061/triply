@@ -101,6 +101,9 @@ const state = {
   category: "all",
   budget: "",
   admission: "any",
+  placeFilters: {},
+  activePlace: null,
+  placeId: null,
   selectedDestination: null,
   mapView: "list",
   photoAssets: {},
@@ -267,7 +270,7 @@ function searchForm() {
   return TriplyExplore.searchForm();
 }
 function categoryFilters() {
-  return `<div class="category-bar">${["all", "camping", "hiking", "views", "beaches", "attractions"].map((c) => `<button class="category-pill ${state.category === c ? "active" : ""}" data-action="category" data-category="${c}" aria-pressed="${state.category === c}">${icon(c === "all" ? "globe" : c)}${categoryName(c)}</button>`).join("")}</div>`;
+  return `<div class="category-bar">${["all", "camping", "hiking", "views", "beaches", "attractions"].map((c) => `<button class="category-pill ${state.category === c ? "active" : ""}" data-action="category" data-category="${c}" aria-pressed="${state.category === c}">${icon(c === "all" ? "globe" : c)}${categoryName(c)}</button>`).join("")}</div>${TriplyPlace.filters()}`;
 }
 function destinationLabel(location, country) {
   const name = countryName(country || "");
@@ -469,7 +472,7 @@ function dealResults() {
 }
 
 function postCard(p) {
-  return `<article class="pick-card"><div class="pick-image"><img src="${p.image}" alt="${escapeHTML(p.location)} shared by ${escapeHTML(p.name)}" loading="lazy"><span class="verified-badge">${categoryName(p.category)} · Community photo</span></div><div class="pick-body"><div class="pick-author"><span class="small-avatar">${escapeHTML(p.name.slice(0, 2).toUpperCase())}</span><strong>${escapeHTML(p.name)}</strong><span>@${escapeHTML(p.handle)}</span></div><h3>${escapeHTML(p.location)}, ${escapeHTML(countryName(p.country))}</h3><p class="post-caption">${escapeHTML(p.caption)}</p><div class="pick-bottom"><button class="text-link" data-action="comments" data-id="${p.id}">${icon("chat")}${p.commentCount} comments</button><button class="text-link" data-action="nearby" data-country="${p.country}" data-location="${escapeHTML(p.location)}">Find deals →</button></div><div class="quick-questions"><button data-action="question" data-id="${p.id}" data-question="Where did you stay?">Where did you stay?</button><button data-action="question" data-id="${p.id}" data-question="How much was it?">How much was it?</button></div><button class="report-link" data-action="report" data-id="${p.id}">Report post</button></div></article>`;
+  return `<article class="pick-card"><div class="pick-image"><img src="${p.image}" alt="${escapeHTML(p.location)} shared by ${escapeHTML(p.name)}" loading="lazy"><span class="verified-badge">${categoryName(p.category)} · Community photo</span></div><div class="pick-body"><div class="pick-author"><span class="small-avatar">${escapeHTML(p.name.slice(0, 2).toUpperCase())}</span><strong>${escapeHTML(p.name)}</strong><span>@${escapeHTML(p.handle)}</span></div><h3>${escapeHTML(p.location)}, ${escapeHTML(countryName(p.country))}</h3><p class="post-caption">${escapeHTML(p.caption)}</p>${p.place_id ? `<a class="text-link" href="#place/${escapeHTML(p.place_id)}">View this place →</a>` : ""}<div class="pick-bottom"><button class="text-link" data-action="comments" data-id="${p.id}">${icon("chat")}${p.commentCount} comments</button><button class="text-link" data-action="nearby" data-country="${p.country}" data-location="${escapeHTML(p.location)}">Find deals →</button></div><div class="quick-questions"><button data-action="question" data-id="${p.id}" data-question="Where did you stay?">Where did you stay?</button><button data-action="question" data-id="${p.id}" data-question="How much was it?">How much was it?</button></div><button class="report-link" data-action="report" data-id="${p.id}">Report post</button></div></article>`;
 }
 function community() {
   return `${intro("Every place has a story. Share yours.", "Camping, city breaks, trails, and the people along the way.", `<button class="primary-button" data-action="create-post">${icon("camera")}Share a photo</button>`)}<div class="community-strip"><div>${icon("users")}<strong>New places. New friends.</strong><span>Join the conversation, then say hello.</span></div><a href="#messages" class="text-link">Find travelers →</a></div><div id="community-results" class="picks-grid"><div class="loading-state">Loading traveler stories…</div></div>`;
@@ -518,13 +521,24 @@ function account() {
     `<form id="profile-form" class="stack-form"><label>Display name<input name="name" value="${escapeHTML(state.user.name)}" minlength="2" maxlength="50" required></label><label>Home country<select name="country">${countryOptions(state.user.country)}</select></label><label class="check-label"><input type="checkbox" name="discover" ${state.user.discover ? "checked" : ""}>Allow travelers to find me and send message requests.</label><p class="form-error" role="alert"></p><button class="primary-button">Save profile</button><button class="secondary-button" type="button" data-action="logout">Sign out</button></form>`,
   );
 }
-function createPost() {
+function createPost(place = null) {
   if (!state.user) return auth("signup");
   modal(
     "A good place is worth sharing.",
     "SHARE A PHOTO · HELP THE NEXT TRAVELER",
     `<form id="post-form" class="stack-form"><label class="upload-area">${icon("camera")}<strong>Choose your travel photo</strong><span>JPG, PNG, or WebP · up to 3 MB</span><input name="photo" type="file" accept="image/jpeg,image/png,image/webp" required></label><label>Where was it?<input name="location" placeholder="e.g. Lakeside, Pokhara" maxlength="100" minlength="2" required></label><div class="form-grid"><label>Country<select name="country">${countryOptions()}</select></label><label>Category<select name="category">${["camping", "hiking", "views", "beaches", "attractions", "stays", "food"].map((c) => `<option value="${c}">${categoryName(c)}</option>`).join("")}</select></label></div><label>Your tip<textarea name="caption" placeholder="What made it special? Anything the next traveler should know?" maxlength="1500" minlength="2" rows="4" required></textarea></label><p class="source-note">Your photo, caption, display name, and location will be visible to people using this Triply server. Only share photos you have permission to post.</p><p class="form-error" role="alert"></p><button class="primary-button">Share photo →</button></form>`,
   );
+  if (place) {
+    const form = $("#post-form");
+    form.dataset.placeId = place.id;
+    form.elements.location.value = place.name;
+    form.elements.location.readOnly = true;
+    if (place.country) form.elements.country.value = place.country;
+    form.elements.country.disabled = Boolean(place.country);
+    form.elements.category.value = place.category;
+    form.elements.category.disabled = true;
+    $("#modal-title").textContent = `Share a photo of ${place.name}`;
+  }
 }
 async function openComments(pid, question = "") {
   activePost = state.posts.find((p) => p.id === pid);
@@ -723,20 +737,23 @@ function render() {
   clearInterval(chatTimer);
   header();
   $("#main").innerHTML =
-    state.page === "home"
-      ? discover()
-      : state.page === "deals"
-        ? dealResults()
-        : state.page === "community"
-          ? community()
-          : state.page === "messages"
-            ? messagesPage()
-            : savedPage();
+    state.page === "place"
+      ? '<div class="loading-state">Loading place details…</div>'
+      : state.page === "home"
+        ? discover()
+        : state.page === "deals"
+          ? dealResults()
+          : state.page === "community"
+            ? community()
+            : state.page === "messages"
+              ? messagesPage()
+              : savedPage();
   if (state.page === "home" && state.searchDone && !state.loading) {
     TriplyExplore.mountMap();
     TriplyExplore.loadPhotos(version);
   }
   if (state.page === "community") loadPosts(version);
+  if (state.page === "place") TriplyPlace.load(version);
   if (state.page === "messages" && state.user) {
     refreshChatList().catch((e) => toast(e.message));
     if (state.chat) openChat(state.chat).catch((e) => toast(e.message));
@@ -754,6 +771,8 @@ document.addEventListener("click", async (event) => {
   try {
     if (action === "close") $("#modal").close();
     if (action === "account") account();
+    if (action === "place-photo" && state.activePlace)
+      createPost(state.activePlace);
     if (action === "copy-trip") {
       capture();
       const details = comparisonTripDetails();
@@ -857,7 +876,11 @@ document.addEventListener("click", async (event) => {
     }
     if (action === "save-place") {
       if (!state.user) return auth();
-      const place = [...state.places, ...state.saved].find((p) => p.id === id);
+      const place = [
+        ...state.places,
+        ...state.saved,
+        ...(state.activePlace ? [state.activePlace] : []),
+      ].find((p) => p.id === id);
       if (!place) return;
       const result = await api("/api/saved", {
         method: "POST",
@@ -947,11 +970,18 @@ document.addEventListener("submit", async (event) => {
           category: b.category,
           caption: b.caption,
           image,
+          ...(form.dataset.placeId ? { placeId: form.dataset.placeId } : {}),
         },
       });
       $("#modal").close();
-      navigate("community");
-      if (state.page === "community") render();
+      if (form.dataset.placeId) {
+        delete state.placePhotos[form.dataset.placeId];
+        navigate(`place/${form.dataset.placeId}`);
+        if (state.page === "place") render();
+      } else {
+        navigate("community");
+        if (state.page === "community") render();
+      }
       toast("Your story is live on this Triply server.");
     }
     if (form.id === "comment-form") {
@@ -961,6 +991,7 @@ document.addEventListener("submit", async (event) => {
       });
       await openComments(form.dataset.id);
       if (state.page === "community") loadPosts(renderVersion);
+      if (state.page === "place") TriplyPlace.loadStories(renderVersion);
     }
     if (form.id === "traveler-search") {
       const data = await api("/api/travelers?q=" + encodeURIComponent(b.query));
@@ -1079,11 +1110,20 @@ $("#theme-toggle").addEventListener("click", () => {
 document.documentElement.classList.toggle("dark", read("triply-dark", false));
 function route() {
   let page = location.hash.slice(1);
+  const placeRoute = page.match(/^place\/(osm-(?:node|way|relation)-\d+)$/);
+  state.activePlace = null;
+  state.placeId = placeRoute ? placeRoute[1] : null;
+  if (placeRoute) page = "place";
   if (page === "home" && state.page !== "home") state.kind = "explore";
   if (page === "picks") page = "community";
-  state.page = ["home", "deals", "community", "messages", "saved"].includes(
-    page,
-  )
+  state.page = [
+    "home",
+    "deals",
+    "community",
+    "messages",
+    "saved",
+    "place",
+  ].includes(page)
     ? page
     : "home";
   if (state.page === "deals" && state.kind === "explore")

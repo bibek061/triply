@@ -1,5 +1,7 @@
 # Triply regression check — October 4, 2026
 
+> Latest place-page update: 26 automated tests and 24 syntax checks pass. Place pages, category filters, canonical photo linkage, story/comment persistence, and mobile detail layout have been verified; see the latest PROGRESS.md entry. Uploads and comments were tested with synthetic data in an isolated database.
+
 > Later pricing update: the Duffel and Booking.com adapters are now implemented. The current suite has 24 passing tests and 21 syntax checks. An actual Duffel account check returned 30 sandbox flight offers for JFK–LHR. Booking.com credentials remain absent; hotel/car provider tests use isolated fixtures. Production pricing access has not been verified. See PRICING-SETUP.md and the latest PROGRESS.md entry. The original regression findings below describe the earlier version.
 
 ## Result

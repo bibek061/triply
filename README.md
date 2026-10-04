@@ -29,6 +29,9 @@ Open http://127.0.0.1:4173. The app needs its server; opening index.html directl
 - Photo posts, comments, threaded replies, and quick questions such as “Where did you stay?” and “How much was it?” Photos are resized and re-encoded in the browser before upload.
 - Opt-in traveler discovery, private message requests, acceptance/decline, chat with five-second polling, blocking, and stored reports. Chat shows the latest 500 messages; older messages remain in the database.
 - Account-based saved places and responsive desktop/mobile layouts.
+- Place detail pages (`#place/osm-…`) open from discovery cards, map popups, saved places, and linked community posts. They show sourced facilities, opening-hour tags, access, fees, directions, and a listed website when present. Discovered places are stored in SQLite so direct links work after a server restart. A place must first be discovered on this server; old saved entries may need rediscovery.
+- Category-specific filters cover campsite tents/caravans/toilets/showers/water, mapped hiking difficulty and trail length, viewpoint/accessibility information, and beach facilities. Unknown values never match a selected facility or measurement filter. Filters apply to the returned set of up to 35 places. Trail length, distance from the search center, and elevation above sea level are separate measurements; elevation gain and current trail safety are not inferred.
+- Share a photo from a place page to attach it to that exact mapped place. The server validates the place ID and supplies its canonical location/category. Its traveler stories support the existing comments, replies, and reporting actions and also appear in Community. Clearly labeled traveler photos fill missing public photos on place pages and discovery cards. Existing unlinked posts remain unchanged.
 
 ## Travel pricing connections
 

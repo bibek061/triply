@@ -1,7 +1,21 @@
 (function (root) {
   const filters = {
-    places: (items, fee) =>
-      fee === "free" ? items.filter((p) => p.feeStatus === "free") : items,
+    places: (items, fee, options = {}) =>
+      items.filter((p) => {
+        if (fee === "free" && p.feeStatus !== "free") return false;
+        const facts = p.facts || {};
+        if ((options.facilities || []).some((key) => facts[key] !== "yes"))
+          return false;
+        if (options.difficulty && facts.difficulty !== options.difficulty)
+          return false;
+        if (
+          options.maxLength &&
+          (!Number.isFinite(facts.trailLengthKm) ||
+            facts.trailLengthKm > Number(options.maxLength))
+        )
+          return false;
+        return true;
+      }),
     offers: (items, budget, currency) =>
       items.filter(
         (o) =>
