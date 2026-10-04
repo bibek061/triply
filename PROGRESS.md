@@ -116,3 +116,10 @@
 - Verified invalid-date rejection, hotel/car not-connected messaging, five comparison links per category, and complete copied car-trip details. Booking.com remains unconfigured; Duffel production access remains unverified.
 - Isolated browser checks covered saved-place removal/re-saving, traveler-photo story navigation, quick-question commenting, category changes, facility filters, empty-filter recovery and matching map pins. Mobile discovery/detail/car views had no horizontal overflow at 390 × 844; no browser JavaScript errors were observed.
 - Updated QA-REPORT.md with current evidence and explicit provider/deployment limits, keeping earlier findings labeled as historical. Test accounts/posts stayed in the separate local QA database; no reservations or payments were created.
+
+## Deployment preparation — October 4, 2026 (New York)
+
+- Added production startup validation for an HTTPS public origin and persistent data path, automatic Render origin detection, graceful shutdown, and a database-backed /healthz endpoint.
+- Added an optional Render Blueprint with a single Node 24 instance, 1 GB persistent disk, health checks, and deployment after CI passes. DEPLOYMENT.md also documents settings for an existing Node hosting account, costs, secrets, persistence verification and rollback limits.
+- All 28 automated tests and 26 JavaScript syntax checks pass. New integration coverage verifies Secure/HttpOnly cookies, cross-origin write rejection, health GET/HEAD, and private-file isolation.
+- The owner chose an existing hosting account; its provider name/dashboard URL is still needed. No paid service was created, no local user database or credentials were transferred, and no public launch is claimed.

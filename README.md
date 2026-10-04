@@ -56,6 +56,8 @@ This compares options within a connected provider's returned inventory, not iden
 
 ## Configuration and hosting
 
+See [DEPLOYMENT.md](DEPLOYMENT.md) for existing-host settings and the optional Render Blueprint. No hosted service has been provisioned yet.
+
 `.env.example` documents `PORT`, `HOST`, `DATA_DIR`, `PUBLIC_ORIGIN`, and discovery endpoints. The default server is local-only. For a hosted instance:
 
 1. Use a persistent Node.js 24 server and a persistent disk for `DATA_DIR`. SQLite and uploads must survive restarts and deploys. Back up both together.

@@ -1,0 +1,26 @@
+# Creates paid resources only when the owner deploys this Blueprint.
+services:
+  - type: web
+    name: triply
+    runtime: node
+    plan: 0.5c-512mb
+    numInstances: 1
+    buildCommand: node scripts/check.js && node --test tests/*.test.js
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    autoDeployTrigger: checksPass
+    disk:
+      name: triply-data
+      mountPath: /var/data/triply
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /var/data/triply
+      - key: BOOKING_ENV
+        value: test
