@@ -314,6 +314,20 @@ function providerLinks() {
         url: `https://www.google.com/travel/hotels?${new URLSearchParams({ q: `hotels in ${place}`, curr: state.currency })}`,
         detail: "Select your dates and compare the total stay price.",
       },
+      {
+        name: "Agoda",
+        subtitle: "Hotels, apartments & vacation stays",
+        url: "https://www.agoda.com/",
+        detail:
+          "Enter your destination, dates, and guests. Compare the full total, including taxes.",
+      },
+      {
+        name: "Hotels.com",
+        subtitle: "Compare rooms and member rates",
+        url: "https://www.hotels.com/",
+        detail:
+          "Enter your trip details. Check whether discounts require signing in and match cancellation terms.",
+      },
     ];
   if (state.kind === "flights")
     return [
@@ -339,6 +353,20 @@ function providerLinks() {
             : "https://www.kayak.com/flights",
         detail: "Review baggage, stops, and the final price.",
       },
+      {
+        name: "Skyscanner",
+        subtitle: "Search airlines and travel agencies",
+        url: "https://www.skyscanner.com/",
+        detail:
+          "Choose one way and enter your route, date, and adults. Check baggage and the booking seller.",
+      },
+      {
+        name: "Trip.com",
+        subtitle: "Compare another flight booking site",
+        url: "https://www.trip.com/flights/",
+        detail:
+          "Enter your route and date. Compare the same flights, baggage allowance, and refund rules.",
+      },
     ];
   return [
     {
@@ -359,7 +387,60 @@ function providerLinks() {
       url: "https://www.expedia.com/Cars",
       detail: "Select your city, dates, pickup times, and driver details.",
     },
+    {
+      name: "Skyscanner Cars",
+      subtitle: "Search across rental providers",
+      url: "https://www.skyscanner.com/car-rental",
+      detail:
+        "Enter your pickup location and local times. Compare the same car category, mileage, and insurance.",
+    },
+    {
+      name: "Auto Europe",
+      subtitle: "Compare international car rentals",
+      url: "https://www.autoeurope.com/",
+      detail:
+        "Enter your dates and driver age. Check the rental total, deposit, and pickup location.",
+    },
   ];
+}
+function comparisonTripDetails() {
+  const lines =
+    state.kind === "flights"
+      ? [
+          `One-way flight: ${state.origin} → ${state.destination}`,
+          `Departure: ${state.start}`,
+          "Cabin: Economy",
+        ]
+      : state.kind === "stays"
+        ? [
+            `Stay: ${state.location}`,
+            `Check-in: ${state.start}`,
+            `Check-out: ${state.end}`,
+            "Rooms: 1",
+          ]
+        : [
+            `Car rental: ${state.location}`,
+            "Pickup and return at the same location",
+            `Pickup: ${state.start} ${state.pickupTime} (local time)`,
+            `Return: ${state.end} ${state.dropoffTime} (local time)`,
+            `Driver age: ${state.driverAge}`,
+          ];
+  lines.push(`Adults: ${state.adults}`, `Currency: ${state.currency}`);
+  if (state.kind !== "flights" && state.residence)
+    lines.push(`Country of residence: ${countryName(state.residence)}`);
+  if (state.budget)
+    lines.push(`Maximum total: ${state.budget} ${state.currency}`);
+  return lines.join("\n");
+}
+function updateComparisonLinks() {
+  const links = document.querySelectorAll("[data-provider-index]");
+  if (!links.length) return;
+  capture();
+  const providers = providerLinks();
+  links.forEach((link) => {
+    const provider = providers[Number(link.dataset.providerIndex)];
+    if (provider) link.href = provider.url;
+  });
 }
 function pricingResults() {
   const data = state.priceData;
@@ -377,10 +458,10 @@ function pricingResults() {
   return `<section id="live-pricing" class="live-pricing" aria-live="polite"><div class="section-heading"><h3>${escapeHTML(data.provider || provider)} prices</h3><span class="price-mode ${data.status === "live" ? "is-live" : ""}">${data.status === "sandbox" ? "TEST DATA" : data.status === "live" ? "LIVE SEARCH" : "CONNECTION STATUS"}</span></div><p>${escapeHTML(data.message || "Prices could not be loaded.")}</p>${data.checkedAt ? `<p class="source-note">Checked ${escapeHTML(new Date(data.checkedAt).toLocaleString())} · sorted by total in ${escapeHTML(state.currency)}${state.budget ? ` · maximum ${money(Number(state.budget), state.currency)}` : ""}</p>` : ""}${offers.length ? `<div class="price-offers">${offers.map((o, i) => `<article class="price-offer">${o.image ? `<img class="offer-image" src="${escapeHTML(o.image)}" alt="${escapeHTML(o.name)} · Booking.com property photo" loading="lazy">` : ""}<div class="offer-description"><h4>${escapeHTML(o.name)}</h4>${(o.details || []).map((d) => `<p>${escapeHTML(d)}</p>`).join("")}<small>${escapeHTML(o.terms || "")}</small>${o.expiresAt ? `<p class="source-note">Offer expires ${escapeHTML(new Date(o.expiresAt).toLocaleTimeString())}. Search again before making plans.</p>` : ""}</div><div class="offer-price"><strong>${money(o.total, o.currency)}</strong><small>${data.status === "sandbox" ? "Test total" : i === 0 ? "Lowest returned total" : "Total for this search"}</small>${o.url && data.status === "live" ? `<a class="primary-button" href="${escapeHTML(o.url)}" target="_blank" rel="noopener noreferrer">View offer ↗</a>` : `<span class="source-note">${data.status === "sandbox" ? "Test offer · no live booking" : "Compare booking sites below"}</span>`}</div></article>`).join("")}</div>` : ["live", "sandbox"].includes(data.status) ? `<div class="notice">${available.length && state.budget ? "No returned offers fit this budget. Increase the maximum total and search again." : "No current offers returned in this currency. Try other dates or a currency supported by the provider."}</div>` : ""}</section>`;
 }
 function dealResults() {
-  return `${intro("A good trip starts with a good deal.", "Compare the journey, the stay, and the little details.")} ${searchForm()}<section class="content-section"><div class="section-heading"><div><h2>${state.kind === "flights" ? `${escapeHTML(state.origin)} → ${escapeHTML(state.destination)}` : `${state.kind === "cars" ? "Car rentals" : "Places to stay"} in ${escapeHTML(state.location)}`}</h2><p>${state.start}${state.kind === "flights" ? "" : ` → ${state.end}`} · ${state.adults} travelers · ${state.currency}</p></div><button class="text-link" data-action="convert">Compare currencies ↗</button></div>${pricingResults()}<div class="comparison-note">${icon("check")}<div><strong>Check other booking websites.</strong><p>These links open separate searches. Their prices may differ from the offers above; compare the same dates, inclusions, and cancellation terms.</p></div></div><div class="provider-grid">${providerLinks()
+  return `${intro("A good trip starts with a good deal.", "Compare the journey, the stay, and the little details.")} ${searchForm()}<section class="content-section"><div class="section-heading"><div><h2>${state.kind === "flights" ? `${escapeHTML(state.origin)} → ${escapeHTML(state.destination)}` : `${state.kind === "cars" ? "Car rentals" : "Places to stay"} in ${escapeHTML(state.location)}`}</h2><p>${state.start}${state.kind === "flights" ? "" : ` → ${state.end}`} · ${state.adults} travelers · ${state.currency}</p></div><button class="text-link" data-action="convert">Compare currencies ↗</button></div>${pricingResults()}<div class="comparison-note">${icon("check")}<div><h3>Compare on ${providerLinks().length} booking websites</h3><p>Prices are shown on each website. Use the same dates, travelers, inclusions, and cancellation terms to compare totals. Some sites need you to enter your trip details again.</p><button class="text-link" data-action="copy-trip">Copy trip details ↗</button></div></div><div class="provider-grid">${providerLinks()
     .map(
       (p, i) =>
-        `<article class="provider-card">${TriplyExplore.providerPhoto(state.kind)}<span class="provider-number">0${i + 1}</span><div class="provider-wordmark">${p.name}</div><h3>${p.subtitle}</h3><p>${escapeHTML(p.detail)}</p><span class="price-check-label">Price available on provider</span><a class="primary-button" target="_blank" rel="noopener noreferrer" href="${escapeHTML(p.url)}">Compare on ${p.name} ↗</a></article>`,
+        `<article class="provider-card">${TriplyExplore.providerPhoto(state.kind)}<span class="provider-number">0${i + 1}</span><div class="provider-wordmark">${p.name}</div><h3>${p.subtitle}</h3><p>${escapeHTML(p.detail)}</p><span class="price-check-label">Price available on provider</span><a class="primary-button" data-provider-index="${i}" target="_blank" rel="noopener noreferrer" href="${escapeHTML(p.url)}">Compare on ${p.name} ↗</a></article>`,
     )
     .join(
       "",
@@ -673,6 +754,23 @@ document.addEventListener("click", async (event) => {
   try {
     if (action === "close") $("#modal").close();
     if (action === "account") account();
+    if (action === "copy-trip") {
+      capture();
+      const details = comparisonTripDetails();
+      try {
+        await navigator.clipboard.writeText(details);
+        toast(
+          "Trip details copied. Use them to compare the same trip on each site.",
+        );
+      } catch {
+        modal(
+          "Your trip details",
+          "Select and copy these details for the booking website.",
+          `<label>Trip details<textarea id="trip-copy-fallback" rows="10" readonly>${escapeHTML(details)}</textarea></label>`,
+        );
+        $("#trip-copy-fallback").select();
+      }
+    }
     if (action === "auth-mode") auth(el.dataset.mode);
     if (action === "kind") {
       capture();
@@ -931,6 +1029,7 @@ async function preparePhoto(file) {
 }
 document.addEventListener("input", (event) => {
   if (!event.target.closest("#global-search")) return;
+  updateComparisonLinks();
   searchVersion++;
   state.loading = false;
   state.priceData = null;
@@ -956,6 +1055,7 @@ document.addEventListener("change", (event) => {
     event.target.closest("#global-search") &&
     event.target.matches("input,select")
   ) {
+    updateComparisonLinks();
     searchVersion++;
     state.loading = false;
     state.priceData = null;

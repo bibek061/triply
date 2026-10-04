@@ -251,6 +251,12 @@
 .comparison-note strong {
   font-size: 12px;
 }
+.comparison-note h3 {
+  font-size: 15px;
+}
+.comparison-note .text-link {
+  margin-top: 12px;
+}
 .comparison-note p {
   font-size: 10px;
   line-height: 1.8;
