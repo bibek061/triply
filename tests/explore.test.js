@@ -135,3 +135,139 @@ test("photo service rejects unrelated image hosts and fails gracefully", async (
     {},
   );
 });
+
+test("Wikipedia article references resolve redirects and request reusable Commons attribution", async () => {
+  const calls = [];
+  const service = createPhotos({
+    fetchImpl: async (url) => {
+      calls.push(url);
+      const u = new URL(url);
+      if (u.hostname === "fr.wikipedia.org")
+        return {
+          ok: true,
+          json: async () => ({
+            query: {
+              redirects: [{ from: "Tour", to: "Tour Eiffel" }],
+              pages: { 1: { title: "Tour Eiffel", pageimage: "Tower.jpg" } },
+            },
+          }),
+        };
+      assert.equal(u.hostname, "commons.wikimedia.org");
+      assert.equal(u.searchParams.get("titles"), "File:Tower.jpg");
+      return {
+        ok: true,
+        json: async () => ({
+          query: {
+            pages: {
+              1: {
+                title: "File:Tower.jpg",
+                imageinfo: [
+                  {
+                    thumburl: "https://thumb.wikimedia.org/tower.jpg",
+                    descriptionurl:
+                      "https://commons.wikimedia.org/wiki/File:Tower.jpg",
+                    mime: "image/jpeg",
+                    extmetadata: {
+                      Artist: { value: "Photographer" },
+                      LicenseShortName: { value: "CC BY 4.0" },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        }),
+      };
+    },
+  });
+  const result = await service.enrich([
+    { id: "osm-node-1", wikipedia: "fr:Tour" },
+  ]);
+  assert.equal(result["osm-node-1"].kind, "place");
+  assert.equal(calls.length, 2);
+  assert.ok(calls[0].includes("pilicense=free"));
+});
+
+test("nearby photos require name and distance, keep unique pictures, and label approximate matches", async () => {
+  const service = createPhotos({
+    fetchImpl: async (url) => {
+      const q = new URL(url).searchParams;
+      if (q.get("list") === "geosearch")
+        return {
+          ok: true,
+          json: async () => ({
+            query: {
+              geosearch: [
+                { title: "File:Unrelated temple.jpg", dist: 1 },
+                { title: "File:Alpha hill far.jpg", dist: 151 },
+                { title: "File:Alpha hill.jpg", dist: 5 },
+                { title: "File:Alpha hill other.jpg", dist: 15 },
+              ],
+            },
+          }),
+        };
+      assert.ok(!q.get("titles").includes("temple"));
+      assert.ok(!q.get("titles").includes("far"));
+      return {
+        ok: true,
+        json: async () => ({
+          query: {
+            pages: Object.fromEntries(
+              q
+                .get("titles")
+                .split("|")
+                .map((title, i) => [
+                  i,
+                  {
+                    title,
+                    imageinfo: [
+                      {
+                        thumburl:
+                          "https://thumb.wikimedia.org/" +
+                          encodeURIComponent(title),
+                        descriptionurl:
+                          "https://commons.wikimedia.org/wiki/" +
+                          encodeURIComponent(title),
+                        mime: "image/jpeg",
+                        extmetadata: {
+                          Artist: { value: "Author" },
+                          LicenseShortName: { value: "CC BY-SA 4.0" },
+                        },
+                      },
+                    ],
+                  },
+                ]),
+            ),
+          },
+        }),
+      };
+    },
+  });
+  const result = await service.enrich([
+    { id: "osm-node-1", name: "Alpha hill", lat: 10, lon: 20 },
+    { id: "osm-node-2", name: "Alpha hill", lat: 10, lon: 20 },
+  ]);
+  assert.equal(result["osm-node-1"].kind, "nearby");
+  assert.ok(result["osm-node-1"].distanceMeters <= 150);
+  assert.notEqual(result["osm-node-1"].url, result["osm-node-2"].url);
+});
+
+test("photo misses retry after expiry and concurrent callers share source requests", async () => {
+  let clock = 0,
+    calls = 0;
+  const service = createPhotos({
+    now: () => clock,
+    fetchImpl: async () => {
+      calls++;
+      return { ok: true, json: async () => ({ query: { geosearch: [] } }) };
+    },
+  });
+  const items = [{ id: "osm-node-1", name: "Alpha hill", lat: 10, lon: 20 }];
+  await Promise.all([service.enrich(items), service.enrich(items)]);
+  assert.equal(calls, 1);
+  await service.enrich(items);
+  assert.equal(calls, 1);
+  clock = 600001;
+  await service.enrich(items);
+  assert.equal(calls, 2);
+});

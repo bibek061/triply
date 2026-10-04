@@ -45,3 +45,13 @@
 - Mobile verification at 390 × 844: no horizontal overflow, List/Map toggles work, and booking links preserve applicable trip details. Provider photos loaded successfully. Keyboard destination selection and card-to-pin popups worked. Browser reported no JavaScript errors during these checks.
 - All 13 automated tests and 19 JavaScript syntax checks pass. New tests cover destination disambiguation, selected coordinates, budget/currency/date/fee boundaries, photo attribution, caching, host validation and outages, plus API input validation.
 - Added a safe Amadeus connection-check script and setup documentation. The saved local credentials remain empty, so no sandbox or production fares are connected. The app explicitly reports this and continues to provide booking-provider search links. Production approval and hotel/car live feeds remain external setup work.
+
+## Worldwide public place photos — October 3, 2026 (New York)
+
+- Removed repeated category photos from named place cards and map popups. Missing/broken images show a clear unavailable state.
+- Expanded public photo lookup to tagged Wikipedia articles and Commons geotagged uploads worldwide, in addition to exact Wikimedia/Wikidata references. Name and distance checks reject unrelated nearby files; approximate matches are labeled with distance, source, author and license. Duplicate nearby photos are not assigned to different cards in the server cache.
+- Added place-specific Google Images search links without scraping or republishing Google/social-media results.
+- Added progressive loading, bounded source concurrency, shared in-flight requests, cache expiry and retries for missing photos.
+- Live network checks returned attributed, name-matched photos for Pont des Arts (France), Fewa Lake (Nepal) and Sydney Opera House (Australia). This verifies examples across countries, not complete photo coverage of all locations.
+- Sixteen automated tests pass, including Wikipedia redirects, reusable-image requests, name/distance matching, nearby-photo deduplication, attribution and retry/coalescing behavior.
+- Browser verification: Paris viewpoints now have 23 exact/nearby photos across 35 cards, up from 5 direct-reference photos. All 35 cards link to the correct place-specific Google search; missing photos use clear placeholders. Loaded photos, map popups, attribution and progressive completion were checked with no browser errors.

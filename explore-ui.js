@@ -31,17 +31,34 @@ window.TriplyExplore = (() => {
       state.photoAssets[category === "views" ? "hiking" : "attractions"]
     );
   }
-  function photoFor(p) {
-    return state.placePhotos[p.id] || fallback(p.category);
+  function photoSearchURL(p) {
+    return (
+      "https://www.google.com/search?" +
+      new URLSearchParams({
+        tbm: "isch",
+        q: [
+          p.name,
+          p.location || state.location,
+          countryName(p.country || state.country),
+        ]
+          .filter(Boolean)
+          .join(" "),
+      })
+    );
   }
-  function photoMarkup(p, forceFallback = false) {
-    const photo = forceFallback ? fallback(p.category) : photoFor(p);
-    if (!photo) return "";
-    return `<div class="place-photo" data-photo-id="${escapeHTML(p.id)}" data-fallback="${photo.kind === "inspiration"}"><img src="${escapeHTML(photo.url)}" alt="${escapeHTML(photo.kind === "place" ? p.name : photo.alt + " — travel inspiration")}" loading="lazy" decoding="async"><span class="photo-kind">${photo.kind === "place" ? "Place photo" : "Travel inspiration"}</span><a class="photo-credit" href="${escapeHTML(photo.source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(photo.credit)} · ${escapeHTML(photo.license)}</a></div>`;
+  function photoMarkup(p, unavailable = false) {
+    const photo = unavailable ? null : state.placePhotos[p.id];
+    if (!photo)
+      return `<div class="place-photo photo-empty" data-photo-id="${escapeHTML(p.id)}"><span>${icon("pin")}</span><strong>${unavailable || Object.hasOwn(state.placePhotos, p.id) || state.page !== "home" ? "Photo unavailable" : "Finding local photos…"}</strong><small>${escapeHTML(p.name)}</small><a href="${escapeHTML(photoSearchURL(p))}" target="_blank" rel="noopener noreferrer">See photos on Google ↗</a></div>`;
+    const label =
+      photo.kind === "nearby"
+        ? "Nearby photo · " + photo.distanceMeters + " m"
+        : "Place photo";
+    return `<div class="place-photo" data-photo-id="${escapeHTML(p.id)}"><img src="${escapeHTML(photo.url)}" alt="${escapeHTML(photo.kind === "nearby" ? photo.title + " — taken near " + p.name : p.name)}" loading="lazy" decoding="async"><span class="photo-kind">${label}</span><a class="photo-credit" href="${escapeHTML(photo.source)}" target="_blank" rel="noopener noreferrer">${escapeHTML(photo.credit)} · ${escapeHTML(photo.license)} · cropped</a></div>`;
   }
   function placeCard(p, index) {
     const saved = state.saved.some((x) => x.id === p.id);
-    return `<article class="place-card photo-place-card" id="card-${escapeHTML(p.id)}">${photoMarkup(p)}<button class="save-button ${saved ? "saved" : ""}" data-action="save-place" data-id="${escapeHTML(p.id)}" aria-label="${saved ? "Unsave" : "Save"} ${escapeHTML(p.name)}">${icon("heart")}</button><div class="place-body"><span class="place-category">${Number.isInteger(index) ? `<span class="place-number">${index + 1}</span>` : ""}${categoryName(p.category)}${Number.isFinite(p.distanceKm) ? ` · ${p.distanceKm} km away` : ""}</span><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(destinationLabel(p.location || state.location, p.country || state.country))}</p><span class="place-fee">${escapeHTML(p.fee || "Check access & fees")}</span><div class="place-actions"><button class="text-link" data-action="map-place" data-id="${escapeHTML(p.id)}">${icon("pin")}View on map</button><button class="text-link" data-action="nearby" data-location="${escapeHTML(p.location || state.location)}" data-country="${escapeHTML(p.country || state.country)}">Plan a visit →</button></div></div></article>`;
+    return `<article class="place-card photo-place-card" id="card-${escapeHTML(p.id)}">${photoMarkup(p)}<button class="save-button ${saved ? "saved" : ""}" data-action="save-place" data-id="${escapeHTML(p.id)}" aria-label="${saved ? "Unsave" : "Save"} ${escapeHTML(p.name)}">${icon("heart")}</button><div class="place-body"><span class="place-category">${Number.isInteger(index) ? `<span class="place-number">${index + 1}</span>` : ""}${categoryName(p.category)}${Number.isFinite(p.distanceKm) ? ` · ${p.distanceKm} km away` : ""}</span><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(destinationLabel(p.location || state.location, p.country || state.country))}</p><span class="place-fee">${escapeHTML(p.fee || "Check access & fees")}</span><div class="place-actions"><a class="text-link" href="${escapeHTML(photoSearchURL(p))}" target="_blank" rel="noopener noreferrer">Photos on Google ↗</a><button class="text-link" data-action="map-place" data-id="${escapeHTML(p.id)}">${icon("pin")}View on map</button><button class="text-link" data-action="nearby" data-location="${escapeHTML(p.location || state.location)}" data-country="${escapeHTML(p.country || state.country)}">Plan a visit →</button></div></div></article>`;
   }
   function discover() {
     const places = visiblePlaces();
@@ -57,7 +74,7 @@ window.TriplyExplore = (() => {
       ? ""
       : `<section class="hero global-hero explore-hero"><img src="${images.hero}" alt="Mountains and an open valley"><div class="hero-content"><div class="hero-tag">LESS SCROLLING. MORE GOING.</div><h2>Good places.<br><em>Better company.</em></h2><p>Find the trail. Compare the flight.<br>Meet the people who make the trip.</p></div></section>`;
     const results = state.searchDone
-      ? `<section class="content-section results-area"><div class="section-heading"><div><h2>${categoryName(state.category)} near ${escapeHTML(state.location)}</h2><p>${state.loading ? "Looking for places…" : `${places.length} places${state.admission === "free" ? " with no entry fee listed" : ""} · within 20 km of the mapped center`}</p></div><div class="mobile-view-switch"><button class="${state.mapView === "list" ? "active" : ""}" data-explore-view="list">${icon("globe")}List</button><button class="${state.mapView === "map" ? "active" : ""}" data-explore-view="map">${icon("pin")}Map</button></div></div><div class="trip-summary"><span>${escapeHTML(state.start)} → ${escapeHTML(state.end)}</span><span>${state.adults} traveler${state.adults === 1 ? "" : "s"}</span>${state.budget ? `<span>Trip budget ${money(Number(state.budget), state.currency)}</span>` : ""}<button data-action="kind" data-kind="stays" class="text-link">Find a stay for these dates →</button></div>${state.placesError ? empty("We couldn’t load places right now.", escapeHTML(state.placesError), "search-again", "Try again") : state.loading ? '<div class="loading-state">Finding places worth the trip…</div>' : `<div class="discovery-layout" data-view="${state.mapView}"><div class="places-grid">${places.length ? places.map(placeCard).join("") : empty("No places match these filters.", "Try another destination or select any entry fee. Unknown fees are excluded from the free filter.")}</div><aside class="map-panel"><div class="map-heading"><strong>Your next adventure, mapped.</strong><span>Tap a pin to explore</span></div><div id="places-map" aria-label="Map of discovered places"></div><p class="map-help" id="map-help">Pins match the numbered place cards. Trail pins show approximate centers.</p></aside></div>`}<p class="source-note">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>. Entry-fee tags do not include transport, equipment, permits, or accommodation. ${state.center ? `Search center: ${escapeHTML(state.center.name)}.` : ""} Photos labeled “Travel inspiration” illustrate the category rather than the named place.</p></section>`
+      ? `<section class="content-section results-area"><div class="section-heading"><div><h2>${categoryName(state.category)} near ${escapeHTML(state.location)}</h2><p>${state.loading ? "Looking for places…" : `${places.length} places${state.admission === "free" ? " with no entry fee listed" : ""} · within 20 km of the mapped center`}</p></div><div class="mobile-view-switch"><button class="${state.mapView === "list" ? "active" : ""}" data-explore-view="list">${icon("globe")}List</button><button class="${state.mapView === "map" ? "active" : ""}" data-explore-view="map">${icon("pin")}Map</button></div></div><div class="trip-summary"><span>${escapeHTML(state.start)} → ${escapeHTML(state.end)}</span><span>${state.adults} traveler${state.adults === 1 ? "" : "s"}</span>${state.budget ? `<span>Trip budget ${money(Number(state.budget), state.currency)}</span>` : ""}<button data-action="kind" data-kind="stays" class="text-link">Find a stay for these dates →</button></div>${state.placesError ? empty("We couldn’t load places right now.", escapeHTML(state.placesError), "search-again", "Try again") : state.loading ? '<div class="loading-state">Finding places worth the trip…</div>' : `<div class="discovery-layout" data-view="${state.mapView}"><div class="places-grid">${places.length ? places.map(placeCard).join("") : empty("No places match these filters.", "Try another destination or select any entry fee. Unknown fees are excluded from the free filter.")}</div><aside class="map-panel"><div class="map-heading"><strong>Your next adventure, mapped.</strong><span>Tap a pin to explore</span></div><div id="places-map" aria-label="Map of discovered places"></div><p class="map-help" id="map-help">Pins match the numbered place cards. Trail pins show approximate centers.</p></aside></div>`}<p class="source-note">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>. Entry-fee tags do not include transport, equipment, permits, or accommodation. ${state.center ? `Search center: ${escapeHTML(state.center.name)}.` : ""} Photos come from public Wikimedia contributions. “Place photo” uses an explicit place reference; “Nearby photo” was geotagged within 150 m and may show the surrounding area.</p></section>`
       : `<section class="content-section"><div class="section-heading"><div><h2>What’s your kind of escape?</h2><p>Pick a place. We’ll help you find what’s around it.</p></div></div><div class="destinations-grid">${inspiration.map((p, i) => `<button class="destination-card" data-action="inspiration" data-index="${i}"><img src="${p.image}" alt="${categoryName(p.category)} inspiration"><span class="destination-tag">${p.label}</span><div class="destination-copy"><h3>${p.name}</h3><p>${countryName(p.country)} · ${categoryName(p.category)}</p><span class="destination-arrow">↗</span></div></button>`).join("")}</div></section>`;
     return introHTML + hero + searchForm() + categoryFilters() + results;
   }
@@ -122,25 +139,29 @@ window.TriplyExplore = (() => {
     requestAnimationFrame(() => map?.invalidateSize());
   }
   async function loadPhotos(version) {
-    const items = state.places;
-    if (!items.length) return;
-    try {
-      const data = await api(
-        "/api/photos?" +
-          new URLSearchParams({ ids: items.map((p) => p.id).join(",") }),
-      );
-      Object.assign(state.placePhotos, data.photos);
+    // Small batches reveal pictures progressively and keep source traffic bounded.
+    const items = [...state.places];
+    for (let offset = 0; offset < items.length; offset += 7) {
       if (version !== renderVersion) return;
-      for (const p of items) {
-        if (!data.photos[p.id]) continue;
+      const batch = items.slice(offset, offset + 7);
+      try {
+        const data = await api(
+          "/api/photos?" +
+            new URLSearchParams({ ids: batch.map((p) => p.id).join(",") }),
+        );
+        for (const p of batch)
+          state.placePhotos[p.id] = data.photos[p.id] || null;
+      } catch {
+        for (const p of batch)
+          if (!state.placePhotos[p.id]) state.placePhotos[p.id] = null;
+      }
+      if (version !== renderVersion) return;
+      for (const p of batch)
         document
           .querySelectorAll(`[data-photo-id="${p.id}"]`)
           .forEach((node) => {
             node.outerHTML = photoMarkup(p);
           });
-      }
-    } catch {
-      /* Keep attributed inspiration images visible. */
     }
   }
   function closeSuggestions() {
@@ -295,12 +316,12 @@ window.TriplyExplore = (() => {
         p = [...state.places, ...state.saved].find(
           (p) => p.id === node.dataset.photoId,
         );
-      if (node.dataset.fallback === "false" && p) {
+      if (p) {
+        state.placePhotos[p.id] = null;
         node.outerHTML = photoMarkup(p, true);
       } else {
         img.hidden = true;
-        node.querySelector(".photo-kind").textContent =
-          "Photo temporarily unavailable";
+        node.querySelector(".photo-kind").textContent = "Photo unavailable";
       }
     },
     true,
