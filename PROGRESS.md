@@ -27,3 +27,10 @@
 - The owner must supply Amadeus credentials and production approval to enable live flight fares. GitHub supplies integration code, not private access credentials.
 - Hotel/car comparisons open provider searches. No cross-provider live feed is connected, so Triply cannot claim a globally cheapest offer or route based on verified matching quotes.
 - Public deployment has not been performed. Launch needs persistent hosting, HTTPS, suitable discovery capacity, operational moderation, account recovery/deletion, and the other items documented in README.md.
+
+## Combined destination search — October 3, 2026 (New York)
+
+- Combined the country dropdown and city input into one destination field for countries, states, and cities, including stays and cars.
+- Worldwide geocoding now resolves the country from the destination instead of applying a stale country filter. Provider searches use the entered destination as-is.
+- Kept resolved country context for local currency and saved places; broad region searches explicitly describe results around their mapped center.
+- Eight automated tests pass, including country/state/city lookup without a hidden country restriction. Live browser search for Paris, France returned 35 viewpoints and EUR context. Mobile verification found one destination input, no country dropdown, and no horizontal overflow.

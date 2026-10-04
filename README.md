@@ -15,6 +15,7 @@ Open http://127.0.0.1:4173. The app needs its server; opening index.html directl
 ## What works
 
 - 250 countries and territories, with 153 active currency codes (including USD). Country records come from mledoze/countries; current tender periods come from Unicode CLDR. Refresh with `node scripts/sync-countries.js`.
+- One destination field accepts a country, state, or city, without requiring a separate country dropdown. The resolved country supplies the local currency and saved-place context. Country/state searches show nearby results around their mapped center; specify a city for a more focused search.
 - Worldwide nearby discovery for camping, hiking, viewpoints, beaches, and cultural attractions using OpenStreetMap's Nominatim and Overpass services. Results depend on local map coverage. A submitted location is geocoded, then up to 35 mapped places within approximately 20 km are shown. Trail relation centers are approximate, not trailheads or safety assessments.
 - Provider comparisons for flights, stays, and rental cars. Buttons open Google Flights/Hotels, Booking.com, Expedia, KAYAK, Rentalcars.com, or DiscoverCars. Destination/date/currency information is included where supported; other links open the provider's search form. These are not affiliate integrations or rankings of current prices.
 - USD default, country currency lookup, and daily currency conversion. Unsupported rate codes are explicitly reported. Cached rates can be used for up to seven days during an outage and are labeled stale.

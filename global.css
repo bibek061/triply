@@ -970,3 +970,24 @@
     height: 250px;
   }
 }
+/* A single destination field replaces the country/city pair. */
+.global-fields:not(:has([name="start"])) {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.global-fields:not(:has([name="start"])) > .primary-button {
+  grid-column: auto;
+}
+.global-fields:has([name="end"]) > .destination-field {
+  grid-column: 1 / -1;
+}
+@media (max-width: 520px) {
+  .global-fields:not(:has([name="start"])) {
+    grid-template-columns: 1fr;
+  }
+  .global-fields:not(:has([name="start"])) > .primary-button {
+    grid-column: 1 / -1;
+  }
+  .global-fields input[name="location"] {
+    font-size: 16px;
+  }
+}

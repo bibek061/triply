@@ -144,3 +144,36 @@ test("currency fallback is labeled stale and expires after seven days", async (t
   );
   await assert.rejects(service.convert(1, "USD", "NPR"), /offline/);
 });
+
+test("one destination accepts countries, states, and cities without a hidden country filter", async (t) => {
+  for (const [location, country] of [
+    ["Japan", "jp"],
+    ["California", "us"],
+    ["Paris, France", "fr"],
+  ]) {
+    const service = createDiscovery({
+      dataDir: dataDir(t),
+      env: {},
+      fetchImpl: async (url) => {
+        const query = new URL(url).searchParams;
+        if (url.includes("nominatim")) {
+          assert.equal(query.get("q"), location);
+          assert.equal(query.has("countrycodes"), false);
+          assert.equal(query.get("addressdetails"), "1");
+          return reply([
+            {
+              lat: "35",
+              lon: "139",
+              display_name: location,
+              address: { country_code: country },
+            },
+          ]);
+        }
+        return reply({ elements: [] });
+      },
+    });
+    const result = await service.places({ location, category: "all" });
+    assert.equal(result.country, country.toUpperCase());
+    assert.equal(result.center.name, location);
+  }
+});

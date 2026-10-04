@@ -96,7 +96,7 @@ function future(days) {
 const state = {
   page: "home",
   country: "NP",
-  location: "Pokhara",
+  location: "Pokhara, Nepal",
   kind: "explore",
   category: "all",
   origin: "KTM",
@@ -150,7 +150,7 @@ const categoryName = (code) =>
     stays: "Stays",
     food: "Food",
   })[code] || escapeHTML(code);
-const countryOptions = (selected = state.country) =>
+const countryOptions = (selected = state.country || "NP") =>
   state.countries
     .map(
       (c) =>
@@ -213,6 +213,14 @@ function capture() {
   const form = $("#global-search");
   if (!form) return;
   const b = new FormData(form);
+  if (
+    b.has("location") &&
+    String(b.get("location")).trim() !== state.location
+  ) {
+    state.country = "";
+    state.center = null;
+    state.searchDone = false;
+  }
   for (const key of [
     "country",
     "location",
@@ -223,6 +231,20 @@ function capture() {
   ])
     if (b.has(key)) state[key] = String(b.get(key)).trim();
   if (b.has("adults")) state.adults = Number(b.get("adults"));
+}
+function destinationHint() {
+  const country = state.countries.find((c) => c.code === state.country);
+  return (
+    icon("globe") +
+    "Search worldwide · Country, state, or city" +
+    (state.kind !== "flights" && country
+      ? " <span>·</span> " +
+        escapeHTML(country.name) +
+        ": " +
+        country.currencies.map((c) => c.code).join(", ") +
+        ' <button type="button" data-action="local-currency">Use local currency</button>'
+      : "")
+  );
 }
 function searchForm() {
   return `<form id="global-search" class="global-search"><div class="search-tabs">${[
@@ -237,28 +259,29 @@ function searchForm() {
     )
     .join(
       "",
-    )}</div><div class="global-fields"><label><span>COUNTRY / TERRITORY</span><select name="country" aria-label="Country or territory">${countryOptions()}</select></label><label><span>${state.kind === "flights" ? "FLYING TO · CITY OR IATA" : "CITY OR AREA"}</span><input name="${state.kind === "flights" ? "destination" : "location"}" value="${escapeHTML(state.kind === "flights" ? state.destination : state.location)}" placeholder="Where would you like to go?" minlength="2" maxlength="100" required></label>${state.kind === "flights" ? `<label><span>FLYING FROM · CITY OR IATA</span><input name="origin" value="${escapeHTML(state.origin)}" placeholder="e.g. JFK" minlength="2" maxlength="80" required></label>` : ""}${state.kind !== "explore" ? `<label><span>${state.kind === "flights" ? "DEPARTURE · ONE WAY" : "START DATE"}</span><input type="date" name="start" value="${state.start}" min="${future(0)}" required></label>${state.kind === "flights" ? "" : `<label><span>END DATE</span><input type="date" name="end" value="${state.end}" min="${state.start}" required></label>`}<label><span>TRAVELERS</span><select name="adults">${Array.from({ length: 9 }, (_, i) => `<option value="${i + 1}" ${state.adults === i + 1 ? "selected" : ""}>${i + 1} adult${i ? "s" : ""}</option>`).join("")}</select></label>` : ""}<button class="primary-button" ${state.loading ? "disabled" : ""}>${icon("search")}${state.loading ? "Searching…" : state.kind === "explore" ? "Find places" : "Compare providers"}</button></div><div class="country-context">${icon("globe")}250 countries & territories <span>·</span> ${escapeHTML(countryName(state.country))}: ${
-    state.countries
-      .find((c) => c.code === state.country)
-      ?.currencies.map((c) => c.code)
-      .join(", ") || "No official currency listed"
-  } <button type="button" data-action="local-currency">Use local currency</button></div><p id="search-error" class="search-error" role="alert"></p></form>`;
+    )}</div><div class="global-fields"><label class="destination-field"><span>${state.kind === "flights" ? "FLYING TO · CITY OR IATA" : "WHERE TO? · COUNTRY, STATE, OR CITY"}</span><input name="${state.kind === "flights" ? "destination" : "location"}" value="${escapeHTML(state.kind === "flights" ? state.destination : state.location)}" aria-label="${state.kind === "flights" ? "Flying to" : "Destination"}" placeholder="${state.kind === "flights" ? "City or airport code" : "Try Nepal, California, or Paris"}" minlength="2" maxlength="100" required></label>${state.kind === "flights" ? `<label><span>FLYING FROM · CITY OR IATA</span><input name="origin" value="${escapeHTML(state.origin)}" placeholder="e.g. JFK" minlength="2" maxlength="80" required></label>` : ""}${state.kind !== "explore" ? `<label><span>${state.kind === "flights" ? "DEPARTURE · ONE WAY" : "START DATE"}</span><input type="date" name="start" value="${state.start}" min="${future(0)}" required></label>${state.kind === "flights" ? "" : `<label><span>END DATE</span><input type="date" name="end" value="${state.end}" min="${state.start}" required></label>`}<label><span>TRAVELERS</span><select name="adults">${Array.from({ length: 9 }, (_, i) => `<option value="${i + 1}" ${state.adults === i + 1 ? "selected" : ""}>${i + 1} adult${i ? "s" : ""}</option>`).join("")}</select></label>` : ""}<button class="primary-button" ${state.loading ? "disabled" : ""}>${icon("search")}${state.loading ? "Searching…" : state.kind === "explore" ? "Find places" : "Compare providers"}</button></div><div class="country-context">${destinationHint()}</div><p id="search-error" class="search-error" role="alert"></p></form>`;
 }
 function categoryFilters() {
   return `<div class="category-bar">${["all", "camping", "hiking", "views", "beaches", "attractions"].map((c) => `<button class="category-pill ${state.category === c ? "active" : ""}" data-action="category" data-category="${c}" aria-pressed="${state.category === c}">${icon(c === "all" ? "globe" : c)}${categoryName(c)}</button>`).join("")}</div>`;
 }
+function destinationLabel(location, country) {
+  const name = countryName(country || "");
+  return name && !location.toLowerCase().includes(name.toLowerCase())
+    ? `${location}, ${name}`
+    : location;
+}
 function placeCard(p) {
   const saved = state.saved.some((x) => x.id === p.id);
-  return `<article class="place-card"><div class="place-symbol ${p.category}">${icon(p.category)}<span>${categoryName(p.category)}</span><button class="save-button ${saved ? "saved" : ""}" data-action="save-place" data-id="${escapeHTML(p.id)}" aria-label="${saved ? "Unsave" : "Save"} ${escapeHTML(p.name)}">${icon("heart")}</button></div><div class="place-body"><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(p.location || state.location)}, ${escapeHTML(countryName(p.country || state.country))}</p><span class="place-fee">${escapeHTML(p.fee || "Saved for your next trip")}</span><div class="place-actions"><a class="text-link" href="${escapeHTML(p.url || mapsURL(p.name))}" target="_blank" rel="noopener noreferrer">View on map ↗</a><button class="text-link" data-action="nearby" data-location="${escapeHTML(p.location || state.location)}" data-country="${p.country || state.country}">Plan a visit →</button></div></div></article>`;
+  return `<article class="place-card"><div class="place-symbol ${p.category}">${icon(p.category)}<span>${categoryName(p.category)}</span><button class="save-button ${saved ? "saved" : ""}" data-action="save-place" data-id="${escapeHTML(p.id)}" aria-label="${saved ? "Unsave" : "Save"} ${escapeHTML(p.name)}">${icon("heart")}</button></div><div class="place-body"><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(destinationLabel(p.location || state.location, p.country || state.country))}</p><span class="place-fee">${escapeHTML(p.fee || "Saved for your next trip")}</span><div class="place-actions"><a class="text-link" href="${escapeHTML(p.url || mapsURL(p.name))}" target="_blank" rel="noopener noreferrer">View on map ↗</a><button class="text-link" data-action="nearby" data-location="${escapeHTML(p.location || state.location)}" data-country="${p.country || state.country}">Plan a visit →</button></div></div></article>`;
 }
 function mapsURL(query) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 function discover() {
-  return `${intro("Find your next somewhere.", "A great view. A better deal. Someone to share it with.", `<span class="world-count">${icon("globe")}The whole world is open</span>`)}<section class="hero global-hero"><img src="${images.hero}" alt="Mountains and an open valley"><div class="hero-content"><div class="hero-tag">LESS SCROLLING. MORE GOING.</div><h2>Good places.<br><em>Better company.</em></h2><p>Find the trail. Compare the flight.<br>Meet the people who make the trip.</p></div><span class="hero-location">Find your kind of out there ↗</span></section>${searchForm()}${categoryFilters()}${state.searchDone ? `<section class="content-section"><div class="section-heading"><div><h2>${categoryName(state.category)} near ${escapeHTML(state.location)}</h2><p>${state.loading ? "Looking for places…" : `${state.places.length} mapped places within approximately 20 km`}</p></div><a class="text-link" href="${mapsURL(`${categoryName(state.category)} near ${state.location}, ${countryName(state.country)}`)}" target="_blank" rel="noopener noreferrer">Search on Maps ↗</a></div>${state.placesError ? empty("We couldn’t load places right now.", escapeHTML(state.placesError), "search-again", "Try again") : state.loading ? '<div class="loading-state">Looking around the neighborhood…</div>' : state.places.length ? `<div class="places-grid">${state.places.map(placeCard).join("")}</div>` : empty("A little further might be the answer.", "Try another nearby town or a different category.")}<p class="source-note">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>. Check current access, conditions, and permits before setting out.${state.center ? ` Search center: ${escapeHTML(state.center.name)}.` : ""}</p></section>` : `<section class="content-section"><div class="section-heading"><div><h2>What’s your kind of escape?</h2><p>Pick a place. We’ll help you find what’s around it.</p></div></div><div class="destinations-grid">${inspiration.map((p, i) => `<button class="destination-card" data-action="inspiration" data-index="${i}"><img src="${p.image}" alt="${categoryName(p.category)} inspiration"><span class="destination-tag">${p.label}</span><div class="destination-copy"><h3>${p.name}</h3><p>${countryName(p.country)} · ${categoryName(p.category)}</p><span class="destination-arrow">↗</span></div></button>`).join("")}</div></section>`}<section class="journey-banner"><div><span class="eyebrow">THE BEST PART IS WHO YOU MEET</span><h2>Go for the place.<br>Stay for the people.</h2><p>Trade tips, share your photos, and make a new travel friend.</p><a href="#community" class="primary-button">Meet the community →</a></div><div class="journey-art">${icon("users")}<span>Good stories start with “hello.”</span></div></section>`;
+  return `${intro("Find your next somewhere.", "A great view. A better deal. Someone to share it with.", `<span class="world-count">${icon("globe")}The whole world is open</span>`)}<section class="hero global-hero"><img src="${images.hero}" alt="Mountains and an open valley"><div class="hero-content"><div class="hero-tag">LESS SCROLLING. MORE GOING.</div><h2>Good places.<br><em>Better company.</em></h2><p>Find the trail. Compare the flight.<br>Meet the people who make the trip.</p></div><span class="hero-location">Find your kind of out there ↗</span></section>${searchForm()}${categoryFilters()}${state.searchDone ? `<section class="content-section"><div class="section-heading"><div><h2>${categoryName(state.category)} near ${escapeHTML(state.location)}</h2><p>${state.loading ? "Looking for places…" : `${state.places.length} mapped places within approximately 20 km of the destination’s mapped center`}</p></div><a class="text-link" href="${mapsURL(`${categoryName(state.category)} near ${state.location}, ${countryName(state.country)}`)}" target="_blank" rel="noopener noreferrer">Search on Maps ↗</a></div>${state.placesError ? empty("We couldn’t load places right now.", escapeHTML(state.placesError), "search-again", "Try again") : state.loading ? '<div class="loading-state">Looking around the neighborhood…</div>' : state.places.length ? `<div class="places-grid">${state.places.map(placeCard).join("")}</div>` : empty("A little further might be the answer.", "Try another nearby town or a different category.")}<p class="source-note">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>. Check current access, conditions, and permits before setting out.${state.center ? ` Search center: ${escapeHTML(state.center.name)}.` : ""}</p></section>` : `<section class="content-section"><div class="section-heading"><div><h2>What’s your kind of escape?</h2><p>Pick a place. We’ll help you find what’s around it.</p></div></div><div class="destinations-grid">${inspiration.map((p, i) => `<button class="destination-card" data-action="inspiration" data-index="${i}"><img src="${p.image}" alt="${categoryName(p.category)} inspiration"><span class="destination-tag">${p.label}</span><div class="destination-copy"><h3>${p.name}</h3><p>${countryName(p.country)} · ${categoryName(p.category)}</p><span class="destination-arrow">↗</span></div></button>`).join("")}</div></section>`}<section class="journey-banner"><div><span class="eyebrow">THE BEST PART IS WHO YOU MEET</span><h2>Go for the place.<br>Stay for the people.</h2><p>Trade tips, share your photos, and make a new travel friend.</p><a href="#community" class="primary-button">Meet the community →</a></div><div class="journey-art">${icon("users")}<span>Good stories start with “hello.”</span></div></section>`;
 }
 function providerLinks() {
-  const place = `${state.location}, ${countryName(state.country)}`,
+  const place = state.location,
     q = new URLSearchParams({
       ss: place,
       checkin: state.start,
@@ -532,16 +555,16 @@ async function runSearch() {
       const data = await api(
         "/api/places?" +
           new URLSearchParams({
-            country: query.country,
             location: query.location,
             category: query.category,
           }),
       );
       if (version !== searchVersion) return;
+      state.country = data.country || "";
       state.places = data.places.map((p) => ({
         ...p,
         location: query.location,
-        country: query.country,
+        country: state.country,
       }));
       state.center = data.center;
       state.placesError = data.message || "";
@@ -644,7 +667,7 @@ document.addEventListener("click", async (event) => {
     if (action === "inspiration") {
       const p = inspiration[Number(el.dataset.index)];
       state.country = p.country;
-      state.location = p.name;
+      state.location = `${p.name}, ${countryName(p.country)}`;
       state.category = p.category;
       state.kind = "explore";
       render();
@@ -654,7 +677,11 @@ document.addEventListener("click", async (event) => {
     if (action === "nearby") {
       $("#modal").close();
       state.country = el.dataset.country;
-      state.location = el.dataset.location;
+      state.location = el.dataset.location
+        .toLowerCase()
+        .includes(countryName(el.dataset.country).toLowerCase())
+        ? el.dataset.location
+        : `${el.dataset.location}, ${countryName(el.dataset.country)}`;
       state.kind = "stays";
       navigate("deals");
     }
@@ -871,10 +898,9 @@ document.addEventListener("change", (event) => {
     button.innerHTML =
       icon("search") +
       (state.kind === "explore" ? "Find places" : "Compare providers");
-    if (event.target.name === "country") {
+    if (event.target.name === "location") {
       capture();
-      state.searchDone = false;
-      render();
+      $(".country-context").innerHTML = destinationHint();
     }
   }
 });
