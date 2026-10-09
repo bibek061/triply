@@ -714,6 +714,14 @@
   }
 }
 /* Keep the external search and retry usable on narrow screens. */
+.google-places-map {
+  display: block;
+  width: 100%;
+  height: clamp(360px, 65vh, 650px);
+  min-width: 200px;
+  border: 0;
+  border-radius: 16px;
+}
 .discovery-recovery-actions {
   display: flex;
   align-items: center;

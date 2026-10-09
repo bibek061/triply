@@ -51,7 +51,11 @@ test("hosted health, secure sessions, origin rejection and private-file isolatio
   const publicOrigin = "https://triply.example";
   const server = createApp({
     dataDir: dir,
-    env: { PUBLIC_ORIGIN: publicOrigin },
+    env: {
+      PUBLIC_ORIGIN: publicOrigin,
+      GOOGLE_MAPS_EMBED_API_KEY: "synthetic-public-embed-key",
+      DUFFEL_ACCESS_TOKEN: "synthetic-private-flight-token",
+    },
   });
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
@@ -66,6 +70,11 @@ test("hosted health, secure sessions, origin rejection and private-file isolatio
   const head = await fetch(base + "/healthz", { method: "HEAD" });
   assert.equal(head.status, 200);
   assert.equal(await head.text(), "");
+  const configResponse = await fetch(base + "/api/config");
+  const configText = await configResponse.text();
+  assert.equal(JSON.parse(configText).googleMapsEmbedKey, "synthetic-public-embed-key");
+  assert.ok(!configText.includes("synthetic-private-flight-token"));
+  assert.match(configResponse.headers.get("content-security-policy"), /frame-src https:\/\/www\.google\.com\/maps\/embed\//);
   const signup = (origin) =>
     fetch(base + "/api/signup", {
       method: "POST",

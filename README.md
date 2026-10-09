@@ -8,6 +8,8 @@ Hosted nearby discovery is currently unavailable: the public Overpass services f
 
 ## Run
 
+Optional in-page Google place search is prepared. Configure your own restricted `GOOGLE_MAPS_EMBED_API_KEY` using [DEPLOYMENT.md](DEPLOYMENT.md) to activate it. It remains disabled until configured; GitHub examples cannot provide account credentials.
+
 Requires Node.js 24 or newer.
 
 ```sh

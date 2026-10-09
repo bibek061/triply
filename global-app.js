@@ -107,6 +107,7 @@ const state = {
   selectedDestination: null,
   mapView: "list",
   photoAssets: {},
+  googleMapsEmbedKey: "",
   placePhotos: {},
   origin: "KTM",
   destination: "DEL",
@@ -270,7 +271,7 @@ function searchForm() {
   return TriplyExplore.searchForm();
 }
 function categoryFilters() {
-  return `<div class="category-bar">${["all", "camping", "hiking", "views", "beaches", "attractions"].map((c) => `<button class="category-pill ${state.category === c ? "active" : ""}" data-action="category" data-category="${c}" aria-pressed="${state.category === c}">${icon(c === "all" ? "globe" : c)}${categoryName(c)}</button>`).join("")}</div>${TriplyPlace.filters()}`;
+  return `<div class="category-bar">${["all", "camping", "hiking", "views", "beaches", "attractions"].map((c) => `<button class="category-pill ${state.category === c ? "active" : ""}" data-action="category" data-category="${c}" aria-pressed="${state.category === c}">${icon(c === "all" ? "globe" : c)}${categoryName(c)}</button>`).join("")}</div>${state.googleMapsEmbedKey ? "" : TriplyPlace.filters()}`;
 }
 function destinationLabel(location, country) {
   const name = countryName(country || "");
@@ -664,6 +665,12 @@ async function runSearch() {
     state.places = [];
     state.area = null;
     state.center = null;
+    if (state.googleMapsEmbedKey) {
+      state.loading = false;
+      navigate("home");
+      render();
+      return;
+    }
     navigate("home");
     render();
     try {
@@ -1140,6 +1147,7 @@ window.addEventListener("hashchange", route);
       currencies: config.currencies,
       pricing: config.pricing,
       photoAssets: config.photos,
+      googleMapsEmbedKey: config.googleMapsEmbedKey || "",
     });
     if (!state.currencies.includes(state.currency)) state.currency = "USD";
     await refreshUser();

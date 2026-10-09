@@ -1,5 +1,12 @@
 # Triply progress
 
+## Google Maps embed preparation — October 8, 2026 (New York)
+
+- Added optional in-page Google Maps Embed search, tied to the selected destination and category. Configured searches bypass Overpass and hide unsupported admission/facility filters.
+- Added narrow iframe content-security policy permission and documented API/website restrictions for the public browser key. Other provider secrets remain private.
+- All 29 tests and 27 syntax checks pass, including category changes, escaped destination text, embed URL/referrer policy, and public-config secret isolation.
+- Activation and real Google result verification require the user's own Google Cloud key. No Google account, key, billing agreement, or subscription was created; this is not yet an active Google map integration on the public site.
+
 ## Hosted follow-up — October 8, 2026 (New York)
 
 - Public deployment: https://triply-cvze.onrender.com, with persistent storage on Render. Launch build passed 28 tests and 26 syntax checks.

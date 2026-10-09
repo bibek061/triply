@@ -28,9 +28,9 @@ window.TriplyExplore = (() => {
       )
       .join("")}</div>
     <div class="destination-row"><label class="destination-field"><span>${flight ? "FLYING TO · CITY OR IATA" : car ? "PICKUP & RETURN · CITY OR AIRPORT CODE" : stay ? "WHERE TO STAY? · CHOOSE A CITY" : "WHERE TO? · COUNTRY, STATE, OR CITY"}</span><input id="destination-input" name="${flight ? "destination" : "location"}" aria-label="${flight ? "Flying to" : "Destination"}" ${flight ? "" : 'role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="destination-suggestions"'} value="${escapeHTML(flight ? state.destination : state.location)}" autocomplete="off" placeholder="${flight ? "City or airport code" : "Try Nepal, California, or Paris"}" minlength="2" maxlength="100" required>${flight ? "" : '<div id="destination-suggestions" class="destination-suggestions" role="listbox" aria-label="Destination suggestions" hidden></div>'}</label>${flight ? `<label><span>FLYING FROM · CITY OR IATA</span><input name="origin" aria-label="Flying from" value="${escapeHTML(state.origin)}" minlength="2" maxlength="80" required></label>` : ""}<button type="submit" class="primary-button search-submit" ${state.loading ? "disabled" : ""}>${icon("search")}${state.loading ? "Searching…" : state.kind === "explore" ? "Find places" : "Compare prices"}</button></div>
-    <div class="trip-options"><label><span>${flight ? "DEPARTURE · ONE WAY" : "START DATE"}</span><input name="start" aria-label="Start date" type="date" value="${state.start}" min="${future(0)}" required></label>${flight ? "" : `<label><span>END DATE</span><input name="end" aria-label="End date" type="date" value="${state.end}" min="${state.start}" required></label>`}<label><span>TRAVELERS</span><select name="adults" aria-label="Travelers">${Array.from({ length: 9 }, (_, i) => `<option value="${i + 1}" ${state.adults === i + 1 ? "selected" : ""}>${i + 1} adult${i ? "s" : ""}</option>`).join("")}</select></label><label><span>${flight ? "MAX FLIGHT TOTAL" : stay ? "MAX STAY TOTAL" : car ? "MAX RENTAL TOTAL" : "TRIP BUDGET"} · ${state.currency}</span><input type="number" name="budget" aria-label="${flight ? "Maximum flight total" : stay ? "Maximum stay total" : car ? "Maximum rental total" : "Trip budget"}" min="1" max="10000000" step="any" placeholder="No limit" value="${escapeHTML(state.budget)}"></label>${state.kind === "explore" ? `<label><span>ENTRY FEES</span><select name="admission" aria-label="Entry fees"><option value="any" ${state.admission === "any" ? "selected" : ""}>Any entry fee</option><option value="free" ${state.admission === "free" ? "selected" : ""}>No entry fee listed</option></select></label>` : ""}</div>
+    <div class="trip-options"><label><span>${flight ? "DEPARTURE · ONE WAY" : "START DATE"}</span><input name="start" aria-label="Start date" type="date" value="${state.start}" min="${future(0)}" required></label>${flight ? "" : `<label><span>END DATE</span><input name="end" aria-label="End date" type="date" value="${state.end}" min="${state.start}" required></label>`}<label><span>TRAVELERS</span><select name="adults" aria-label="Travelers">${Array.from({ length: 9 }, (_, i) => `<option value="${i + 1}" ${state.adults === i + 1 ? "selected" : ""}>${i + 1} adult${i ? "s" : ""}</option>`).join("")}</select></label><label><span>${flight ? "MAX FLIGHT TOTAL" : stay ? "MAX STAY TOTAL" : car ? "MAX RENTAL TOTAL" : "TRIP BUDGET"} · ${state.currency}</span><input type="number" name="budget" aria-label="${flight ? "Maximum flight total" : stay ? "Maximum stay total" : car ? "Maximum rental total" : "Trip budget"}" min="1" max="10000000" step="any" placeholder="No limit" value="${escapeHTML(state.budget)}"></label>${state.kind === "explore" && !state.googleMapsEmbedKey ? `<label><span>ENTRY FEES</span><select name="admission" aria-label="Entry fees"><option value="any" ${state.admission === "any" ? "selected" : ""}>Any entry fee</option><option value="free" ${state.admission === "free" ? "selected" : ""}>No entry fee listed</option></select></label>` : ""}</div>
     ${stay || car ? `<div class="trip-options pricing-options"><label><span>COUNTRY OF RESIDENCE</span><select name="residence" aria-label="Country of residence" required><option value="">Choose your home country</option>${countryOptions(state.residence || state.user?.country || "")}</select></label>${car ? `<label><span>DRIVER AGE</span><input name="driverAge" aria-label="Driver age" type="number" min="18" max="99" required value="${escapeHTML(state.driverAge)}"></label><label><span>PICKUP TIME · LOCAL</span><input name="pickupTime" aria-label="Pickup time" type="time" required value="${escapeHTML(state.pickupTime)}"></label><label><span>RETURN TIME · LOCAL</span><input name="dropoffTime" aria-label="Return time" type="time" required value="${escapeHTML(state.dropoffTime)}"></label>` : `<p class="source-note">1 room · all selected travelers are adults. Total covers the full stay.</p>`}</div>` : ""}
-    <div class="country-context">${destinationHint()}</div><p class="search-scope">${flight ? "Budget filters the returned flight total for all selected adults." : state.kind === "explore" ? "Dates and budget plan your trip. Places are filtered by listed entry fees; opening hours and other costs need checking." : "Budget filters returned totals in your selected currency. Recheck fees, availability, and terms on the provider’s website."}</p><p id="search-error" class="search-error" role="alert"></p></form>`;
+    <div class="country-context">${destinationHint()}</div><p class="search-scope">${flight ? "Budget filters the returned flight total for all selected adults." : state.kind === "explore" ? state.googleMapsEmbedKey ? "Dates and budget plan your trip; Google Maps searches use only the destination and category." : "Dates and budget plan your trip. Places are filtered by listed entry fees; opening hours and other costs need checking." : "Budget filters returned totals in your selected currency. Recheck fees, availability, and terms on the provider’s website."}</p><p id="search-error" class="search-error" role="alert"></p></form>`;
   }
   function fallback(category) {
     return (
@@ -76,7 +76,7 @@ window.TriplyExplore = (() => {
     const saved = state.saved.some((x) => x.id === p.id);
     return `<article class="place-card photo-place-card" id="card-${escapeHTML(p.id)}">${photoMarkup(p)}<button class="save-button ${saved ? "saved" : ""}" data-action="save-place" data-id="${escapeHTML(p.id)}" aria-label="${saved ? "Unsave" : "Save"} ${escapeHTML(p.name)}">${icon("heart")}</button><div class="place-body"><span class="place-category">${Number.isInteger(index) ? `<span class="place-number">${index + 1}</span>` : ""}${categoryName(p.category)}${Number.isFinite(p.distanceKm) ? ` · ${p.distanceKm} km away` : ""}</span><h3><a href="#place/${escapeHTML(p.id)}">${escapeHTML(p.name)}</a></h3><p>${escapeHTML(destinationLabel(p.location || state.location, p.country || state.country))}</p><span class="place-fee">${escapeHTML(p.fee || "Check access & fees")}</span><div class="place-actions"><a class="primary-button" href="#place/${escapeHTML(p.id)}">View place →</a><a class="text-link" href="${escapeHTML(photoSearchURL(p))}" target="_blank" rel="noopener noreferrer">Photos on Google ↗</a><button class="text-link" data-action="map-place" data-id="${escapeHTML(p.id)}">${icon("pin")}View on map</button><button class="text-link" data-action="nearby" data-location="${escapeHTML(p.location || state.location)}" data-country="${escapeHTML(p.country || state.country)}">Plan a visit →</button></div></div></article>`;
   }
-  function discoveryUnavailable() {
+  function mapSearchContext() {
     const term = ({
       all: "places to visit",
       camping: "campsites",
@@ -86,9 +86,19 @@ window.TriplyExplore = (() => {
       attractions: "sights and attractions",
     })[state.category] || "places to visit";
     const location = destinationLabel(state.location, state.country);
-    const url = "https://www.google.com/maps/search/?" + new URLSearchParams({
-      api: "1", query: `${term} near ${location}`,
+    const query = `${term} near ${location}`;
+    const url = "https://www.google.com/maps/search/?" + new URLSearchParams({ api: "1", query });
+    return {term, location, query, url};
+  }
+  function googleMapResults() {
+    const {term, location, query, url} = mapSearchContext();
+    const embed = "https://www.google.com/maps/embed/v1/search?" + new URLSearchParams({
+      key: state.googleMapsEmbedKey, q: query,
     });
+    return `<section class="content-section google-places"><div class="section-heading"><div><h2>${escapeHTML(categoryName(state.category))} near ${escapeHTML(location)}</h2><p>Explore places directly on the Google map below.</p></div></div><iframe class="google-places-map" title="Google Maps: ${escapeHTML(term)} near ${escapeHTML(location)}" src="${escapeHTML(embed)}" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><p class="source-note">Google Maps results use your destination and category. Trip dates, budget, entry fees and facility filters do not filter this map. Google's place results cannot be saved to Triply or linked to Triply posts from this view.</p><a class="text-link" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">If the map does not load, open Google Maps ↗</a></section>`;
+  }
+  function discoveryUnavailable() {
+    const {term, location, url} = mapSearchContext();
     return `<div class="empty-state"><h2>Nearby search is temporarily unavailable.</h2><p>You can still look for ${escapeHTML(term)} near ${escapeHTML(location)} on Google Maps, or retry here.</p><div class="discovery-recovery-actions"><a class="primary-button" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">Find ${escapeHTML(term)} on Google Maps ↗</a><button class="text-link" data-action="search-again">Try again</button></div><p>Google Maps opens separately. Dates, budget, and facility filters are not applied there.</p></div>`;
   }
   function discover() {
@@ -101,6 +111,9 @@ window.TriplyExplore = (() => {
         ? "Places, photos, and a map. Find the ones that feel like you."
         : "A great view. A better deal. Someone to share it with.",
     );
+    if (state.searchDone && state.googleMapsEmbedKey) {
+      return introHTML + searchForm() + categoryFilters() + googleMapResults();
+    }
     if (state.searchDone && state.area && !state.loading) {
       const area = state.area;
       return (

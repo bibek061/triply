@@ -1,5 +1,10 @@
 # Triply regression check — October 4, 2026
 
+## Google embed preparation — October 8, 2026
+
+- 29 tests and 27 syntax checks pass. New checks cover Google search URLs across categories, destination escaping, required referrer policy, hidden admission control, and exposing only the dedicated browser key in public configuration.
+- No real Google key is configured. Actual map rendering, key restrictions and Google authorization remain unverified. The feature is disabled by default; the existing public fallback remains available.
+
 ## Hosted follow-up — October 8, 2026
 
 - Render's HTTPS site, database health endpoint and destination suggestions respond. The initial hosted build passed 28 tests and 26 syntax checks.

@@ -13,6 +13,19 @@ Status: publicly deployed on October 4, 2026. Render reported Live; the HTTPS ho
 
 ## Existing hosting account
 
+### Optional Google map inside Triply
+
+Set `GOOGLE_MAPS_EMBED_API_KEY` in Render's environment to enable Google Maps Embed search inside the Discover page. With it configured, searches use the selected destination/category directly and skip Overpass. Without it, the existing discovery and external fallback remain active. The integration is prepared but not activated or verified against Google: no user-owned key is configured.
+
+1. In your own Google Cloud project, enable **Maps Embed API** and link the billing account Google requires. Embed usage is available at no charge; this implementation does not call Places API or Maps JavaScript API.
+2. Create a dedicated browser key. Restrict its API access to **Maps Embed API** and its website referrers to `https://triply-cvze.onrender.com/*`. Add an exact localhost origin only to a separate development key if needed.
+3. Set that key as `GOOGLE_MAPS_EMBED_API_KEY` in Render, save, and redeploy. Never reuse a server secret or an unrestricted key: this browser key is intentionally returned by `/api/config` and visible in the iframe URL. Do not commit it to Git.
+4. Verify Camping and Hiking for two different destinations on the deployed site. Google authorization, billing and referrer errors can only be checked with a real key.
+
+The embedded map supports exploring Google's results within Triply. Its details/directions links may still open Google. Trip dates, budget, admission and facility filters do not filter its results; Triply saves and place-linked posts are not connected to Google's iframe results. The UI hides unsupported facility/admission controls in this mode.
+
+References: [Embed API setup](https://developers.google.com/maps/documentation/embed/quickstart), [search mode and referrer policy](https://developers.google.com/maps/documentation/embed/embedding-map). Google's GitHub samples require a key from the developer's own project; they do not supply credentials for another app.
+
 ### Current discovery limitation — October 8, 2026
 
 The hosted health endpoint and destination suggestions work, but nearby place queries fail. Render diagnostics found connection refusal from the default Overpass service, HTTP 500 from private.coffee, and HTTP 504 from the tested maps.mail.ru endpoint. Do not treat a healthy server as confirmation that nearby discovery works. Failed searches now offer a category/destination-specific Google Maps link and retry; dates, budget and facility filters do not carry to that external search. The user chose this free fallback. No managed provider account or subscription was created.
