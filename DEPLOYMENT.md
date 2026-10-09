@@ -1,8 +1,21 @@
 # Deploy Triply
 
-Status: deployment files are prepared; no public deployment has been verified.
+Status: publicly deployed on October 4, 2026. Render reported Live; the HTTPS homepage and database health endpoint were verified.
+
+- Site: https://triply-cvze.onrender.com
+- Health: https://triply-cvze.onrender.com/healthz
+- Service dashboard: https://dashboard.render.com/web/srv-db1djo7avr4c73bdjheg
+- Blueprint: https://dashboard.render.com/blueprint/exs-db1di2c9v7es73f2iqdg
+- Source: `bibek061/triply`, `main`; initial launch commit `da47550`.
+- Confirmed configuration: one 0.5 CPU / 512 MB service, 1 GB disk mounted at `/var/data/triply`, Hobby workspace. Render quoted $7.25/month base service/storage cost before additional usage or taxes.
+- The initial Render build passed all 28 automated tests and 26 syntax checks on Node 24.21.0.
+- No local credentials, accounts or uploads were copied. Hosted flight/hotel/car pricing is unconfigured; external comparison links work independently. Configure fresh provider tokens in the host's secret environment settings when ready.
 
 ## Existing hosting account
+
+### Current discovery limitation — October 8, 2026
+
+The hosted health endpoint and destination suggestions work, but nearby place queries fail. Render diagnostics found connection refusal from the default Overpass service, HTTP 500 from private.coffee, and HTTP 504 from the tested maps.mail.ru endpoint. Do not treat a healthy server as confirmation that nearby discovery works. Failed searches now offer a category/destination-specific Google Maps link and retry; dates, budget and facility filters do not carry to that external search. The user chose this free fallback. No managed provider account or subscription was created.
 
 Connect the private GitHub repository `bibek061/triply`, branch `main`, to a Node.js web service. GitHub Pages/static-only hosting cannot run its accounts, chat, uploads or APIs.
 

@@ -1,6 +1,10 @@
 # Triply
 
-Find places to go, compare travel providers, and meet other travelers. Triply is a working local MVP with a Node.js backend and persistent SQLite data. The interface uses plain HTML, CSS, and JavaScript; there are no runtime package dependencies.
+Find places to go, compare travel providers, and meet other travelers. Triply is a hosted MVP with a Node.js backend and persistent SQLite data. The interface uses plain HTML, CSS, and JavaScript; there are no runtime package dependencies.
+
+Live site: **https://triply-cvze.onrender.com**. Hosted on Render with persistent storage. Pricing credentials are not configured on the hosted instance; booking-site comparison links remain available.
+
+Hosted nearby discovery is currently unavailable: the public Overpass services failed from Render during October 8 checks. Destination suggestions and country/city browsing still work. Failed nearby searches offer a free Google Maps search for the selected destination and category. No paid map provider is configured.
 
 ## Run
 
@@ -56,7 +60,7 @@ This compares options within a connected provider's returned inventory, not iden
 
 ## Configuration and hosting
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for existing-host settings and the optional Render Blueprint. No hosted service has been provisioned yet.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for the current Render deployment and hosting settings.
 
 `.env.example` documents `PORT`, `HOST`, `DATA_DIR`, `PUBLIC_ORIGIN`, and discovery endpoints. The default server is local-only. For a hosted instance:
 
@@ -66,7 +70,7 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for existing-host settings and the optional R
 4. Configure managed or self-hosted discovery endpoints before public scale. The public Nominatim service is paced below one request per second and geocodes are cached for a day. Place queries are serialized, coalesced, and cached for an hour. Public Overpass has no uptime guarantee and can reject or time out queries. The browser loads standard OpenStreetMap tiles on demand with visible attribution; no bulk downloads or offline prefetching are implemented. Follow the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/) and arrange a suitable tile provider for public traffic.
 5. Add operational account recovery/deletion, server-side image decoding, moderation tools/staffing, backups, monitoring, and abuse controls appropriate for public launch. Reports are stored but do not notify a staffed team. Password reset, email verification, notification delivery, and end-to-end chat encryption are not implemented.
 
-No public deployment, payment processing, flight ticketing, or external booking synchronization has been performed.
+The MVP is publicly deployed on Render. Payment processing, flight ticketing, and external booking synchronization are not implemented.
 
 ## Verification
 

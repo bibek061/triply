@@ -1,5 +1,13 @@
 # Triply regression check — October 4, 2026
 
+## Hosted follow-up — October 8, 2026
+
+- Render's HTTPS site, database health endpoint and destination suggestions respond. The initial hosted build passed 28 tests and 26 syntax checks.
+- Nearby discovery is currently blocked by upstream map service failures from Render. Earlier successful local Overpass checks below do not establish hosted availability.
+- Hosted live pricing credentials remain unconfigured. External booking-site comparison links are independent of those credentials.
+- Added an outage recovery link to Google Maps that retains the selected category and destination, alongside retry. It explicitly explains that trip dates, budget and facility filters do not carry over.
+- All 28 tests and 26 JavaScript syntax checks pass. An isolated outage preview verified Paris camping and hiking links, retry, and a 390 × 844 viewport with no horizontal document overflow or JavaScript console errors.
+
 ## Final regression pass — October 4, 2026
 
 - All **26 automated tests** and **24 JavaScript syntax checks** passed. Whitespace checks passed. No new functional regression was found during this pass.

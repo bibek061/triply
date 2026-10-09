@@ -713,3 +713,16 @@
     height: 210px;
   }
 }
+/* Keep the external search and retry usable on narrow screens. */
+.discovery-recovery-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+}
+.discovery-recovery-actions .primary-button {
+  white-space: normal;
+  text-align: center;
+}

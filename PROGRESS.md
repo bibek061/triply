@@ -1,5 +1,13 @@
 # Triply progress
 
+## Hosted follow-up — October 8, 2026 (New York)
+
+- Public deployment: https://triply-cvze.onrender.com, with persistent storage on Render. Launch build passed 28 tests and 26 syntax checks.
+- Diagnosed hosted nearby discovery failures across three public Overpass endpoints. User chose the free external map fallback; no managed provider account or subscription was created.
+- Added category/destination-specific Google Maps recovery links for failed nearby searches, retaining the in-app retry action and explaining external filter limitations.
+- Updated deployment and QA documentation to distinguish working hosted services from unavailable nearby discovery and unconfigured hosted live pricing.
+- Validation: all 28 tests and 26 JavaScript syntax checks pass. Browser outage preview verified Paris camping and hiking links, retry, and mobile layout without horizontal overflow or JavaScript errors.
+
 ## Completed — October 3, 2026 (New York)
 
 - Original prototype created and pushed: `05ebd16`.
